@@ -7,9 +7,9 @@ interface TableProps {
 export default function Table({ entries }: TableProps) {
 
     const keys = Object.keys(entries[0]);
-    
+
     return (
-        <div>
+        <div className="container">
             <table className="table">
                 <thead>
                     <tr>

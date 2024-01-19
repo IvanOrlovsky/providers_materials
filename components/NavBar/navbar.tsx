@@ -14,9 +14,10 @@ export default function NavBar() {
 	const menuClass = isActive ? 'navbar-menu is-active' : 'navbar-menu';
 
     return (
-        <nav className="navbar" role="navigation" aria-label="main navigation">
+        <div className="container ">
+			<nav className="navbar has-background-grey-light px-5" role="navigation" aria-label="main navigation">
 			<div className="navbar-brand">
-				<a className="navbar-item" href="/">
+				<a className="navbar-item has-text-black-bis" href="/">
 					Главная страница
 				</a>
 
@@ -36,16 +37,16 @@ export default function NavBar() {
 			
 			<div id="navMenu" className={menuClass}>
 				<div className="navbar-end">
-					<a className="navbar-item" href="/providers">
+					<a className="navbar-item has-text-black-bis" href="/providers">
 						Поставщики
 					</a>
 
-					<a className="navbar-item" href="/materials">
+					<a className="navbar-item has-text-black-bis" href="/materials">
 						Виды материалов
 					</a>
 				</div>
 			</div>
-			
         </nav>
+		</div>
     )
 }
