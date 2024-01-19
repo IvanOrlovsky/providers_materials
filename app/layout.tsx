@@ -6,9 +6,11 @@ import NavBar from '@/components/NavBar/navbar'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'First Task',
-  description: 'First task for appling to a job',
+  title: 'Providers & Materials',
+  description: 'A site for appling for a job',
 }
+
+export const revalidate = 0;
 
 export default function RootLayout({
   children,
