@@ -2,6 +2,10 @@
 
 export default function Home() {
   return (
-    <h1 className="has-background-success">Start</h1>
+    <div className="container px-5">
+        <h1>
+          Главная страница
+        </h1>
+    </div>
   )
 }

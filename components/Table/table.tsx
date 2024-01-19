@@ -10,7 +10,7 @@ export default function Table({ entries }: TableProps) {
 
     return (
         <div className="container">
-            <table className="table">
+            <table className="table mx-5">
                 <thead>
                     <tr>
                         {

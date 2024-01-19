@@ -11,15 +11,15 @@ export default async function Materials() {
     const keys = Object.keys(rows[0]);
 
     return (
-        <div className="container content">
+        <div className="container content px-5">
             <ul>
                 {rows.map((entry, index) => (
-                                <li key={index}>
-                                        <span key={index}>
-                                            <strong>{entry[keys[1]]}</strong>{' ('}{entry[keys[2]]}{')'}
-                                        </span>
-                                </li>
-                            ))}
+                    <li key={index}>
+                            <span key={index}>
+                                <strong>{entry[keys[1]]}</strong>{' ('}{entry[keys[2]]}{')'}
+                            </span>
+                    </li>
+                ))}
             </ul>
         </div>
     )
