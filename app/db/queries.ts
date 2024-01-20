@@ -6,23 +6,13 @@ import { unstable_noStore as noStore } from "next/cache";
 export async function getAllProviders() {
     noStore();
 
-
-
     return sql` SELECT 
-                p.id AS "Номер поставщика", 
-                p.type AS "Тип поставщика",
-                p.name AS "Название компании",
-                p.phone AS "Номер телефона",
-                p.address AS "Адрес",
-                sum(pm.quantity) AS "Количество материалов"
-            FROM 
-                provider p
-                JOIN Provider_Material pm ON p.id = pm.provider_id
-            GROUP BY 
-                p.id
-            ORDER BY 
-                p.id
-        `;
+                id AS "Номер поставщика", 
+                type AS "Тип поставщика",
+                name AS "Название компании",
+                phone AS "Номер телефона",
+                address AS "Адрес"
+                FROM provider;`;
     
 }
 
@@ -35,4 +25,16 @@ export async function getAllMaterials() {
     name AS "Название материала",
     Unit_of_measure AS "Единица измерения"
     FROM material` 
+}
+
+export async function getAllMaterialsById(id: string) {
+    noStore();
+
+    return sql`SELECT 
+    m.name as meterial_name, m.unit_of_measure, pm.quantity
+    from provider p
+    JOIN provider_material pm ON p.id = pm.provider_id
+    JOIN material m ON m.id = pm.material_id
+    WHERE pm.provider_id = ${id}
+    ;` 
 }

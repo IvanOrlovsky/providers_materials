@@ -1,7 +1,7 @@
 "use server";
 
 import { getAllProviders } from "../db/queries"
-import Table from "@/components/Table/table";
+import Providers_Table from "@/components/Providers_Table/Providers_Table";
 
 export default async function Providers() {
 
@@ -9,7 +9,7 @@ export default async function Providers() {
 
     return (
         <div>
-            <Table entries={rows}/>
+            <Providers_Table entries={rows}/>
         </div>
     )
 }
