@@ -1,6 +1,7 @@
 import type { QueryResultRow } from "@vercel/postgres";
 import Materials_List from "../Materials_List/Materials_List";
 
+
 interface TableProps {
   entries: QueryResultRow[];
 }
@@ -36,6 +37,12 @@ export default function Providers_Table({ entries }: TableProps) {
                                 ))}
                                 <td>
                                     <Materials_List entries={entry[keys[0]]}/>
+                                </td>
+                                <td>
+                                    <button 
+                                    className="button is-primary"
+                                    >
+                                        Редактировать</button>
                                 </td>
                             </tr>
                         ))}
