@@ -30,7 +30,7 @@ export default function Providers_Table({ entries }: TableProps) {
                         {entries.map((entry) => (
                             <tr key={entry[keys[0]]}> 
                                 {keys.map((key) => (
-                                    <td>
+                                    <td key={entry[key]}>
                                         {entry[key]}
                                     </td>
                                 ))}
