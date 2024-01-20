@@ -8,9 +8,10 @@ export default async function Providers() {
     let { rows } = await getAllProviders();
 
     return (
-        <div px-5>
+        <div>
             <Table entries={rows}/>
         </div>
     )
 }
+
 

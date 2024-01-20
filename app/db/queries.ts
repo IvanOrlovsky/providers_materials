@@ -8,8 +8,7 @@ export async function getAllProviders() {
 
 
 
-    return sql`
-            SELECT 
+    return sql` SELECT 
                 p.id AS "Номер поставщика", 
                 p.type AS "Тип поставщика",
                 p.name AS "Название компании",
