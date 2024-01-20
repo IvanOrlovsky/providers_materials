@@ -14,7 +14,7 @@ export default function NavBar() {
 	const menuClass = isActive ? 'navbar-menu is-active' : 'navbar-menu';
 
     return (
-        <div className="">
+        <div className="containeris-widescreen">
 			<nav className="navbar has-background-grey-light px-5" role="navigation" aria-label="main navigation">
 			<div className="navbar-brand">
 				<a className="navbar-item has-text-black-bis" href="/">
