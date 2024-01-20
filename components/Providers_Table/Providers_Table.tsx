@@ -1,6 +1,5 @@
 import type { QueryResultRow } from "@vercel/postgres";
 import Materials_List from "../Materials_List/Materials_List";
-import { getAllMaterialsById } from "@/app/db/queries";
 
 interface TableProps {
   entries: QueryResultRow[];
@@ -28,19 +27,18 @@ export default function Providers_Table({ entries }: TableProps) {
                     </tr>
                 </thead>
                 <tbody>
-                        {entries.map((entry, index) => (
-                                <tr key={index}> 
-                                    {keys.map((key) => (
-                                        <td key={key}>
-                                            {entry[key]}
-                                        </td>
-                                    ))}
+                        {entries.map((entry) => (
+                            <tr key={entry[keys[0]]}> 
+                                {keys.map((key) => (
                                     <td>
-                                        <Materials_List entries={entry[keys[0]]}/>
+                                        {entry[key]}
                                     </td>
-                                </tr>
-                            ))}
-                            
+                                ))}
+                                <td>
+                                    <Materials_List entries={entry[keys[0]]}/>
+                                </td>
+                            </tr>
+                        ))}
                 </tbody>
             </table>
         </div>
