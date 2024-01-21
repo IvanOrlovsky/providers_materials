@@ -6,10 +6,11 @@ export default async function Materials_List({ entries }: QueryResultRow) {
     let { rows } = await getAllMaterialsById(entries);
 
         return (
-        <div className="content">
+        <div className="">
             <ul>
                 {rows.map((row, index) => (
                 <li key={index}>
+                    {'- '}
                     <strong>{row.meterial_name}</strong>
                     <span>{'('}{row.unit_of_measure}{') - '}</span>
                     <span>{row.quantity}</span>

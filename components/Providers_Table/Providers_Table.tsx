@@ -40,9 +40,12 @@ export default function Providers_Table({ entries }: TableProps) {
                                 </td>
                                 <td>
                                     <button 
-                                    className="button is-primary"
+                                    className="button is-link"
                                     >
-                                        <a href={`/edit-provider/${entry[keys[0]]}`}>
+                                        <a 
+                                        href={`/edit-provider/${entry[keys[0]]}`}
+                                        className="has-text-white-bis"
+                                        >
                                             Редактировать
                                         </a>
                                     </button>
