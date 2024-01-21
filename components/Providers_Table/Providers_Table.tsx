@@ -42,7 +42,10 @@ export default function Providers_Table({ entries }: TableProps) {
                                     <button 
                                     className="button is-primary"
                                     >
-                                        Редактировать</button>
+                                        <a href={`/edit-provider/${entry[keys[0]]}`}>
+                                            Редактировать
+                                        </a>
+                                    </button>
                                 </td>
                             </tr>
                         ))}
