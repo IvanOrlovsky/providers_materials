@@ -5,8 +5,6 @@ export default async function EditProvider({ params } : { params: { id: string }
 
     let { rows } = await getProviderById(params.id)
 
-    const keys = Object.keys(rows[0]); 
-
     return (
         <div className="container my-5">
             <h1 className="title has-text-centered">
@@ -105,14 +103,6 @@ export default async function EditProvider({ params } : { params: { id: string }
                                         />
                                     </td>
                                 </tr>
-                                <tr>
-                                    <th>
-                                        
-                                    </th>
-                                    <td>
-                                        
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -122,9 +112,12 @@ export default async function EditProvider({ params } : { params: { id: string }
                                 Материалы поставщика
                             </strong>                        
                         </p>
+                        <table className="table is-bordered my-5"> 
+
+                        </table>
                     </div>
                 </div>
-            </form>
+            </form>  
         </div>
     )
 }
