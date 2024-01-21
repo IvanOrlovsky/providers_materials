@@ -10,6 +10,7 @@ export default async function EditProvider({ params } : { params: { id: string }
             <h1 className="title has-text-centered">
                 Редактирование поставщика номер {params.id}
             </h1>
+            
             <form>
                 <div className="tile is-ancestor">
                     <div className="tile is-child box">
