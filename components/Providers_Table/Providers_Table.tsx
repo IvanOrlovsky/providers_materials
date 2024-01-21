@@ -1,5 +1,6 @@
 import type { QueryResultRow } from "@vercel/postgres";
 import Materials_List from "../Materials_List/Materials_List";
+import Link from "next/link";
 
 
 interface TableProps {
@@ -42,12 +43,12 @@ export default function Providers_Table({ entries }: TableProps) {
                                     <button 
                                     className="button is-link"
                                     >
-                                        <a 
+                                        <Link 
                                         href={`/edit-provider/${entry[keys[0]]}`}
                                         className="has-text-white-bis"
                                         >
                                             Редактировать
-                                        </a>
+                                        </Link>
                                     </button>
                                 </td>
                             </tr>

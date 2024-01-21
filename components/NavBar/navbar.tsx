@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link";
 
 export default function NavBar() {
 
@@ -17,9 +18,9 @@ export default function NavBar() {
         <div className="containeris-widescreen">
 			<nav className="navbar has-background-grey-light px-5" role="navigation" aria-label="main navigation">
 			<div className="navbar-brand">
-				<a className="navbar-item has-text-black-bis" href="/">
+				<Link className="navbar-item has-text-black-bis is-size-4" href="/">
 					Главная страница
-				</a>
+				</Link>
 
 				<a
 				role="button"
@@ -37,13 +38,13 @@ export default function NavBar() {
 			
 			<div id="navMenu" className={menuClass}>
 				<div className="navbar-end">
-					<a className="navbar-item has-text-black-bis" href="/providers">
+					<Link className="navbar-item has-text-black-bis" href="/providers">
 						Поставщики
-					</a>
+					</Link>
 
-					<a className="navbar-item has-text-black-bis" href="/materials">
+					<Link className="navbar-item has-text-black-bis" href="/materials">
 						Виды материалов
-					</a>
+					</Link>
 				</div>
 			</div>
         </nav>
