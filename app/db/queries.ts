@@ -16,6 +16,20 @@ export async function getAllProviders() {
     
 }
 
+export async function getProviderById(id: string) {
+    noStore();
+
+    return sql` SELECT 
+                id AS "Номер поставщика", 
+                type AS "Тип поставщика",
+                name AS "Название компании",
+                phone AS "Номер телефона",
+                address AS "Адрес"
+                FROM provider
+                WHERE id = ${id};`;
+    
+}
+
 
 export async function getAllMaterials() {
     noStore();
