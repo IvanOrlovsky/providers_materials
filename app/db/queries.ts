@@ -45,7 +45,10 @@ export async function getAllMaterialsById(id: string) {
     noStore();
 
     return sql`SELECT 
-    m.name as meterial_name, m.unit_of_measure, pm.quantity
+    m.id AS "Номер материала",
+    m.name AS "Название материала", 
+    m.unit_of_measure AS "Единица измерения", 
+    pm.quantity AS "Количество"
     from provider p
     JOIN provider_material pm ON p.id = pm.provider_id
     JOIN material m ON m.id = pm.material_id

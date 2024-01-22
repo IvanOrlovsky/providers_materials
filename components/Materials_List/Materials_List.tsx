@@ -9,11 +9,11 @@ export default async function Materials_List({ entries }: QueryResultRow) {
         <div className="">
             <ul>
                 {rows.map((row, index) => (
-                <li key={index}>
+                <li key={row["Номер материала"]}>
                     {'- '}
-                    <strong>{row.meterial_name}</strong>
-                    <span>{'('}{row.unit_of_measure}{') - '}</span>
-                    <span>{row.quantity}</span>
+                    <strong>{row["Название материала"]}</strong>
+                    <span>{'('}{row["Единица измерения"]}{') - '}</span>
+                    <span>{row["Количество"]}</span>
                 </li>
                 ))}
             </ul>

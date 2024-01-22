@@ -119,21 +119,21 @@ export default async function EditProvider({ params } : { params: { id: string }
                         <table className="table is-bordered my-5"> 
                             <tbody>
                                 {material_rows.map((material, index) => (
-                                    <tr  key={index}>
+                                    <tr key={index}>
                                         <th>
-                                            {material.meterial_name}
+                                            {material["Название материала"]}
                                         </th>
                                         <td>
                                             <input
                                             type='text'
-                                            placeholder={material.unit_of_measure}
+                                            placeholder={material["Единица измерения"]}
                                             >
                                             </input>
                                         </td>
                                         <td>
                                             <input
                                             type='number'
-                                            placeholder={material.quantity}
+                                            placeholder={material["Количество"]}
                                             >
                                             </input>
                                         </td>
