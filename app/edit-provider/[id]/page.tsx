@@ -1,9 +1,13 @@
 import { getProviderById } from "@/app/db/queries"
-
+import { getAllMaterialsById } from "@/app/db/queries"
 
 export default async function EditProvider({ params } : { params: { id: string } }) {
 
-    let { rows } = await getProviderById(params.id)
+    let providers_data = await getProviderById(params.id)
+    let providers_rows = providers_data.rows[0]
+
+    let material_data = await getAllMaterialsById(params.id)
+    let material_rows = material_data.rows
 
     return (
         <div className="container my-5">
@@ -28,7 +32,7 @@ export default async function EditProvider({ params } : { params: { id: string }
                                     <td>
                                         <input
                                         type='number'
-                                        placeholder={rows[0]['Номер поставщика']}
+                                        placeholder={providers_rows['Номер поставщика']}
                                         className="input"
                                         />
                                     </td>
@@ -39,28 +43,27 @@ export default async function EditProvider({ params } : { params: { id: string }
                                     </th>
                                     <td>
                                         <div className="select">
-                                            <select name="type">
+                                            <select 
+                                            name="type"
+                                            defaultValue={providers_rows['Тип поставщика']}
+                                            >
                                                 <option 
                                                 value="ИП"
-                                                selected={rows[0]['Тип поставщика'] === "ИП"}
                                                 >
                                                     ИП
                                                 </option>
                                                 <option 
                                                 value="Самозанятый"
-                                                selected={rows[0]['Тип поставщика'] === "Самозанятый"}
                                                 >
                                                     Самозанятый
                                                 </option>
                                                 <option 
                                                 value="ООО"
-                                                selected={rows[0]['Тип поставщика'] === "ООО"}
                                                 >
                                                     ООО
                                                 </option>
                                                 <option 
                                                 value="АО"
-                                                selected={rows[0]['Тип поставщика'] === "АО"}
                                                 >
                                                     АО
                                                 </option>
@@ -75,7 +78,7 @@ export default async function EditProvider({ params } : { params: { id: string }
                                     <td>
                                         <input
                                             type='text'
-                                            placeholder={rows[0]['Название компании']}
+                                            placeholder={providers_rows['Название компании']}
                                             className="input"
                                         />
                                     </td>
@@ -87,7 +90,7 @@ export default async function EditProvider({ params } : { params: { id: string }
                                     <td>
                                         <input
                                             type='tel'
-                                            placeholder={rows[0]['Номер телефона']}
+                                            placeholder={providers_rows['Номер телефона']}
                                             className="input"
                                         />
                                     </td>
@@ -99,7 +102,7 @@ export default async function EditProvider({ params } : { params: { id: string }
                                     <td>
                                         <input
                                             type="text"
-                                            placeholder={rows[0]['Адрес']}
+                                            placeholder={providers_rows['Адрес']}
                                             className="input"
                                         />
                                     </td>
@@ -114,7 +117,29 @@ export default async function EditProvider({ params } : { params: { id: string }
                             </strong>                        
                         </p>
                         <table className="table is-bordered my-5"> 
-
+                            <tbody>
+                                {material_rows.map((material, index) => (
+                                    <tr  key={index}>
+                                        <th>
+                                            {material.meterial_name}
+                                        </th>
+                                        <td>
+                                            <input
+                                            type='text'
+                                            placeholder={material.unit_of_measure}
+                                            >
+                                            </input>
+                                        </td>
+                                        <td>
+                                            <input
+                                            type='number'
+                                            placeholder={material.quantity}
+                                            >
+                                            </input>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
                         </table>
                     </div>
                 </div>
