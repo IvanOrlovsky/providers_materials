@@ -1,9 +1,12 @@
 import { getAllMaterialsById } from "@/app/db/queries"
+import DeleteProviderMaterialBtn from "../DeleteProviderMaterialBtn/DeleteProviderMaterialBtn"
 
 export default async function Provider_Materials_Edit_Table({ id }: {id: string}){
 
     let material_data = await getAllMaterialsById(id)
     let material_rows = material_data.rows
+
+    
 
     return (
         <table className="table is-bordered my-5"> 
@@ -28,9 +31,7 @@ export default async function Provider_Materials_Edit_Table({ id }: {id: string}
                             </input>
                         </td>
                         <td>
-                            <button>
-
-                            </button>
+                            <DeleteProviderMaterialBtn id={id}/>
                         </td>
                     </tr>
                 ))}
