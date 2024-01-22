@@ -1,13 +1,11 @@
-import { getProviderById } from "@/app/db/queries"
 import { getAllMaterialsById } from "@/app/db/queries"
+import Provider_Edit_Table from "@/components/Provider_Edit_Table/Provider_Edit_Table"
 
 export default async function EditProvider({ params } : { params: { id: string } }) {
 
-    let providers_data = await getProviderById(params.id)
-    let providers_rows = providers_data.rows[0]
-
     let material_data = await getAllMaterialsById(params.id)
     let material_rows = material_data.rows
+
 
     return (
         <div className="container my-5">
@@ -23,92 +21,7 @@ export default async function EditProvider({ params } : { params: { id: string }
                                 Информация о поставщике
                             </strong>                        
                         </p>
-                        <table className="table is-bordered my-5">
-                            <tbody>
-                                <tr>
-                                    <th>
-                                        Номер поставщика
-                                    </th>
-                                    <td>
-                                        <input
-                                        type='number'
-                                        placeholder={providers_rows['Номер поставщика']}
-                                        className="input"
-                                        />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        Тип поставщика
-                                    </th>
-                                    <td>
-                                        <div className="select">
-                                            <select 
-                                            name="type"
-                                            defaultValue={providers_rows['Тип поставщика']}
-                                            >
-                                                <option 
-                                                value="ИП"
-                                                >
-                                                    ИП
-                                                </option>
-                                                <option 
-                                                value="Самозанятый"
-                                                >
-                                                    Самозанятый
-                                                </option>
-                                                <option 
-                                                value="ООО"
-                                                >
-                                                    ООО
-                                                </option>
-                                                <option 
-                                                value="АО"
-                                                >
-                                                    АО
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        Название компании
-                                    </th>
-                                    <td>
-                                        <input
-                                            type='text'
-                                            placeholder={providers_rows['Название компании']}
-                                            className="input"
-                                        />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        Номер телефона
-                                    </th>
-                                    <td>
-                                        <input
-                                            type='tel'
-                                            placeholder={providers_rows['Номер телефона']}
-                                            className="input"
-                                        />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        Адрес
-                                    </th>
-                                    <td>
-                                        <input
-                                            type="text"
-                                            placeholder={providers_rows['Адрес']}
-                                            className="input"
-                                        />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <Provider_Edit_Table id={params.id}/>
                     </div>
                     <div className="tile is-child box">
                         <p className="is-size-5">
@@ -136,6 +49,11 @@ export default async function EditProvider({ params } : { params: { id: string }
                                             placeholder={material["Количество"]}
                                             >
                                             </input>
+                                        </td>
+                                        <td>
+                                            <button>
+
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
