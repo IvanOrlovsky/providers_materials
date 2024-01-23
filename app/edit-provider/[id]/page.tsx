@@ -3,14 +3,14 @@ import Provider_Edit_Table from "@/components/Provider_Edit_Table/Provider_Edit_
 import Provider_Materials_Edit_Table from "@/components/Provider_Materials_Edit_Table/Provider_Materials_Edit_Table"
 import ConfirmationModal from "@/components/ConfirmationModal/ConfirmationModal"
 
-export default async function EditProvider({ params } : { params: { id: string } }) {
+
+export default function EditProvider({ params } : { params: { id: string } }) {
 
 
 
     async function onClose(){
         "use server"
         console.log('closed!')
-
     }
     async function onOk(){
         "use server"
@@ -24,6 +24,7 @@ export default async function EditProvider({ params } : { params: { id: string }
             onClose={onClose}
             onOk={onOk}
             content="test"
+            currentUrl={`/edit-provider/${params.id}`}
             >
 
             </ConfirmationModal>

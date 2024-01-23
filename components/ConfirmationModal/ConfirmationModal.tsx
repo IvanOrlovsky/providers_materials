@@ -3,18 +3,17 @@
 import { useSearchParams } from "next/navigation";
 import Modal from "../Modal/Modal";
 import { useRef, useEffect } from "react";
-import { useRouter, NextRouter } from "next/router";
-
+import Link from "next/link";
 
 interface ConfirmationModalProps{
     title: string,
     content: string,
     onOk: () => void,
     onClose: () => void,
-    router: NextRouter
+    currentUrl: string,
 }
 
-export default function ConfirmationModal({title, content, onOk, onClose, router}: ConfirmationModalProps){
+export default function ConfirmationModal({title, content, currentUrl, onOk, onClose}: ConfirmationModalProps){
 
     const searchParams = useSearchParams();
     const confirmationModalRef = useRef<null | HTMLDialogElement>(null)
@@ -49,8 +48,16 @@ export default function ConfirmationModal({title, content, onOk, onClose, router
                 {content}
             </section>
             <footer className="modal-card-foot">
-                <button className="button is-success" onClick={clickOk}>Да</button>
-                <button className="button" onClick={closeModal}>Отмена</button>
+                <button className="button is-success" onClick={clickOk}>
+                    <Link href={currentUrl} className="has-text-white-bis">
+                        Да
+                    </Link>
+                </button>
+                <button className="button" onClick={closeModal}>
+                    <Link href={currentUrl} className="has-text-black-bis">
+                        Отмена
+                    </Link>
+                </button>
             </footer>
         </Modal>
     ) : null
