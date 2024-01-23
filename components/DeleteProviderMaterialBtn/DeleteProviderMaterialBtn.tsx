@@ -12,7 +12,7 @@ export default function DeleteProviderMaterialBtn({ id }: {id: string}) {
         onClick={() => handleMaterialDelete(id)}
         type="button"
         >
-
+        Удалить
         </button>
     )
 } 
