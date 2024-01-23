@@ -28,14 +28,8 @@ export default async function Provider_Edit_Table({id}: { id: string }) {
                                         <div className="select">
                                             <select 
                                             name="type"
+                                            defaultValue=""
                                             >
-                                                <option 
-                                                value="" 
-                                                disabled 
-                                                selected 
-                                                hidden>
-                                                    Выберите тип...
-                                                </option>
                                                 <option 
                                                 value="ИП"
                                                 >

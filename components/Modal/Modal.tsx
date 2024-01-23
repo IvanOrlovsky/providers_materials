@@ -1,20 +1,17 @@
+import { Ref } from "react"
 
 interface ModalProps {
-    isOpen: boolean,
     title: string,
     onDismiss: () => void,
-    children: React.ReactNode 
+    modalRef: Ref<HTMLDialogElement>,
+    children: React.ReactNode, 
 }
 
-export default function Modal({isOpen, title, onDismiss, children} : ModalProps) {
-
-    if(!isOpen) {
-        return null
-    }
-
+export default function Modal({title, onDismiss, modalRef, children} : ModalProps) {
 
     return (
-        <div className="modal" onClick={onDismiss}>
+        <dialog ref={modalRef}>
+            <div className="modal is-active" onClick={onDismiss}>
             <div className="modal-background"></div>
             <div className="modal-card" onClick={(event) => event.stopPropagation()}>
                 <header className="modal-card-head">
@@ -25,5 +22,6 @@ export default function Modal({isOpen, title, onDismiss, children} : ModalProps)
                 {children}
             </div>
         </div>
+        </dialog>
     )
 }

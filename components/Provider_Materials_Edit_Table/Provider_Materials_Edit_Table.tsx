@@ -1,5 +1,6 @@
 import { getAllMaterialsById } from "@/app/db/queries"
 import DeleteProviderMaterialBtn from "../DeleteProviderMaterialBtn/DeleteProviderMaterialBtn"
+import Link from "next/link"
 
 export default async function Provider_Materials_Edit_Table({ id }: {id: string}){
 
@@ -31,7 +32,9 @@ export default async function Provider_Materials_Edit_Table({ id }: {id: string}
                             </input>
                         </td>
                         <td>
-                            <DeleteProviderMaterialBtn id={id}/>
+                            <Link className="has-text-white-bis" href={`/edit-provider/${id}?showModal=y`}>
+                                <DeleteProviderMaterialBtn id={id}/>
+                            </Link>
                         </td>
                     </tr>
                 ))}
