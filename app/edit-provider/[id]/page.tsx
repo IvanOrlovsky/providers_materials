@@ -32,7 +32,16 @@ export default function EditProvider({ params } : { params: { id: string } }) {
                         <Provider_Materials_Edit_Table id={params.id}/>
                     </div>
                 </div>
-                <Link className="has-text-white-bis" href={`/edit-provider/${params.id}/confirmation`}>
+                <Link 
+                className="has-text-white-bis" 
+                href={{
+                    pathname: `/edit-provider/${params.id}/confirmation`,
+                    query: {
+                        name: "qwe"
+                    }
+                }}
+                as={`/edit-provider/${params.id}/confirmation`}
+                >
                     <button 
                     className="button is-warning is-fullwidth has-text-weight-bold my-3"
                     type="button"
