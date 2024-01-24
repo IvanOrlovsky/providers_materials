@@ -1,4 +1,7 @@
+
 import Modal from "@/components/Modal/Modal";
+import { GetServerSideProps } from "next";
+ 
 
 export default function Confirmation() {
 
@@ -11,3 +14,6 @@ export default function Confirmation() {
         </Modal>
     )
 }
+
+    
+    

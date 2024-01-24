@@ -18,21 +18,16 @@ export default function Modal({title, children} : ModalProps) {
         router.back();
     }, [router]);
 
-    const onClick: MouseEventHandler = useCallback(
-    (e) => {
+    const onClick: MouseEventHandler = useCallback((e) => {
         if (e.target === overlay.current || e.target === wrapper.current) {
-        if (onDismiss) onDismiss();
+            if (onDismiss) onDismiss();
         }
-    },
-    [onDismiss, overlay, wrapper]
-    );
+    }, [onDismiss, overlay, wrapper]);
 
     const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
         if (e.key === "Escape") onDismiss();
-    },
-    [onDismiss]
-    );
+    }, [onDismiss] );
 
     useEffect(() => {
         document.addEventListener("keydown", onKeyDown);

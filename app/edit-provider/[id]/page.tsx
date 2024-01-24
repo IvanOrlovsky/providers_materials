@@ -3,6 +3,7 @@ import Provider_Edit_Table from "@/components/Provider_Edit_Table/Provider_Edit_
 import Provider_Materials_Edit_Table from "@/components/Provider_Materials_Edit_Table/Provider_Materials_Edit_Table"
 import Link from "next/link"
 
+
 export default function EditProvider({ params } : { params: { id: string } }) {
 
 
