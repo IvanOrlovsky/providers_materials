@@ -44,14 +44,7 @@ export default function Provider_Materials_Edit_Table({ id }: {id: string}){
                         </th>
                         <td>
                             <input
-                            type='text'
-                            placeholder={material["Единица измерения"]}
-                            disabled={disabledRows.includes(material["Номер материала"])}
-                            >
-                            </input>
-                        </td>
-                        <td>
-                            <input
+                            name="materialQuantity"
                             type='number'
                             placeholder={material["Количество"]}
                             disabled={disabledRows.includes(material["Номер материала"])}
@@ -59,7 +52,6 @@ export default function Provider_Materials_Edit_Table({ id }: {id: string}){
                             </input>
                         </td>
                         <td>
-                            {/* <Link className="has-text-white-bis" href={`/edit-provider/${id}/confirmation`}> */}
                                 <button
                                 className={disabledRows.includes(material["Номер материала"]) ? "button is-warning" : "button is-danger"}
                                 type="button"
@@ -67,7 +59,6 @@ export default function Provider_Materials_Edit_Table({ id }: {id: string}){
                                 >
                                     {disabledRows.includes(material["Номер материала"]) ? "Оставить" : "Удалить"}
                                 </button>
-                            {/* </Link> */}
                         </td>
                     </tr>
                 ))}

@@ -14,6 +14,7 @@ export default async function Provider_Edit_Table({id}: { id: string }) {
                                     </th>
                                     <td>
                                         <input
+                                        name="providerId"
                                         type='number'
                                         placeholder={provider_row['Номер поставщика']}
                                         className="input"
@@ -27,7 +28,7 @@ export default async function Provider_Edit_Table({id}: { id: string }) {
                                     <td>
                                         <div className="select">
                                             <select 
-                                            name="type"
+                                            name="providerType"
                                             defaultValue=""
                                             >
                                                 <option 
@@ -60,6 +61,7 @@ export default async function Provider_Edit_Table({id}: { id: string }) {
                                     </th>
                                     <td>
                                         <input
+                                            name="providerName"
                                             type='text'
                                             placeholder={provider_row['Название компании']}
                                             className="input"
@@ -72,6 +74,7 @@ export default async function Provider_Edit_Table({id}: { id: string }) {
                                     </th>
                                     <td>
                                         <input
+                                            name="providerNumber"
                                             type='tel'
                                             placeholder={provider_row['Номер телефона']}
                                             className="input"
@@ -84,6 +87,7 @@ export default async function Provider_Edit_Table({id}: { id: string }) {
                                     </th>
                                     <td>
                                         <input
+                                            name="providerAdress"
                                             type="text"
                                             placeholder={provider_row['Адрес']}
                                             className="input"
