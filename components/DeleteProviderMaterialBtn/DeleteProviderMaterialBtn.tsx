@@ -3,7 +3,7 @@
 export default function DeleteProviderMaterialBtn({ id }: {id: string}) {
 
     async function handleMaterialDelete(id: string) {
-        
+        console.log("ok")
     }
     
     return (

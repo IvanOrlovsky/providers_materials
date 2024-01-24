@@ -1,19 +1,49 @@
-import { Ref } from "react"
+"use client";
 
-interface ModalProps {
+import { useCallback, useRef, useEffect, MouseEventHandler } from "react";
+import { useRouter } from "next/navigation";
+
+type ModalProps = {
     title: string,
-    onDismiss: () => void,
-    modalRef: Ref<HTMLDialogElement>,
     children: React.ReactNode, 
 }
 
-export default function Modal({title, onDismiss, modalRef, children} : ModalProps) {
+export default function Modal({title, children} : ModalProps) {
+
+    const overlay = useRef(null);
+    const wrapper = useRef(null);
+    const router = useRouter();
+
+    const onDismiss = useCallback(() => {
+        router.back();
+    }, [router]);
+
+    const onClick: MouseEventHandler = useCallback(
+    (e) => {
+        if (e.target === overlay.current || e.target === wrapper.current) {
+        if (onDismiss) onDismiss();
+        }
+    },
+    [onDismiss, overlay, wrapper]
+    );
+
+    const onKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+        if (e.key === "Escape") onDismiss();
+    },
+    [onDismiss]
+    );
+
+    useEffect(() => {
+        document.addEventListener("keydown", onKeyDown);
+        return () => document.removeEventListener("keydown", onKeyDown);
+    }, [onKeyDown]);
 
     return (
-        <dialog ref={modalRef}>
-            <div className="modal is-active" onClick={onDismiss}>
-            <div className="modal-background"></div>
-            <div className="modal-card" onClick={(event) => event.stopPropagation()}>
+        <>
+        <div className="modal is-active">
+            <div className="modal-background" ref={overlay}  onClick={onClick}></div>
+            <div className="modal-card" ref={wrapper}>
                 <header className="modal-card-head">
                     <h1 className="modal-card-title">{title}</h1>
                     <button className="delete" aria-label="close" onClick={onDismiss}></button>
@@ -22,6 +52,6 @@ export default function Modal({title, onDismiss, modalRef, children} : ModalProp
                 {children}
             </div>
         </div>
-        </dialog>
+        </>
     )
 }

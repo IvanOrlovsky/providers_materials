@@ -32,7 +32,7 @@ export default async function Provider_Materials_Edit_Table({ id }: {id: string}
                             </input>
                         </td>
                         <td>
-                            <Link className="has-text-white-bis" href={`/edit-provider/${id}?showModal=y`}>
+                            <Link className="has-text-white-bis" href={`/edit-provider/${id}/confirmation`}>
                                 <DeleteProviderMaterialBtn id={id}/>
                             </Link>
                         </td>

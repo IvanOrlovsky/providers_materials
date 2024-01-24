@@ -10,10 +10,9 @@ interface ConfirmationModalProps{
     content: string,
     onOk: () => void,
     onClose: () => void,
-    currentUrl: string,
 }
 
-export default function ConfirmationModal({title, content, currentUrl, onOk, onClose}: ConfirmationModalProps){
+export default function ConfirmationModal({title, content, onOk, onClose}: ConfirmationModalProps){
 
     const searchParams = useSearchParams();
     const confirmationModalRef = useRef<null | HTMLDialogElement>(null)
@@ -41,22 +40,16 @@ export default function ConfirmationModal({title, content, currentUrl, onOk, onC
     ? (
         <Modal
         title={title}
-        modalRef={confirmationModalRef}
-        onDismiss={closeModal}
         >
             <section className="modal-card-body">
                 {content}
             </section>
             <footer className="modal-card-foot">
                 <button className="button is-success" onClick={clickOk}>
-                    <Link href={currentUrl} className="has-text-white-bis">
                         Да
-                    </Link>
                 </button>
                 <button className="button" onClick={closeModal}>
-                    <Link href={currentUrl} className="has-text-black-bis">
                         Отмена
-                    </Link>
                 </button>
             </footer>
         </Modal>
