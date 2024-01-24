@@ -1,5 +1,4 @@
 import { getAllMaterialsById } from "@/app/db/queries"
-import DeleteProviderMaterialBtn from "../DeleteProviderMaterialBtn/DeleteProviderMaterialBtn"
 import Link from "next/link"
 
 export default async function Provider_Materials_Edit_Table({ id }: {id: string}){
@@ -33,7 +32,12 @@ export default async function Provider_Materials_Edit_Table({ id }: {id: string}
                         </td>
                         <td>
                             <Link className="has-text-white-bis" href={`/edit-provider/${id}/confirmation`}>
-                                <DeleteProviderMaterialBtn id={id}/>
+                                <button
+                                className="button is-danger"
+                                type="button"
+                                >
+                                    Удалить
+                                </button>
                             </Link>
                         </td>
                     </tr>
