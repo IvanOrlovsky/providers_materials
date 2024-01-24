@@ -1,6 +1,7 @@
 
 import Provider_Edit_Table from "@/components/Provider_Edit_Table/Provider_Edit_Table"
 import Provider_Materials_Edit_Table from "@/components/Provider_Materials_Edit_Table/Provider_Materials_Edit_Table"
+import Link from "next/link"
 
 export default function EditProvider({ params } : { params: { id: string } }) {
 
@@ -31,12 +32,14 @@ export default function EditProvider({ params } : { params: { id: string } }) {
                         <Provider_Materials_Edit_Table id={params.id}/>
                     </div>
                 </div>
-                <button 
-                className="button is-warning is-fullwidth has-text-weight-bold my-3"
-                type="submit"
-                >
-                    Подтвердить изменения
-                </button>
+                <Link className="has-text-white-bis" href={`/edit-provider/${params.id}/confirmation`}>
+                    <button 
+                    className="button is-warning is-fullwidth has-text-weight-bold my-3"
+                    type="button"
+                    >
+                        Подтвердить изменения
+                    </button>
+                </Link>
                 <button 
                 className="button is-danger is-fullwidth has-text-weight-bold"
                 type="button"
