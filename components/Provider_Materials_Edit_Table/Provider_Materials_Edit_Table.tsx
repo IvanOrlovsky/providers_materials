@@ -1,19 +1,45 @@
+"use client"
+
 import { getAllMaterialsById } from "@/app/db/queries"
 import Link from "next/link"
+import { useEffect, useState } from "react"
+import { QueryResultRow } from "@vercel/postgres"
 
-export default async function Provider_Materials_Edit_Table({ id }: {id: string}){
+export default function Provider_Materials_Edit_Table({ id }: {id: string}){
 
-    let material_data = await getAllMaterialsById(id)
-    let material_rows = material_data.rows
+    const [materialRows, setMaterialRows] = useState<QueryResultRow[]>([]);
+    const [disabledRows, setDisabledRows] = useState<string[]>([]);
+
+    const fetchData = async () => {
+        const materialData = await getAllMaterialsById(id);
+        setMaterialRows(materialData.rows);
+        
+      };
 
     
+    const handleMaterialDelete = (material_id: string) => {
+        if (disabledRows.includes(material_id)) {
+            setDisabledRows(disabledRows.filter(obj => obj !== material_id));
+        } else {
+            setDisabledRows([...disabledRows, material_id]);
+        }
+    }
 
+
+    useEffect(() => {
+        fetchData();
+    }, [id])
+
+    
     return (
         <table className="table is-bordered my-5"> 
             <tbody>
-                {material_rows.map((material, index) => (
-                    <tr key={index}>
-                        <th>
+                {materialRows.map((material) => (
+                    <tr
+                    key={material["Номер материала"]}
+                    style={disabledRows.includes(material["Номер материала"]) ? { backgroundColor: 'rgba(0, 0, 0, 0.5)' } : {}}
+                    >
+                        <th className="">
                             {material["Название материала"]}
                         </th>
                         <td>
@@ -31,14 +57,15 @@ export default async function Provider_Materials_Edit_Table({ id }: {id: string}
                             </input>
                         </td>
                         <td>
-                            <Link className="has-text-white-bis" href={`/edit-provider/${id}/confirmation`}>
+                            {/* <Link className="has-text-white-bis" href={`/edit-provider/${id}/confirmation`}> */}
                                 <button
-                                className="button is-danger"
+                                className={disabledRows.includes(material["Номер материала"]) ? "button is-warning" : "button is-danger"}
                                 type="button"
+                                onClick={() => {handleMaterialDelete(material["Номер материала"])}}
                                 >
-                                    Удалить
+                                    {disabledRows.includes(material["Номер материала"]) ? "Оставить" : "Удалить"}
                                 </button>
-                            </Link>
+                            {/* </Link> */}
                         </td>
                     </tr>
                 ))}
