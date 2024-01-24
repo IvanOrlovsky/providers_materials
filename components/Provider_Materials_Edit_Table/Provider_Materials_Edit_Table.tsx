@@ -46,6 +46,7 @@ export default function Provider_Materials_Edit_Table({ id }: {id: string}){
                             <input
                             type='text'
                             placeholder={material["Единица измерения"]}
+                            disabled={disabledRows.includes(material["Номер материала"])}
                             >
                             </input>
                         </td>
@@ -53,6 +54,7 @@ export default function Provider_Materials_Edit_Table({ id }: {id: string}){
                             <input
                             type='number'
                             placeholder={material["Количество"]}
+                            disabled={disabledRows.includes(material["Номер материала"])}
                             >
                             </input>
                         </td>
