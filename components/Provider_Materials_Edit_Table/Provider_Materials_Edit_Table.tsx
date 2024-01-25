@@ -18,7 +18,11 @@ export default function Provider_Materials_Edit_Table({ id, setProviderMaterials
     const fetchData = async () => {
         const materialData = await getAllMaterialsById(id);
         setMaterialRows(materialData.rows);
-        return materialData.rows
+        setProviderMaterialsEditData({
+            "prevProviderMaterialsInfo" : materialData.rows,
+            "providerMaterialsDisabledRows": "",
+            "providerMaterialsQuantities": "",
+        });
       };
 
     const handleQuantityChange = (material_id: string, quantity: string) => {
@@ -51,12 +55,7 @@ export default function Provider_Materials_Edit_Table({ id, setProviderMaterials
 
 
     useEffect(() => {
-        const res = fetchData();
-        setProviderMaterialsEditData({
-            "prevProviderMaterialsInfo" : res,
-            "providerMaterialsDisabledRows": "",
-            "providerMaterialsQuantities": "",
-        });
+        fetchData();
     }, [id])
 
     
