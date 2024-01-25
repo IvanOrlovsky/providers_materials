@@ -6,6 +6,10 @@ import Link from "next/link"
 
 export default function EditProvider({ params } : { params: { id: string } }) {
 
+    const foo = async (data: FormData) => {
+        "use server"
+        console.log(data)
+    }
 
     return (
         <div className="container my-5">
@@ -14,7 +18,7 @@ export default function EditProvider({ params } : { params: { id: string } }) {
                 Редактирование поставщика номер {params.id}
             </h1>
             
-            <form>
+            <form action={foo}>
                 <div className="tile is-ancestor">
                     <div className="tile is-child box">
                         <p className="is-size-5">
@@ -33,7 +37,7 @@ export default function EditProvider({ params } : { params: { id: string } }) {
                         <Provider_Materials_Edit_Table id={params.id}/>
                     </div>
                 </div>
-                <Link 
+                {/* <Link 
                 className="has-text-white-bis" 
                 href={{
                     pathname: `/edit-provider/${params.id}/confirmation`,
@@ -42,14 +46,14 @@ export default function EditProvider({ params } : { params: { id: string } }) {
                     }
                 }}
                 as={`/edit-provider/${params.id}/confirmation`}
-                >
+                > */}
                     <button 
                     className="button is-warning is-fullwidth has-text-weight-bold my-3"
-                    type="button"
+                    type="submit"
                     >
                         Подтвердить изменения
                     </button>
-                </Link>
+                {/* </Link> */}
                 <button 
                 className="button is-danger is-fullwidth has-text-weight-bold"
                 type="button"

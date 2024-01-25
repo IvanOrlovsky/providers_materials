@@ -32,37 +32,49 @@ export default function Provider_Materials_Edit_Table({ id }: {id: string}){
 
     
     return (
-        <table className="table is-bordered my-5"> 
-            <tbody>
-                {materialRows.map((material) => (
-                    <tr
-                    key={material["Номер материала"]}
-                    style={disabledRows.includes(material["Номер материала"]) ? { backgroundColor: 'rgba(0, 0, 0, 0.5)' } : {}}
-                    >
-                        <th className="">
-                            {material["Название материала"]}
-                        </th>
-                        <td>
-                            <input
-                            name="materialQuantity"
-                            type='number'
-                            placeholder={material["Количество"]}
-                            disabled={disabledRows.includes(material["Номер материала"])}
-                            >
-                            </input>
-                        </td>
-                        <td>
-                                <button
-                                className={disabledRows.includes(material["Номер материала"]) ? "button is-warning" : "button is-danger"}
-                                type="button"
-                                onClick={() => {handleMaterialDelete(material["Номер материала"])}}
+        <>
+            <input
+                type="hidden"
+                name="prevMaterialsInfo"
+                value={JSON.stringify({materialRows})}
+            />
+            <input
+                type="hidden"
+                name="disabledRowsData"
+                value={JSON.stringify(disabledRows)}
+            />
+            <table className="table is-bordered my-5"> 
+                <tbody>
+                    {materialRows.map((material) => (
+                        <tr
+                        key={material["Номер материала"]}
+                        style={disabledRows.includes(material["Номер материала"]) ? { backgroundColor: 'rgba(0, 0, 0, 0.5)' } : {}}
+                        >
+                            <th className="">
+                                {material["Название материала"]}
+                            </th>
+                            <td>
+                                <input
+                                name="materialQuantity"
+                                type='number'
+                                placeholder={material["Количество"]}
+                                disabled={disabledRows.includes(material["Номер материала"])}
                                 >
-                                    {disabledRows.includes(material["Номер материала"]) ? "Оставить" : "Удалить"}
-                                </button>
-                        </td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+                                </input>
+                            </td>
+                            <td>
+                                    <button
+                                    className={disabledRows.includes(material["Номер материала"]) ? "button is-warning" : "button is-danger"}
+                                    type="button"
+                                    onClick={() => {handleMaterialDelete(material["Номер материала"])}}
+                                    >
+                                        {disabledRows.includes(material["Номер материала"]) ? "Оставить" : "Удалить"}
+                                    </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </>
     ) 
 }
