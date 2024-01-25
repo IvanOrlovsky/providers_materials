@@ -1,6 +1,7 @@
 "use client"
 
 import Modal from "@/components/Modal/Modal";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
  
@@ -101,7 +102,9 @@ export default function Confirmation({ params } : { params: { id: string } }) {
                 </div>
             </section>
             <footer className="modal-card-foot">
-                <button className="button is-success">Сохранить изменения</button>
+                <Link className="button is-success" href={`/edit-provider/${params.id}/confirm-complete`}>
+                    Сохранить изменения
+                </Link>
                 <button className="button" onClick={() => {router.back()}}>Отмена</button>
             </footer>
         </Modal>
