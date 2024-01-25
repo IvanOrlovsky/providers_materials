@@ -2,24 +2,33 @@
 
 import Provider_Edit_Table from "@/components/Provider_Edit_Table/Provider_Edit_Table"
 import Provider_Materials_Edit_Table from "@/components/Provider_Materials_Edit_Table/Provider_Materials_Edit_Table"
-import Link from "next/link"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { FormEvent, useState } from "react"
+import makeSearchParams from "@/app/utils/makeSearchParams"
 
 export default function EditProvider({ params } : { params: { id: string } }) {
 
-    const [providerEditData, setProviderEditData] = useState();
-    const [providerMaterialsEditData, setProviderMaterialsEditData] = useState();
+    const [providerEditData, setProviderEditData] = useState<{ [key: string]: string }>({});
+    const [providerMaterialsEditData, setProviderMaterialsEditData] = useState<{ [key: string]: string }>({});
+
+    const router = useRouter();
+
+    const handleSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        const urlParams = makeSearchParams(providerEditData, providerMaterialsEditData);
+
+        router.push(`/edit-provider/${params.id}/confirmation/${urlParams}`)
+
+    }
 
     return (
         <div className="container my-5">
             
             <h1 className="title has-text-centered">
                 Редактирование поставщика номер {params.id}
-                {providerMaterialsEditData && JSON.stringify(providerMaterialsEditData)}
             </h1>
             
-            <form onSubmit={(e: FormEvent) => e.preventDefault()}>
+            <form onSubmit={handleSubmit}>
                 <div className="tile is-ancestor">
                     <div className="tile is-child box">
                         <p className="is-size-5">
