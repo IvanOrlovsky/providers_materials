@@ -1,16 +1,27 @@
+"use client"
+
 import { getProviderById } from "@/app/db/queries"
+import { useEffect, useState } from "react";
 
-export default async function Provider_Edit_Table({id}: { id: string }) {
+export default function Provider_Edit_Table({id}: { id: string }) {
 
-    let providers_data = await getProviderById(id)
-    let provider_row = providers_data.rows[0]
+    const [providerData, setProviderData] = useState<any>({});
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await getProviderById(id);
+            setProviderData(result.rows[0]);
+        };
+        fetchData();
+      }, [id]);
+
 
     return (
         <>
             <input
                 type="hidden"
                 name="prevProviderInfo"
-                value={JSON.stringify({provider_row})}
+                value={JSON.stringify({providerData})}
             />
             <table className="table is-bordered my-5">
                     <tbody>
@@ -22,7 +33,7 @@ export default async function Provider_Edit_Table({id}: { id: string }) {
                                 <input
                                 name="providerId"
                                 type='number'
-                                placeholder={provider_row['Номер поставщика']}
+                                placeholder={providerData['Номер поставщика']}
                                 className="input"
                                 />
                             </td>
@@ -74,7 +85,7 @@ export default async function Provider_Edit_Table({id}: { id: string }) {
                                 <input
                                     name="providerName"
                                     type='text'
-                                    placeholder={provider_row['Название компании']}
+                                    placeholder={providerData['Название компании']}
                                     className="input"
                                 />
                             </td>
@@ -87,7 +98,7 @@ export default async function Provider_Edit_Table({id}: { id: string }) {
                                 <input
                                     name="providerNumber"
                                     type='tel'
-                                    placeholder={provider_row['Номер телефона']}
+                                    placeholder={providerData['Номер телефона']}
                                     className="input"
                                 />
                             </td>
@@ -100,7 +111,7 @@ export default async function Provider_Edit_Table({id}: { id: string }) {
                                 <input
                                     name="providerAdress"
                                     type="text"
-                                    placeholder={provider_row['Адрес']}
+                                    placeholder={providerData['Адрес']}
                                     className="input"
                                 />
                             </td>

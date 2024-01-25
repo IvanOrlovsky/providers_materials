@@ -1,14 +1,17 @@
+"use client"
 
 import Provider_Edit_Table from "@/components/Provider_Edit_Table/Provider_Edit_Table"
 import Provider_Materials_Edit_Table from "@/components/Provider_Materials_Edit_Table/Provider_Materials_Edit_Table"
 import Link from "next/link"
-
+import { useRouter } from "next/router"
 
 export default function EditProvider({ params } : { params: { id: string } }) {
 
-    const foo = async (data: FormData) => {
-        "use server"
-        console.log(data)
+    
+    const handleSubmit = () => {
+        const router = useRouter()
+        router.push(`/edit-provider/${params.id}/confirmation`)
+        console.log("cl happened")
     }
 
     return (
@@ -18,7 +21,7 @@ export default function EditProvider({ params } : { params: { id: string } }) {
                 Редактирование поставщика номер {params.id}
             </h1>
             
-            <form action={foo}>
+            <form onSubmit={handleSubmit}>
                 <div className="tile is-ancestor">
                     <div className="tile is-child box">
                         <p className="is-size-5">
