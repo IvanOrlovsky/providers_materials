@@ -2,10 +2,12 @@
 
 import Modal from "@/components/Modal/Modal";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
  
 
 export default function Confirmation({ params } : { params: { id: string } }) {
 
+    const router = useRouter();
     const searchParams = useSearchParams();
 
     const prevProviderMaterialsInfo = JSON.parse(searchParams.get("prevProviderMaterialsInfo") as string)
@@ -19,7 +21,6 @@ export default function Confirmation({ params } : { params: { id: string } }) {
     const providerNumber = searchParams.get("providerNumber")
     const providerAddress = searchParams.get("providerAddress")
 
-    console.log(providerMaterialsDisabledRows)
     
     return (
         <Modal
@@ -100,8 +101,8 @@ export default function Confirmation({ params } : { params: { id: string } }) {
                 </div>
             </section>
             <footer className="modal-card-foot">
-                <button className="button is-success">Save changes</button>
-                <button className="button">Cancel</button>
+                <button className="button is-success">Сохранить изменения</button>
+                <button className="button" onClick={() => {router.back()}}>Отмена</button>
             </footer>
         </Modal>
     )
