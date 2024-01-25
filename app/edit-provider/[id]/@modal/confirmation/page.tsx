@@ -14,15 +14,50 @@ export default function Confirmation({ params } : { params: { id: string } }) {
     const prevProviderMaterialsInfo = JSON.parse(searchParams.get("prevProviderMaterialsInfo") as string)
     const providerMaterialsDisabledRows = searchParams.get("providerMaterialsDisabledRows") ? 
         JSON.parse(searchParams.get("providerMaterialsDisabledRows") as string) : []
-    const providerMaterialsQuantities = searchParams.get("providerMaterialsQuantities")
+    const providerMaterialsQuantities = searchParams.get("providerMaterialsQuantities") ? 
+        JSON.parse(searchParams.get("providerMaterialsQuantities") as string) : {}
     const prevProviderInfo = JSON.parse(searchParams.get("prevProviderInfo") as string)
-    const providerId = searchParams.get("providerId")
     const providerType = searchParams.get("providerType")
     const providerName = searchParams.get("providerName")
     const providerNumber = searchParams.get("providerNumber")
     const providerAddress = searchParams.get("providerAddress")
 
-    
+    if (
+        (providerMaterialsDisabledRows.length === 0) &&
+        (Object.keys(providerMaterialsQuantities).length === 0) &&
+        (!providerType) &&
+        (!providerName) &&
+        (!providerNumber) &&
+        (!providerAddress)
+    ) {
+        console.log("OKKKK")
+        return (
+            <Modal
+            title="Вы ничего не изменили">
+                <section className="modal-card-body  has-background-warning">
+                    <div className="container">
+                        {`Вы не изменили информацию о поставщике ${params.id}`}
+                    </div>
+                </section>
+                <footer  className="modal-card-foot">
+                    <Link href={`/providers`}  className="button is-warning">
+                        Я знаю и хочу продолжить
+                    </Link>
+                    <button className="button" onClick={() => {router.back()}}>Отмена</button>
+                </footer>
+            </Modal>
+        )
+    } 
+
+    console.log("Непустые переменные:");
+    if ((providerMaterialsDisabledRows.length !== 0)) console.log("providerMaterialsDisabledRows:", providerMaterialsDisabledRows);
+    if (Object.keys(providerMaterialsQuantities).length !== 0) console.log("providerMaterialsQuantities:", providerMaterialsQuantities);
+    if (providerType) console.log("providerType:", providerType);
+    if (providerName) console.log("providerName:", providerName);
+    if (providerNumber) console.log("providerNumber:", providerNumber);
+    if (providerAddress) console.log("providerAddress:", providerAddress);
+
+    // console.log(providerType)
     return (
         <Modal
         title='Подтвердите изменения'
@@ -32,15 +67,6 @@ export default function Confirmation({ params } : { params: { id: string } }) {
                     <div className="tile is-child box">
                     <table className="table is-bordered my-1 is-narrow">
                         <tbody>
-                            <tr>
-                                <th>
-                                    Номер поставщика
-                                </th>
-                                <td className={prevProviderInfo['Номер поставщика'] != providerId?
-                                "is-warning" : ""}>
-                                    {providerId}
-                                </td>
-                            </tr>
                             <tr>
                                 <th>
                                     Тип поставщика
@@ -92,7 +118,7 @@ export default function Confirmation({ params } : { params: { id: string } }) {
                                             {material["Название материала"]}
                                         </th>
                                         <td>
-                                            {material["Количество"]}
+                                            {providerMaterialsQuantities[parseInt(material["Номер материала"], 10)]}
                                         </td>
                                     </tr>
                                 ))}
@@ -111,5 +137,6 @@ export default function Confirmation({ params } : { params: { id: string } }) {
     )
 }
 
+    
     
     

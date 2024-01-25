@@ -21,11 +21,5 @@ export default function makeSearchParams(
 
     const queryString = searchParams.toString();
 
-    // console.log(queryString)
-
     return queryString ? `?${queryString}` : ''; 
-}
-
-export  async function QWE() {
-    await new Promise(resolve => setTimeout(resolve, 4000));
 }

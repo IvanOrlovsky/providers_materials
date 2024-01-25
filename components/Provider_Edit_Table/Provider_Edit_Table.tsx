@@ -7,7 +7,6 @@ export default function Provider_Edit_Table({ id, setProviderEditData }: {
 }) {
     const [providerData, setProviderData] = useState<any>({});
 
-    const [providerId, setProviderId] = useState("")
     const [providerType, setProviderType] = useState("")
     const [providerName, setProviderName] = useState("")
     const [providerNumber, setProviderNumber] = useState("")
@@ -19,7 +18,6 @@ export default function Provider_Edit_Table({ id, setProviderEditData }: {
             setProviderData(result.rows[0]);
             setProviderEditData({
                 "prevProviderInfo" : result.rows[0],
-                "providerId": "",
                 "providerType": "",
                 "providerName": "",
                 "providerNumber": "",
@@ -33,13 +31,6 @@ export default function Provider_Edit_Table({ id, setProviderEditData }: {
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         switch (name) {
-            case "providerId":
-                setProviderId(value);
-                setProviderEditData((prevData: any) => ({
-                    ...prevData,
-                    "providerId": value,
-                }));
-                break;
             case "providerType":
                 setProviderType(value);
                 setProviderEditData((prevData: any) => ({
@@ -84,21 +75,6 @@ export default function Provider_Edit_Table({ id, setProviderEditData }: {
                 <tbody>
                     <tr>
                         <th>
-                            Номер поставщика
-                        </th>
-                        <td>
-                            <input
-                                name="providerId"
-                                type='number'
-                                placeholder={providerData['Номер поставщика']}
-                                className="input"
-                                value={providerId}
-                                onChange={handleChange}
-                            />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             Тип поставщика
                         </th>
                         <td>
@@ -129,7 +105,7 @@ export default function Provider_Edit_Table({ id, setProviderEditData }: {
                                         АО
                                     </option>
                                 </select>
-                            </div>
+                            </div> 
                         </td>
                     </tr>
                     <tr>
