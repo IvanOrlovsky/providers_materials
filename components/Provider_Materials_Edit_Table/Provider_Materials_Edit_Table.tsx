@@ -2,32 +2,61 @@
 
 import { getAllMaterialsById } from "@/app/db/queries"
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useEffect, useState, ChangeEvent, Dispatch, SetStateAction } from "react"
 import { QueryResultRow } from "@vercel/postgres"
 
-export default function Provider_Materials_Edit_Table({ id }: {id: string}){
+export default function Provider_Materials_Edit_Table({ id, setProviderMaterialsEditData }: {
+    id: string,
+    setProviderMaterialsEditData: Dispatch<SetStateAction<any>>
+}){
 
     const [materialRows, setMaterialRows] = useState<QueryResultRow[]>([]);
     const [disabledRows, setDisabledRows] = useState<string[]>([]);
+    const [materialQuantities, setMaterialQuantities] = useState<{ [key: string]: string }>({});
+
 
     const fetchData = async () => {
         const materialData = await getAllMaterialsById(id);
         setMaterialRows(materialData.rows);
-        
+        return materialData.rows
       };
 
+    const handleQuantityChange = (material_id: string, quantity: string) => {
+        setMaterialQuantities(prevQuantities => ({
+            ...prevQuantities,
+            [material_id]: quantity
+        }));
+        setProviderMaterialsEditData((prevData: any) => ({
+            ...prevData,
+            "providerMaterialsQuantities": {...materialQuantities, [material_id]: quantity},
+        }));
+    }
     
     const handleMaterialDelete = (material_id: string) => {
         if (disabledRows.includes(material_id)) {
-            setDisabledRows(disabledRows.filter(obj => obj !== material_id));
+            const newDisabledRows = disabledRows.filter(obj => obj !== material_id)
+            setDisabledRows(newDisabledRows);
+            setProviderMaterialsEditData((prevData: any) => ({
+                ...prevData,
+                "providerMaterialsDisabledRows": newDisabledRows,
+            }));
         } else {
             setDisabledRows([...disabledRows, material_id]);
+            setProviderMaterialsEditData((prevData: any) => ({
+                ...prevData,
+                "providerMaterialsDisabledRows": [...disabledRows, material_id],
+            }));
         }
     }
 
 
     useEffect(() => {
-        fetchData();
+        const res = fetchData();
+        setProviderMaterialsEditData({
+            "prevProviderMaterialsInfo" : res,
+            "providerMaterialsDisabledRows": "",
+            "providerMaterialsQuantities": "",
+        });
     }, [id])
 
     
@@ -59,6 +88,10 @@ export default function Provider_Materials_Edit_Table({ id }: {id: string}){
                                 type='number'
                                 placeholder={material["Количество"]}
                                 disabled={disabledRows.includes(material["Номер материала"])}
+                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                    const quantity = e.target.value;
+                                    handleQuantityChange(material["Номер материала"], quantity);
+                                }}
                                 >
                                 </input>
                             </td>

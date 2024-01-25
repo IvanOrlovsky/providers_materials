@@ -31,7 +31,6 @@ export default function Provider_Edit_Table({ id, setProviderEditData }: {
     }, [id]);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        console.log(e.target.name, "   ", e.target.value)
         const { name, value } = e.target;
         switch (name) {
             case "providerId":

@@ -9,13 +9,14 @@ import { FormEvent, useState } from "react"
 export default function EditProvider({ params } : { params: { id: string } }) {
 
     const [providerEditData, setProviderEditData] = useState();
+    const [providerMaterialsEditData, setProviderMaterialsEditData] = useState();
 
     return (
         <div className="container my-5">
             
             <h1 className="title has-text-centered">
                 Редактирование поставщика номер {params.id}
-                {providerEditData && JSON.stringify(providerEditData)}
+                {providerMaterialsEditData && JSON.stringify(providerMaterialsEditData)}
             </h1>
             
             <form onSubmit={(e: FormEvent) => e.preventDefault()}>
@@ -34,7 +35,7 @@ export default function EditProvider({ params } : { params: { id: string } }) {
                                 Материалы поставщика
                             </strong>                        
                         </p>
-                        <Provider_Materials_Edit_Table id={params.id}/>
+                        <Provider_Materials_Edit_Table id={params.id} setProviderMaterialsEditData={setProviderMaterialsEditData}/>
                     </div>
                 </div>
                 {/* <Link 
