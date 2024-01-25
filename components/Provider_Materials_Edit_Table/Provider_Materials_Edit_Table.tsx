@@ -18,11 +18,16 @@ export default function Provider_Materials_Edit_Table({ id, setProviderMaterials
     const fetchData = async () => {
         const materialData = await getAllMaterialsById(id);
         setMaterialRows(materialData.rows);
+
         setProviderMaterialsEditData({
             "prevProviderMaterialsInfo" : materialData.rows,
             "providerMaterialsDisabledRows": "",
-            "providerMaterialsQuantities": "",
+            "providerMaterialsQuantities": materialData.rows.reduce((acc, material) => {
+                acc[material['Номер материала']] = material['Количество'];
+                return acc;
+              }, {}),
         });
+        
       };
 
     const handleQuantityChange = (material_id: string, quantity: string) => {
@@ -85,6 +90,7 @@ export default function Provider_Materials_Edit_Table({ id, setProviderMaterials
                                 <input
                                 name="materialQuantity"
                                 type='number'
+                                defaultValue={material["Количество"]}
                                 placeholder={material["Количество"]}
                                 disabled={disabledRows.includes(material["Номер материала"])}
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => {

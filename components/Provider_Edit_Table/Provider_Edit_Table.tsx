@@ -18,15 +18,21 @@ export default function Provider_Edit_Table({ id, setProviderEditData }: {
             setProviderData(result.rows[0]);
             setProviderEditData({
                 "prevProviderInfo" : result.rows[0],
-                "providerType": "",
-                "providerName": "",
-                "providerNumber": "",
-                "providerAddress": "",
+                "providerType": result.rows[0]['Тип поставщика'],
+                "providerName": result.rows[0]['Название компании'],
+                "providerNumber": result.rows[0]['Номер телефона'],
+                "providerAddress": result.rows[0]['Адрес'],
             });
+            setProviderName(result.rows[0]['Название компании'] || "");
+            setProviderNumber(result.rows[0]['Номер телефона'] || "");
+            setProviderAddress(result.rows[0]['Адрес'] || "");
+            setProviderType(result.rows[0]['Тип поставщика'] || "");
         };
         fetchData();
 
     }, [id]);
+
+
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
@@ -81,7 +87,7 @@ export default function Provider_Edit_Table({ id, setProviderEditData }: {
                             <div className="select">
                                 <select
                                     name="providerType"
-                                    value={providerType}
+                                    defaultValue={providerType}
                                     onChange={handleChange}
                                 >
                                     <option
@@ -116,6 +122,7 @@ export default function Provider_Edit_Table({ id, setProviderEditData }: {
                             <input
                                 name="providerName"
                                 type='text'
+                                // defaultValue={providerData['Название компании']}
                                 placeholder={providerData['Название компании']}
                                 className="input"
                                 value={providerName}

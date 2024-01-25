@@ -47,23 +47,12 @@ export default function EditProvider({ params } : { params: { id: string } }) {
                         <Provider_Materials_Edit_Table id={params.id} setProviderMaterialsEditData={setProviderMaterialsEditData}/>
                     </div>
                 </div>
-                {/* <Link 
-                className="has-text-white-bis" 
-                href={{
-                    pathname: `/edit-provider/${params.id}/confirmation`,
-                    query: {
-                        name: "qwe"
-                    }
-                }}
-                as={`/edit-provider/${params.id}/confirmation`}
-                > */} 
-                    <button 
-                    className="button is-warning is-fullwidth has-text-weight-bold my-3"
-                    type="submit"
-                    >
-                        Подтвердить изменения
-                    </button>
-                {/* </Link> */}
+                <button 
+                className="button is-warning is-fullwidth has-text-weight-bold my-3"
+                type="submit"
+                >
+                    Подтвердить изменения
+                </button>
                 <button 
                 className="button is-danger is-fullwidth has-text-weight-bold"
                 type="button"

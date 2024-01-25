@@ -22,15 +22,21 @@ export default function Confirmation({ params } : { params: { id: string } }) {
     const providerNumber = searchParams.get("providerNumber")
     const providerAddress = searchParams.get("providerAddress")
 
+    
+    const prevProviderMaterialsQuantities = prevProviderMaterialsInfo.reduce((acc: any, material: any) => {
+        acc[material['Номер материала']] = material['Количество'];
+        return acc;
+      }, {})
+
+
     if (
-        (providerMaterialsDisabledRows.length === 0) &&
-        (Object.keys(providerMaterialsQuantities).length === 0) &&
-        (!providerType) &&
-        (!providerName) &&
-        (!providerNumber) &&
-        (!providerAddress)
+        (JSON.stringify(prevProviderMaterialsQuantities) === JSON.stringify(providerMaterialsQuantities)) &&
+        (providerType === prevProviderInfo['Тип поставщика']) &&
+        (providerName === prevProviderInfo['Название компании']) &&
+        (providerNumber === prevProviderInfo['Номер телефона']) &&
+        (providerAddress ===  prevProviderInfo['Адрес']) &&
+        (JSON.stringify(providerMaterialsDisabledRows) === JSON.stringify([]))
     ) {
-        console.log("OKKKK")
         return (
             <Modal
             title="Вы ничего не изменили">
@@ -49,15 +55,6 @@ export default function Confirmation({ params } : { params: { id: string } }) {
         )
     } 
 
-    console.log("Непустые переменные:");
-    if ((providerMaterialsDisabledRows.length !== 0)) console.log("providerMaterialsDisabledRows:", providerMaterialsDisabledRows);
-    if (Object.keys(providerMaterialsQuantities).length !== 0) console.log("providerMaterialsQuantities:", providerMaterialsQuantities);
-    if (providerType) console.log("providerType:", providerType);
-    if (providerName) console.log("providerName:", providerName);
-    if (providerNumber) console.log("providerNumber:", providerNumber);
-    if (providerAddress) console.log("providerAddress:", providerAddress);
-
-    // console.log(providerType)
     return (
         <Modal
         title='Подтвердите изменения'
