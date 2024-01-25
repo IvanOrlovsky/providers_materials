@@ -3,25 +3,22 @@
 import Provider_Edit_Table from "@/components/Provider_Edit_Table/Provider_Edit_Table"
 import Provider_Materials_Edit_Table from "@/components/Provider_Materials_Edit_Table/Provider_Materials_Edit_Table"
 import Link from "next/link"
-import { useRouter } from "next/router"
+import { useRouter, useSearchParams } from "next/navigation"
+import { FormEvent, useState } from "react"
 
 export default function EditProvider({ params } : { params: { id: string } }) {
 
-    
-    const handleSubmit = () => {
-        const router = useRouter()
-        router.push(`/edit-provider/${params.id}/confirmation`)
-        console.log("cl happened")
-    }
+    const [providerEditData, setProviderEditData] = useState();
 
     return (
         <div className="container my-5">
-
+            
             <h1 className="title has-text-centered">
                 Редактирование поставщика номер {params.id}
+                {providerEditData && JSON.stringify(providerEditData)}
             </h1>
             
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e: FormEvent) => e.preventDefault()}>
                 <div className="tile is-ancestor">
                     <div className="tile is-child box">
                         <p className="is-size-5">
@@ -29,7 +26,7 @@ export default function EditProvider({ params } : { params: { id: string } }) {
                                 Информация о поставщике
                             </strong>                        
                         </p>
-                        <Provider_Edit_Table id={params.id}/>
+                        <Provider_Edit_Table id={params.id} setProviderEditData={setProviderEditData}/>
                     </div>
                     <div className="tile is-child box">
                         <p className="is-size-5">
@@ -49,7 +46,7 @@ export default function EditProvider({ params } : { params: { id: string } }) {
                     }
                 }}
                 as={`/edit-provider/${params.id}/confirmation`}
-                > */}
+                > */} 
                     <button 
                     className="button is-warning is-fullwidth has-text-weight-bold my-3"
                     type="submit"
