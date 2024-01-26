@@ -2,6 +2,7 @@
 
 import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 export async function getAllProviders() {
     noStore();
@@ -60,11 +61,23 @@ export async function getAllMaterialsById(id: string) {
 export async function getNotProviderMaterials(id: string) {
     noStore();
 
-    return sql`SELECT *
-    FROM Material
-    WHERE id NOT IN (
-        SELECT material_id
-        FROM Provider_Material
-        WHERE provider_id = ${id})
+    return sql`SELECT 
+    m.id AS "Номер материала",
+    m.name AS "Название материала",
+    m.unit_of_measure AS "Единица измерения"
+    FROM Material m
+    LEFT JOIN Provider_Material pm ON m.id = pm.material_id AND pm.provider_id = ${id}
+    WHERE pm.provider_id IS NULL;
     `
+}
+
+export async function addMaterialToProvider(provider_id: string, material_id: string, quantity: string) {
+    noStore();
+
+    await sql`INSERT INTO Provider_Material (provider_id, material_id, quantity)
+    VALUES (${provider_id}, ${material_id}, ${quantity});
+    `
+    // revalidatePath(`/edit-provider/${provider_id}`);
+
+    return 
 }
