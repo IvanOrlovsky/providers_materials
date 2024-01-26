@@ -5,6 +5,7 @@ import { updateProvider, deleteProviderMaterial, updateProviderMaterial } from "
 import { useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import areObjectsEqual from "@/app/utils/areObjectsEqual";
 
 export default function ConfirmSuccess({ params } : { params: { id: string } }) {
 
@@ -38,7 +39,7 @@ export default function ConfirmSuccess({ params } : { params: { id: string } }) 
               }
         }
 
-        if (JSON.stringify(prevProviderMaterialsQuantities) != JSON.stringify(providerMaterialsQuantities)) {
+        if (!areObjectsEqual(prevProviderMaterialsQuantities, providerMaterialsQuantities)) {
             for (const material_id in providerMaterialsQuantities) {
                 const quantityToUpdate = providerMaterialsQuantities[material_id];
                 updateProviderMaterial(material_id, params.id, quantityToUpdate)
