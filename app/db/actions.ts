@@ -21,7 +21,5 @@ export async function updateProvider(providerData: {
                     address = ${providerData.address}
                 WHERE
                     id = ${providerData.id};`
-        
-
-
+    
 }

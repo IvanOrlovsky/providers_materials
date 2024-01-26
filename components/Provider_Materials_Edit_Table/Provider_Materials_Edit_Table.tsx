@@ -18,7 +18,10 @@ export default function Provider_Materials_Edit_Table({ id, setProviderMaterials
     const fetchData = async () => {
         const materialData = await getAllMaterialsById(id);
         setMaterialRows(materialData.rows);
-
+        setMaterialQuantities(materialData.rows.reduce((acc, material) => {
+            acc[material['Номер материала']] = material['Количество'];
+            return acc;
+          }, {}))
         setProviderMaterialsEditData({
             "prevProviderMaterialsInfo" : materialData.rows,
             "providerMaterialsDisabledRows": "",

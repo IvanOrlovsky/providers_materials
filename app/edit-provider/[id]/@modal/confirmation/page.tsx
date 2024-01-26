@@ -109,13 +109,14 @@ export default function Confirmation({ params } : { params: { id: string } }) {
                                 {prevProviderMaterialsInfo.map((material: {[key: string] : string}) => (
                                     <tr
                                     key={material["Номер материала"]}
-                                    style={providerMaterialsDisabledRows.includes(+material["Номер материала"]) ? { backgroundColor: 'rgba(255, 0, 0, 0.5)' } : {}}
+                                    style={providerMaterialsDisabledRows.includes(+material["Номер материала"]) ? { backgroundColor: 'rgba(255, 0, 0, 0.5)' } : ((material["Количество"] != providerMaterialsQuantities[parseInt(material["Номер материала"], 10)]) ? {backgroundColor: 'rgba(255, 221, 87, 0.7)'} : {})}
+
                                     >
-                                        <th className="">
+                                        <th>
                                             {material["Название материала"]}
                                         </th>
                                         <td>
-                                            {providerMaterialsQuantities[parseInt(material["Номер материала"], 10)]}
+                                            {providerMaterialsQuantities[parseInt(material["Номер материала"], 10)] || material["Количество"]}
                                         </td>
                                     </tr>
                                 ))}
