@@ -21,6 +21,7 @@ export default function EditMaterial({ params }: { params: { id: string } }) {
     fetchData();
   }, [params.id]);
 
+    
   const handleMaterialNameChange = (name: string) => {
     setMaterialName(name);
   };
