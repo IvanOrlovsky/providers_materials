@@ -7,13 +7,15 @@ import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 
 export default function AddSuccess() {
+    
+
+    const router = useRouter();
+    const searchParams = useSearchParams();
+
     const pathname = usePathname();
     if (!pathname.includes('add-complete')) {
         return null;
     }
-
-    const router = useRouter();
-    const searchParams = useSearchParams();
 
     useEffect(() => {
         const name = searchParams.get("materialName") as string
