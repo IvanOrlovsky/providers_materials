@@ -12,17 +12,19 @@ export default function AddSuccess() {
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const pathname = usePathname();
-    if (!pathname.includes('add-complete')) {
-        return null;
-    }
-
     useEffect(() => {
         const name = searchParams.get("materialName") as string
         const unit_of_measure = searchParams.get("materialUnitOfMeasure") as string
         insertMaterial(name, unit_of_measure)
 
     }, [])
+        
+    const pathname = usePathname();
+    if (!pathname.includes('add-complete')) {
+        return null;
+    }
+
+    
     
     return (
         <Modal
