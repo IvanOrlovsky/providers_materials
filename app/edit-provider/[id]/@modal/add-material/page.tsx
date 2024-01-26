@@ -5,9 +5,12 @@ import { useEffect, useState } from "react";
 import { getNotProviderMaterials } from "@/app/db/queries";
 import { QueryResultRow } from "@vercel/postgres";
 import { addMaterialToProvider } from "@/app/db/queries";
-import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
+
 
 export default function AddMaterial({ params } : { params: { id: string } }){
+
+    const router = useRouter();
 
     const [materialsData, setMaterialsData] = useState<QueryResultRow[]>([]);
     const [materialQuantities, setMaterialQuantities] = useState<{ [key: string]: string }>({});
@@ -103,7 +106,12 @@ export default function AddMaterial({ params } : { params: { id: string } }){
                 </form>
             </section>
             <footer className="modal-card-foot">
-
+                <button className="button is-info" onClick={() => {
+                    
+                    router.back();
+                }}>
+                    Вернуться к редактированию поставщика
+                </button>
             </footer>
         </Modal>
     )

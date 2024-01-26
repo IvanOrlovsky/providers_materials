@@ -5,6 +5,7 @@ import Link from "next/link"
 import { useEffect, useState, ChangeEvent, Dispatch, SetStateAction } from "react"
 import { QueryResultRow } from "@vercel/postgres"
 
+
 export default function Provider_Materials_Edit_Table({ id, setProviderMaterialsEditData, setProviderMaterialDataLoadedState }: {
     id: string,
     setProviderMaterialsEditData: Dispatch<SetStateAction<any>>,
@@ -90,7 +91,7 @@ export default function Provider_Materials_Edit_Table({ id, setProviderMaterials
                         style={disabledRows.includes(material["Номер материала"]) ? { backgroundColor: 'rgba(0, 0, 0, 0.5)' } : {}}
                         >
                             <th className="">
-                                {material["Название материала"]}
+                                {material["Название материала"]}{" ("}{material["Единица измерения"]}{")"}
                             </th>
                             <td>
                                 <input

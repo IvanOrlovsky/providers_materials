@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: 'A site for appling for a job',
 }
 
-export const revalidate = 60;
+export const revalidate = 10;
 
 export default function RootLayout({
   children,
