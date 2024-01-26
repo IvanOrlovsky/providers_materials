@@ -64,8 +64,14 @@ export default function MaterialConfirmarion({ params }: { params: { id: string 
                 href={`/edit-material/${params.id}/confirm-complete?name=${name}&unitOfMeasure=${unitOfMeasure}`} 
                 className="button is-success"
                 >
-                    К списку материалов
+                    Сохранить изменения
                 </Link>
+                <button
+                className="button"
+                onClick={() => {router.back();}}
+                >   
+                    Отмена
+                </button>
                 </footer>
         </Modal>
     )
