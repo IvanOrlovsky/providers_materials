@@ -30,12 +30,12 @@ export default function Confirmation({ params } : { params: { id: string } }) {
 
 
     if (
-        (JSON.stringify(prevProviderMaterialsQuantities) === JSON.stringify(providerMaterialsQuantities)) &&
-        (providerType === prevProviderInfo['Тип поставщика']) &&
-        (providerName === prevProviderInfo['Название компании']) &&
-        (providerNumber === prevProviderInfo['Номер телефона']) &&
-        (providerAddress ===  prevProviderInfo['Адрес']) &&
-        (JSON.stringify(providerMaterialsDisabledRows) === JSON.stringify([]))
+        (JSON.stringify(prevProviderMaterialsQuantities) == JSON.stringify(providerMaterialsQuantities)) &&
+        (providerType == prevProviderInfo['Тип поставщика']) &&
+        (providerName == prevProviderInfo['Название компании']) &&
+        (providerNumber == prevProviderInfo['Номер телефона']) &&
+        (providerAddress ==  prevProviderInfo['Адрес']) &&
+        (JSON.stringify(providerMaterialsDisabledRows) == JSON.stringify([]))
     ) {
         return (
             <Modal

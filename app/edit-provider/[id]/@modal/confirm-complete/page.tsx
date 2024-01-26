@@ -1,7 +1,7 @@
 "use client"
 
 import Modal from "@/components/Modal/Modal";
-import { updateProvider } from "@/app/db/actions";
+import { updateProvider, deleteMaterial } from "@/app/db/actions";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -10,6 +10,9 @@ export default function ConfirmSuccess({ params } : { params: { id: string } }) 
 
     const searchParams = useSearchParams();
 
+    const providerMaterialsDisabledRows = searchParams.get("providerMaterialsDisabledRows") ? 
+        JSON.parse(searchParams.get("providerMaterialsDisabledRows") as string) : []
+    
     useEffect(() => {
         updateProvider({
             id: params.id,
@@ -18,6 +21,13 @@ export default function ConfirmSuccess({ params } : { params: { id: string } }) 
             number: searchParams.get("providerNumber") as string,
             address: searchParams.get("providerAddress") as string,
         })
+
+        if (JSON.stringify(providerMaterialsDisabledRows) != JSON.stringify([])) {
+            for (const key in providerMaterialsDisabledRows) {
+                const materialIdToDelete = providerMaterialsDisabledRows[key];
+                deleteMaterial(materialIdToDelete, params.id)
+              }
+        }
     }, [])
     
     return (
