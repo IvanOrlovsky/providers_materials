@@ -4,7 +4,7 @@ import Modal from "@/components/Modal/Modal";
 import { useEffect, useState } from "react";
 import { getNotProviderMaterials } from "@/app/db/queries";
 import { QueryResultRow } from "@vercel/postgres";
-import { addMaterialToProvider } from "@/app/db/queries";
+import { insertMaterialToProvider } from "@/app/db/actions";
 import { useRouter } from "next/navigation";
 
 
@@ -34,7 +34,7 @@ export default function AddProviderMaterial({ params } : { params: { id: string 
     };
 
     const handleAddMaterial = (material_id: string) => {
-        addMaterialToProvider(params.id, material_id, materialQuantities[material_id]);
+        insertMaterialToProvider(params.id, material_id, materialQuantities[material_id]);
         
         setMaterialsDataChanged(!materialsDataChanged)
     }

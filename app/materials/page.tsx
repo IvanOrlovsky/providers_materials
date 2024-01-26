@@ -26,15 +26,15 @@ export default function Materials() {
                             <span key={index}>
                                 <strong>{material['Название материала']}</strong>{' ('}{material['Единица измерения']}{')'}
                             </span>
+                            <Link href={`/edit-material/${material['Номер материала']}`} className="button is-info is-small mx-4    ">
+                                Редактировать
+                            </Link>
                     </li>
                 ))}
             </ul>
             <Link href={`/materials/add-material`} className="button is-warning">
                 Добавить материал
             </Link> 
-            <Link href={`/edit-material`} className="button is-info">
-                Редактировать
-            </Link>
         </div>
     )
 }

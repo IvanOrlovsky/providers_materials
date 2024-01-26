@@ -48,6 +48,17 @@ export async function getAllMaterialsById(id: string) {
     noStore();
 
     return sql`SELECT 
+    m.name AS "Название материала", 
+    m.unit_of_measure AS "Единица измерения"
+    from material m
+    WHERE m.id = ${id}
+    ;` 
+}
+
+export async function getAllMaterialsByProviderId(id: string) {
+    noStore();
+
+    return sql`SELECT 
     m.id AS "Номер материала",
     m.name AS "Название материала", 
     m.unit_of_measure AS "Единица измерения", 
@@ -72,10 +83,3 @@ export async function getNotProviderMaterials(id: string) {
     `
 }
 
-export async function addMaterialToProvider(provider_id: string, material_id: string, quantity: string) {
-    noStore();
-
-    return sql`INSERT INTO Provider_Material (provider_id, material_id, quantity)
-    VALUES (${provider_id}, ${material_id}, ${quantity});
-    `
-}
