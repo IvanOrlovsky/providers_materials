@@ -62,10 +62,7 @@ export default function MaterialConfirmarion({ params }: { params: { id: string 
             <footer className="modal-card-foot">
                 <Link 
                 href={`/edit-material/${params.id}/confirm-complete?name=${name}&unitOfMeasure=${unitOfMeasure}`} 
-                className="button is-success" 
-                onClick={() => (
-                    alert("Необходимо будет обновить страницу видов материалов, чтобы изменения вступили в силу.")
-                )}
+                className="button is-success"
                 >
                     К списку материалов
                 </Link>

@@ -24,7 +24,7 @@ export default function UpdateMaterialSuccess({ params }: { params: { id: string
                 Данные о материале успешно обновлены
             </section>
             <footer className="modal-card-foot">
-            <Link href={`/materials`} className="button is-success">К видам материалов</Link>
+                <Link href={`/materials`} className="button is-success">К видам материалов</Link>
             </footer>
         </Modal>
     )
