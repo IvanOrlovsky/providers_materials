@@ -1,9 +1,9 @@
-import { getAllMaterialsById } from "@/app/db/queries";
+import { getAllMaterialsByProviderId } from "@/app/db/queries";
 import { QueryResultRow } from "@vercel/postgres";
 
 export default async function Materials_List({ entries }: QueryResultRow) {
 
-    let { rows } = await getAllMaterialsById(entries);
+    let { rows } = await getAllMaterialsByProviderId(entries);
 
         return (
         <div className="">

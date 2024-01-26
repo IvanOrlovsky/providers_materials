@@ -1,7 +1,7 @@
 "use client"
 
 import Modal from "@/components/Modal/Modal";
-import { updateProvider, deleteMaterial, updateProviderMaterial } from "@/app/db/actions";
+import { updateProvider, deleteProviderMaterial, updateProviderMaterial } from "@/app/db/actions";
 import { useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
@@ -34,7 +34,7 @@ export default function ConfirmSuccess({ params } : { params: { id: string } }) 
         if (JSON.stringify(providerMaterialsDisabledRows) != JSON.stringify([])) {
             for (const key in providerMaterialsDisabledRows) {
                 const materialIdToDelete = providerMaterialsDisabledRows[key];
-                deleteMaterial(materialIdToDelete, params.id)
+                deleteProviderMaterial(materialIdToDelete, params.id)
               }
         }
 

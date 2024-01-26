@@ -19,19 +19,7 @@ export default function materialConfirmarion({ params }: { params: { id: string 
     const prevUnitOfMeasure = searchParams.get("prevUnitOfMeasure") as string;
     const name = searchParams.get("name") as string;
     const unitOfMeasure = searchParams.get("unitOfMeasure") as string;
-    // href={`/edit-material/${params.id}
-    // /confirmation?
-    // prevName=${materialInfo['Название материала']}
-    // &prevUnitOfMeasure=${materialInfo['Единица измерения']}
-    // &name=${materialName}
-    // &unitOfMeasure=${materialUnitOfMeasure}`}
 
-    // useEffect(() => {
-    //     const name = searchParams.get("materialName") as string
-    //     const unit_of_measure = searchParams.get("materialUnitOfMeasure") as string
-    //     insertMaterial(name, unit_of_measure)
-
-    // }, [])
     if ((prevName == name) && (prevUnitOfMeasure == unitOfMeasure)) {
         return (
             <Modal
@@ -78,8 +66,16 @@ export default function materialConfirmarion({ params }: { params: { id: string 
                 </table>
             </section>
             <footer className="modal-card-foot">
-            <Link href={`/edit-material/${params.id}/confirm-complete?name=${name}&unitOfMeasure=${unitOfMeasure}`} className="button is-success" onClick={() => (alert("Необходимо будет обновить страницу видов материалов, чтобы изменения вступили в силу."))}>К списку материалов</Link>
-            </footer>
+                <Link 
+                href={`/edit-material/${params.id}/confirm-complete?name=${name}&unitOfMeasure=${unitOfMeasure}`} 
+                className="button is-success" 
+                onClick={() => (
+                    alert("Необходимо будет обновить страницу видов материалов, чтобы изменения вступили в силу.")
+                )}
+                >
+                    К списку материалов
+                </Link>
+                </footer>
         </Modal>
     )
 

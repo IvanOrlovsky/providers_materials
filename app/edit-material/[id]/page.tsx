@@ -87,6 +87,16 @@ export default function EditMaterial({ params }: { params: { id: string } }) {
                     )}
                   </td>
                 </tr>
+                <tr>
+                    <td colSpan={3}>
+                        <Link 
+                            href={`/edit-material/${params.id}/delete-confirmation`}
+                            className="button is-danger is-fullwidth has-text-weight-bold"
+                            >
+                                Удалить материал
+                        </Link>
+                    </td>
+                </tr>
               </tfoot>
             </table>
           </div>

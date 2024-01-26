@@ -1,6 +1,6 @@
 "use server";
 
-import { sql } from "@vercel/postgres";
+import { sql, QueryResultRow } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
 
 
@@ -60,7 +60,7 @@ export async function insertMaterialToProvider(provider_id: string, material_id:
     `
 }
 
-export async function deleteMaterial(material_id: string, provider_id: string) {
+export async function deleteProviderMaterial(material_id: string, provider_id: string) {
     noStore();
 
     await sql`DELETE FROM Provider_Material
@@ -74,4 +74,27 @@ export async function deleteProvider(id: string) {
     await sql`DELETE FROM Provider
                 WHERE id = ${id};
                 `
+}
+
+export async function deleteMaterial(id: string): Promise<void> {
+    noStore();
+
+    try {
+        const hasAssociations: QueryResultRow = await sql`SELECT EXISTS (
+            SELECT 1
+            FROM Provider_Material
+            WHERE material_id = ${id}
+        ) AS has_associations;`;
+
+        if (hasAssociations.rows[0].has_associations) {
+            return Promise.reject("Material has associations");
+        }
+
+        await sql`DELETE FROM Material WHERE id = ${id};`;
+
+        return Promise.resolve();
+    } catch (error) {
+        console.error("Error in deleteMaterial:", error);
+        return Promise.reject(error);
+    }
 }
