@@ -1,26 +1,38 @@
-"use server";
+"use client";
 
 import { getAllMaterials } from "../db/queries"
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { QueryResultRow } from "@vercel/postgres";
 
-export default async function Materials() {
+export default function Materials() {
 
+    const [materialsData, setMaterialsData] = useState<QueryResultRow[]>([]);
 
-    let { rows } = await getAllMaterials();
-
-    const keys = Object.keys(rows[0]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getAllMaterials();
+            console.log(data)
+            setMaterialsData(data.rows);
+        }
+        fetchData();
+    }, [])
+    
 
     return (
         <div className="container content px-5">
             <ul>
-                {rows.map((entry, index) => (
+                {materialsData.map((material, index) => (
                     <li key={index}>
                             <span key={index}>
-                                <strong>{entry[keys[1]]}</strong>{' ('}{entry[keys[2]]}{')'}
+                                <strong>{material['Название материала']}</strong>{' ('}{material['Единица измерения']}{')'}
                             </span>
                     </li>
                 ))}
             </ul>
+            <Link href={`/materials/add-material`} className="button is-warning">
+                Добавить материал
+            </Link> 
             <Link href={`/edit-material`} className="button is-info">
                 Редактировать
             </Link>

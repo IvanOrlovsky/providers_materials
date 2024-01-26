@@ -8,7 +8,7 @@ import { addMaterialToProvider } from "@/app/db/queries";
 import { useRouter } from "next/navigation";
 
 
-export default function AddMaterial({ params } : { params: { id: string } }){
+export default function AddProviderMaterial({ params } : { params: { id: string } }){
 
     const router = useRouter();
 

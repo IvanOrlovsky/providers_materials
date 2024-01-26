@@ -55,81 +55,57 @@ export default function EditMaterial() {
                 <div className="container">
                     <div className="columns is-centered">
                         <table className="table is-narrow is-bordered is-boxed">
-                            <tbody>
+                            <thead>
                                 <tr>
-                                    <th>
-                                        Номер материала
-                                    </th>
-                                    <th>
-                                        Название материала
-                                    </th>
-                                    <th>
-                                        Единица измерения
-                                    </th>
+                                    <th>Номер материала</th>
+                                    <th>Название материала</th>
+                                    <th>Единица измерения</th>
                                 </tr>
+                            </thead>
+                            <tbody>
                                 {materialsInfo.map((material) => (
                                     <tr key={material['Номер материала']}>
+                                        <td>{material['Номер материала']}</td>
                                         <td>
-                                            {material['Номер материала']}
+                                            <input
+                                                type='text'
+                                                className="input"
+                                                placeholder={material['Название материала']}
+                                                value={materialsNames[material['Номер материала']]}
+                                                onChange={(e) => {handleMaterialNameChange(material['Номер материала'], e.target.value)}}
+                                                required
+                                            />
                                         </td>
                                         <td>
                                             <input
-                                            type='text'
-                                            className="input"
-                                            placeholder={material['Название материала']}
-                                            value={materialsNames[material['Номер материала']]}
-                                            onChange={(e) => {handleMaterialNameChange(material['Номер материала'], e.target.value)}}
-                                            required
-                                            >
-                                            </input>
-                                        </td>
-                                        <td>
-                                            <input
-                                            type='text'
-                                            className="input"
-                                            placeholder={material['Единица измерения']}
-                                            value={materialsUnitsOfMeasure[material['Номер материала']]}
-                                            onChange={(e) => {handleMaterialUnitsOfMeasureChange(material['Номер материала'], e.target.value)}}
-                                            required
-                                            >
-                                            </input>
+                                                type='text'
+                                                className="input"
+                                                placeholder={material['Единица измерения']}
+                                                value={materialsUnitsOfMeasure[material['Номер материала']]}
+                                                onChange={(e) => {handleMaterialUnitsOfMeasureChange(material['Номер материала'], e.target.value)}}
+                                                required
+                                            />
                                         </td>
                                     </tr>
                                 ))}
-
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colSpan={3}>                                       
+                                    <td colSpan={3}>
                                         {(Object.keys(materialsNames).length > 0 && Object.keys(materialsUnitsOfMeasure).length > 0) ? 
-                                        <Link href={``} className="button is-info is-fullwidth">
-                                            Добавить материал
-                                        </Link> 
-                                        : 
-                                        <button className="button is-info is-fullwidth is-loading"></button>}
+                                            <Link href={``} className="button is-warning is-fullwidth">
+                                                Сохранить изменения
+                                            </Link>
+                                            : 
+                                            <button className="button is-warning is-fullwidth is-loading"></button>
+                                        }
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td colSpan={3}>                                       
-                                        {(Object.keys(materialsNames).length > 0 && Object.keys(materialsUnitsOfMeasure).length > 0) ? 
-                                       <Link href={``} className="button is-warning is-fullwidth">
-                                            Сохранить изменения
-                                        </Link>
-                                        : 
-                                        <button className="button is-warning is-fullwidth is-loading"></button>}
-                                    </td>
-                                    <td colSpan={3}>
-                                        
-                                    </td>
-                                </tr>   
                             </tfoot>
                         </table>
-                        
-                    </div>
-                    
+                    </div>  
                 </div>
             </section>
-            
         </div>
     )
 }
