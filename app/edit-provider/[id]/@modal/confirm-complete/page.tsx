@@ -3,11 +3,12 @@
 import Modal from "@/components/Modal/Modal";
 import { updateProvider, deleteMaterial, updateProviderMaterial } from "@/app/db/actions";
 import { useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function ConfirmSuccess({ params } : { params: { id: string } }) {
 
+    const router = useRouter();
     const searchParams = useSearchParams();
 
     const providerMaterialsDisabledRows = searchParams.get("providerMaterialsDisabledRows") ? 
@@ -49,6 +50,7 @@ export default function ConfirmSuccess({ params } : { params: { id: string } }) 
     return (
         <Modal
         title="Успех"
+        onDismissFunc={() => {router.push(`/providers`)}}
         >
             <section className="modal-card-body">
                 Данные о поставщике успешно обновлены

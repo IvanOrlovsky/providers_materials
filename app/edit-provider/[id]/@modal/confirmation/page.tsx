@@ -58,6 +58,7 @@ export default function Confirmation({ params } : { params: { id: string } }) {
     return (
         <Modal
         title='Подтвердите изменения'
+        
         >
             <section className="modal-card-body">
                 <div className="tile is-ancestor">

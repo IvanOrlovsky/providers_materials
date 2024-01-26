@@ -5,19 +5,27 @@ import { useRouter } from "next/navigation";
 
 type ModalProps = {
     title: string,
-    children: React.ReactNode, 
-}
+    children: React.ReactNode,
+    onDismissFunc?: () => void,
+};
 
-export default function Modal({title, children} : ModalProps) {
+export default function Modal({ title, children, onDismissFunc}: ModalProps) {
+
 
     const overlay = useRef(null);
     const wrapper = useRef(null);
     const router = useRouter();
 
+    
     const onDismiss = useCallback(() => {
-        router.back();
+        if (onDismissFunc) {
+            onDismissFunc();
+            console.log(onDismissFunc)
+        } else {
+            onDismissFunc = () => router.back(); 
+        }
     }, [router]);
-
+    
     const onClick: MouseEventHandler = useCallback((e) => {
         if (e.target === overlay.current || e.target === wrapper.current) {
             if (onDismiss) onDismiss();
