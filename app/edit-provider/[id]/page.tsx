@@ -5,6 +5,8 @@ import Provider_Materials_Edit_Table from "@/components/Provider_Materials_Edit_
 import { useRouter } from "next/navigation"
 import { FormEvent, useState } from "react"
 import makeSearchParams from "@/app/utils/makeSearchParams"
+import Link from "next/link"
+
 
 
 
@@ -17,6 +19,8 @@ export default function EditProvider({ params } : { params: { id: string } }) {
     const [providerMaterialDataLoadedState, setProviderMaterialDataLoadedState] = useState(false);
 
     const router = useRouter();
+
+
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -69,19 +73,14 @@ export default function EditProvider({ params } : { params: { id: string } }) {
                     </button>
                 ) :
                 (
-                    <button 
-                        className="button is-warning is-fullwidth is-loading"
-                        
-                    >
-                        
-                    </button>
+                    <button className="button is-warning is-fullwidth is-loading"></button>
                 )}
-                <button 
+                <Link 
+                href={`/edit-provider/${params.id}/delete-confirmation`}
                 className="button is-danger is-fullwidth has-text-weight-bold"
-                type="button"
                 >
                     Удалить поставщика
-                </button>
+                </Link>
             </form>  
         </div>
     )

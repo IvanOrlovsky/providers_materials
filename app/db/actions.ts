@@ -42,3 +42,10 @@ export async function deleteMaterial(material_id: string, provider_id: string) {
                 `
 }
 
+export async function deleteProvider(id: string) {
+    noStore();
+
+    await sql`DELETE FROM Provider
+                WHERE id = ${id};
+                `
+}
