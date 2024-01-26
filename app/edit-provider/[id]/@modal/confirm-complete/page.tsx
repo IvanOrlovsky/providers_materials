@@ -1,7 +1,7 @@
 "use client"
 
 import Modal from "@/components/Modal/Modal";
-import { updateProvider, deleteMaterial } from "@/app/db/actions";
+import { updateProvider, deleteMaterial, updateProviderMaterial } from "@/app/db/actions";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -13,6 +13,14 @@ export default function ConfirmSuccess({ params } : { params: { id: string } }) 
     const providerMaterialsDisabledRows = searchParams.get("providerMaterialsDisabledRows") ? 
         JSON.parse(searchParams.get("providerMaterialsDisabledRows") as string) : []
     
+    const providerMaterialsQuantities = searchParams.get("providerMaterialsQuantities") ? 
+        JSON.parse(searchParams.get("providerMaterialsQuantities") as string) : {}
+    
+    const prevProviderMaterialsQuantities = JSON.parse(searchParams.get("prevProviderMaterialsInfo") as string).reduce((acc: any, material: any) => {
+        acc[material['Номер материала']]  = material['Количество'];
+        return acc;
+        }, {})
+
     useEffect(() => {
         updateProvider({
             id: params.id,
@@ -27,6 +35,14 @@ export default function ConfirmSuccess({ params } : { params: { id: string } }) 
                 const materialIdToDelete = providerMaterialsDisabledRows[key];
                 deleteMaterial(materialIdToDelete, params.id)
               }
+        }
+
+        if (JSON.stringify(prevProviderMaterialsQuantities) != JSON.stringify(providerMaterialsQuantities)) {
+            for (const material_id in providerMaterialsQuantities) {
+                const quantityToUpdate = providerMaterialsQuantities[material_id];
+                updateProviderMaterial(material_id, params.id, quantityToUpdate)
+              }
+            
         }
     }, [])
     

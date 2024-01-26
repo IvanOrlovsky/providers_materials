@@ -25,6 +25,15 @@ export async function updateProvider(providerData: {
     
 }
 
+export async function updateProviderMaterial(material_id: string, provider_id: string, quantity: string) {
+    noStore();
+
+    await sql`UPDATE Provider_Material
+                SET quantity = ${quantity}
+                WHERE provider_id = ${provider_id} AND material_id = ${material_id};
+                `
+}
+
 export async function deleteMaterial(material_id: string, provider_id: string) {
     noStore();
 
@@ -32,3 +41,4 @@ export async function deleteMaterial(material_id: string, provider_id: string) {
                 WHERE provider_id = ${provider_id} AND material_id = ${material_id};
                 `
 }
+
