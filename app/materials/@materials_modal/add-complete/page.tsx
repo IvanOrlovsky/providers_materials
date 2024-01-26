@@ -19,6 +19,7 @@ export default function addSuccess() {
         const name = searchParams.get("materialName") as string
         const unit_of_measure = searchParams.get("materialUnitOfMeasure") as string
         insertMaterial(name, unit_of_measure)
+
     }, [])
     
     return (
@@ -30,7 +31,7 @@ export default function addSuccess() {
                 Данные о видах материалов успешно обновлены
             </section>
             <footer className="modal-card-foot">
-            <Link href={`/materials`} className="button is-success">К списку материалов</Link>
+            <Link href={`/materials`} className="button is-success" onClick={() => (alert("Необходимо будет обновить страницу видов материалов, чтобы изменения вступили в силу."))}>К списку материалов</Link>
             </footer>
         </Modal>
     )
