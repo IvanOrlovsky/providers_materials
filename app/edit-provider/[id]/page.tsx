@@ -10,6 +10,8 @@ export default function EditProvider({ params } : { params: { id: string } }) {
 
     const [providerEditData, setProviderEditData] = useState<{ [key: string]: string }>({});
     const [providerMaterialsEditData, setProviderMaterialsEditData] = useState<{ [key: string]: string }>({});
+    const [providerDataLoadedState, setProviderDataLoadedState] = useState(false);
+    const [providerMaterialDataLoadedState, setProviderMaterialDataLoadedState] = useState(false);
 
     const router = useRouter();
 
@@ -36,7 +38,11 @@ export default function EditProvider({ params } : { params: { id: string } }) {
                                 Информация о поставщике
                             </strong>                        
                         </p>
-                        <Provider_Edit_Table id={params.id} setProviderEditData={setProviderEditData}/>
+                        <Provider_Edit_Table 
+                        id={params.id} 
+                        setProviderEditData={setProviderEditData}
+                        setProviderDataLoadedState={setProviderDataLoadedState}
+                        />
                     </div>
                     <div className="tile is-child box">
                         <p className="is-size-5">
@@ -44,15 +50,21 @@ export default function EditProvider({ params } : { params: { id: string } }) {
                                 Материалы поставщика
                             </strong>                        
                         </p>
-                        <Provider_Materials_Edit_Table id={params.id} setProviderMaterialsEditData={setProviderMaterialsEditData}/>
+                        <Provider_Materials_Edit_Table 
+                        id={params.id} 
+                        setProviderMaterialsEditData={setProviderMaterialsEditData}
+                        setProviderMaterialDataLoadedState={setProviderMaterialDataLoadedState}
+                        />
                     </div>
                 </div>
-                <button 
-                className="button is-warning is-fullwidth has-text-weight-bold my-3"
-                type="submit"
-                >
-                    Подтвердить изменения
-                </button>
+                {providerMaterialDataLoadedState && providerDataLoadedState && (
+                    <button 
+                        className="button is-warning is-fullwidth has-text-weight-bold my-3"
+                        type="submit"
+                    >
+                        Подтвердить изменения
+                    </button>
+                )}
                 <button 
                 className="button is-danger is-fullwidth has-text-weight-bold"
                 type="button"

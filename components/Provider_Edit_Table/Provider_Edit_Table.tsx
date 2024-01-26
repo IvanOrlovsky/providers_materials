@@ -1,9 +1,10 @@
 import { getProviderById } from "@/app/db/queries";
 import { useEffect, useState, Dispatch, SetStateAction, ChangeEvent } from "react";
 
-export default function Provider_Edit_Table({ id, setProviderEditData }: {
+export default function Provider_Edit_Table({ id, setProviderEditData, setProviderDataLoadedState }: {
     id: string,
-    setProviderEditData: Dispatch<SetStateAction<any>>
+    setProviderEditData: Dispatch<SetStateAction<any>>,
+    setProviderDataLoadedState: Dispatch<SetStateAction<any>>
 }) {
     const [providerData, setProviderData] = useState<any>({});
 
@@ -29,7 +30,7 @@ export default function Provider_Edit_Table({ id, setProviderEditData }: {
             setProviderType(result.rows[0]['Тип поставщика'] || "");
         };
         fetchData();
-
+        setProviderDataLoadedState(true);
     }, [id]);
 
 

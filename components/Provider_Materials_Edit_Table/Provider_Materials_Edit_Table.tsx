@@ -5,9 +5,10 @@ import Link from "next/link"
 import { useEffect, useState, ChangeEvent, Dispatch, SetStateAction } from "react"
 import { QueryResultRow } from "@vercel/postgres"
 
-export default function Provider_Materials_Edit_Table({ id, setProviderMaterialsEditData }: {
+export default function Provider_Materials_Edit_Table({ id, setProviderMaterialsEditData, setProviderMaterialDataLoadedState }: {
     id: string,
-    setProviderMaterialsEditData: Dispatch<SetStateAction<any>>
+    setProviderMaterialsEditData: Dispatch<SetStateAction<any>>,
+    setProviderMaterialDataLoadedState: Dispatch<SetStateAction<any>>
 }){
 
     const [materialRows, setMaterialRows] = useState<QueryResultRow[]>([]);
@@ -30,6 +31,8 @@ export default function Provider_Materials_Edit_Table({ id, setProviderMaterials
                 return acc;
               }, {}),
         });
+
+        setProviderMaterialDataLoadedState(true);
         
       };
 
