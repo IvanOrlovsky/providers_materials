@@ -92,6 +92,7 @@ export default function Provider_Edit_Table({ id, setProviderEditData, setProvid
                                     onChange={handleChange}
                                     required
                                 >
+                                    <option value="" disabled hidden>{providerType}</option>
                                     <option
                                         value="ИП"
                                     >
@@ -124,7 +125,6 @@ export default function Provider_Edit_Table({ id, setProviderEditData, setProvid
                             <input
                                 name="providerName"
                                 type='text'
-                                // defaultValue={providerData['Название компании']}
                                 placeholder={providerData['Название компании']}
                                 className="input"
                                 value={providerName}
