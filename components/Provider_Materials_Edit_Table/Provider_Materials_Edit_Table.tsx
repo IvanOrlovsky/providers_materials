@@ -118,6 +118,15 @@ export default function Provider_Materials_Edit_Table({ id, setProviderMaterials
                         </tr>
                     ))}
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td>
+                        <Link href={`/edit-provider/${id}/add-material`} className="button is-info is-fullwidth">
+                        Добавить материал
+                    </Link>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </>
     ) 

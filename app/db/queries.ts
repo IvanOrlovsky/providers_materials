@@ -65,6 +65,6 @@ export async function getNotProviderMaterials(id: string) {
     WHERE id NOT IN (
         SELECT material_id
         FROM Provider_Material
-        WHERE provider_id = ${id}
+        WHERE provider_id = ${id})
     `
 }

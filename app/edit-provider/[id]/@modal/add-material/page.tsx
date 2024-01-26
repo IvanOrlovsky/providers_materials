@@ -1,7 +1,8 @@
 "use client"
 
 import Modal from "@/components/Modal/Modal";
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
+import { getNotProviderMaterials } from "@/app/db/queries";
 
 export default function AddMaterial({ params } : { params: { id: string } }){
 
@@ -9,6 +10,14 @@ export default function AddMaterial({ params } : { params: { id: string } }){
         e.preventDefault();
 
     }
+
+    useEffect(() => {
+        const fetchData = async () => {
+            return await getNotProviderMaterials(params.id);
+        }
+        const res = fetchData();
+        console.log(res)
+    }, [params.id])
 
     return (
         <Modal
