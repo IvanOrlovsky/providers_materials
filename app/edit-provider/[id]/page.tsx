@@ -12,7 +12,7 @@ export default function EditProvider({ params } : { params: { id: string } }) {
 
     const [providerEditData, setProviderEditData] = useState<{ [key: string]: string }>({});
     const [providerMaterialsEditData, setProviderMaterialsEditData] = useState<{ [key: string]: string }>({});
-    
+
     const [providerDataLoadedState, setProviderDataLoadedState] = useState(false);
     const [providerMaterialDataLoadedState, setProviderMaterialDataLoadedState] = useState(false);
 

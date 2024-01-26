@@ -4,7 +4,7 @@ import Modal from "@/components/Modal/Modal";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
- 
+import areObjectsEqual from "@/app/utils/areObjectsEqual";
 
 export default function Confirmation({ params } : { params: { id: string } }) {
 
@@ -30,7 +30,7 @@ export default function Confirmation({ params } : { params: { id: string } }) {
 
 
     if (
-        (JSON.stringify(prevProviderMaterialsQuantities) == JSON.stringify(providerMaterialsQuantities)) &&
+        areObjectsEqual(prevProviderMaterialsQuantities, providerMaterialsQuantities) &&
         (providerType == prevProviderInfo['Тип поставщика']) &&
         (providerName == prevProviderInfo['Название компании']) &&
         (providerNumber == prevProviderInfo['Номер телефона']) &&
@@ -54,6 +54,8 @@ export default function Confirmation({ params } : { params: { id: string } }) {
             </Modal>
         )
     } 
+
+    console.log("prevState: ",JSON.stringify(prevProviderMaterialsQuantities),"\ncurState: ", JSON.stringify(providerMaterialsQuantities))
 
     return (
         <Modal

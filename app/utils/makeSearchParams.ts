@@ -23,3 +23,4 @@ export default function makeSearchParams(
 
     return queryString ? `?${queryString}` : ''; 
 }
+
