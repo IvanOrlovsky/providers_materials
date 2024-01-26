@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { getAllMaterialsById } from "../../db/queries";
+import { getMaterialById } from "../../db/queries";
 import Link from "next/link";
 
 export default function EditMaterial({ params }: { params: { id: string } }) {
@@ -11,7 +11,7 @@ export default function EditMaterial({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { rows } = await getAllMaterialsById(params.id);
+      const { rows } = await getMaterialById(params.id);
 
       setMaterialsInfo(rows[0]);
       setMaterialName(rows[0]['Название материала']);

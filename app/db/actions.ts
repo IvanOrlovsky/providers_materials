@@ -3,7 +3,10 @@
 import { sql, QueryResultRow } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
 
-
+/**
+ * Функция, осуществляющая запрос на обновление данных поставщика по его id
+ * @param providerData объект данных о поставщике
+ */
 export async function updateProvider(providerData: {
     id: string,
     type: string,
@@ -25,6 +28,13 @@ export async function updateProvider(providerData: {
     
 }
 
+/**
+ * Функция, осуществляющая запрос на обновление данных о связанных с поставщиком
+    материалах по id материала и поставщика
+ * @param material_id номер материала
+    @param provider_id номер поставщика
+    @param quantity количество материала у поставщика
+ */
 export async function updateProviderMaterial(material_id: string, provider_id: string, quantity: string) {
     noStore();
 
@@ -34,6 +44,13 @@ export async function updateProviderMaterial(material_id: string, provider_id: s
                 `
 }
 
+/**
+ * Функция, осуществляющая запрос на обновление данных о материале
+    по его id 
+ * @param id номер материала
+    @param name название материала
+    @param unit_of_measure единица измерения материала
+ */
 export async function updateMaterial(id: string, name: string, unit_of_measure: string) {
     noStore();
 
@@ -44,6 +61,11 @@ export async function updateMaterial(id: string, name: string, unit_of_measure: 
                 `
 }
 
+/**
+ * Функция, осуществляющая запрос на вставку строки нового материала
+    @param name название материала
+    @param unit_of_measure единица измерения материала
+ */
 export async function insertMaterial(name: string, unit_of_measure: string) {
     noStore();
 
@@ -52,6 +74,12 @@ export async function insertMaterial(name: string, unit_of_measure: string) {
                 `
 }
 
+/**
+ * Функция, осуществляющая запрос на вставку строки новой связи поставщика с материалом
+    @param provider_id номер поставщика
+    @param material_id номер материала
+    @param quantity количество материала
+ */
 export async function insertMaterialToProvider(provider_id: string, material_id: string, quantity: string) {
     noStore();
 
@@ -60,6 +88,13 @@ export async function insertMaterialToProvider(provider_id: string, material_id:
     `
 }
 
+
+/**
+ * Функция, осуществляющая запрос на удаление связи поставщика с материалом
+    по id материала и поставщика
+    @param provider_id номер поставщика
+    @param material_id номер материала
+ */
 export async function deleteProviderMaterial(material_id: string, provider_id: string) {
     noStore();
 
@@ -68,6 +103,10 @@ export async function deleteProviderMaterial(material_id: string, provider_id: s
                 `
 }
 
+/**
+ * Функция, осуществляющая запрос на удаление поставщика по его id
+    @param id номер поставщика
+ */
 export async function deleteProvider(id: string) {
     noStore();
 
@@ -76,6 +115,10 @@ export async function deleteProvider(id: string) {
                 `
 }
 
+/**
+ * Функция, осуществляющая запрос на удаление материала по его id
+    @param id номер материала
+ */
 export async function deleteMaterial(id: string): Promise<void> {
     noStore();
 

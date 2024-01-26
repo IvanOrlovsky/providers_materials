@@ -1,14 +1,20 @@
 "use client"
 
-import { getAllMaterialsById } from "@/app/db/queries"
+import { getAllMaterialsByProviderId } from "@/app/db/queries"
 import Link from "next/link"
 import { useEffect, useState, ChangeEvent, Dispatch, SetStateAction } from "react"
 import { QueryResultRow } from "@vercel/postgres"
 
-export function toggleDataState() {
-
-}
-
+/** Клеинтский компонент таблицы с вводом пользовательских новых значений для полей поставщика
+    на странице /edit-provider/[id]
+ * @param id id поставщика из URL адреса
+ * @param setProviderMaterialsEditData обновляет состояние объекта с информацией о выбранных на удаление
+        строк материалов поставщика, введенных значений количества, а также изначальной информацией о
+        связи поставщика с материалами
+ * @param setProviderMaterialDataLoadedState обновляет состояние, которое сигнализирует о том, что данные для 
+        компонента загрузились, по сути она нужно только для того, чтобы в родительской странице была 
+        недоступна кнопка сохранения изменений и показывался UI загрузки
+ */
 export default function Provider_Materials_Edit_Table({ id, setProviderMaterialsEditData, setProviderMaterialDataLoadedState }: {
     id: string,
     setProviderMaterialsEditData: Dispatch<SetStateAction<any>>,
@@ -19,8 +25,15 @@ export default function Provider_Materials_Edit_Table({ id, setProviderMaterials
     const [disabledRows, setDisabledRows] = useState<string[]>([]);
     const [materialQuantities, setMaterialQuantities] = useState<{ [key: string]: string }>({});
 
+    /**
+     * Функция, получающая из базы данных выборку материалов по номеру поставщика,
+     * а также уставнавливающая состояния
+     * setMaterialRows - вся строка материалов
+     * setMaterialQuantities - количество материалов в виде объекта вида {[key: Номер материала] : Количество}
+     * setProviderMaterialsEditData - 
+     */
     const fetchData = async () => {
-        const materialData = await getAllMaterialsById(id);
+        const materialData = await getAllMaterialsByProviderId(id);
         setMaterialRows(materialData.rows);
         setMaterialQuantities(materialData.rows.reduce((acc, material) => {
             acc[material['Номер материала']] = material['Количество'];

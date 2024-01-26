@@ -3,7 +3,9 @@
 import { sql } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
 
-
+/**
+ * Функция, осуществляющая запрос на выборку всех строк поставщиков
+ */
 export async function getAllProviders() {
     noStore();
 
@@ -18,6 +20,11 @@ export async function getAllProviders() {
     
 }
 
+/**
+ * Функция, осуществляющая запрос на выборку строки
+    определенного поставщика по его id
+    @param id номер поставщика
+ */
 export async function getProviderById(id: string) {
     noStore();
 
@@ -32,7 +39,9 @@ export async function getProviderById(id: string) {
     
 }
 
-
+/**
+ * Функция, осуществляющая запрос на выборку всех строк материалов
+ */
 export async function getAllMaterials() {
     noStore();
 
@@ -44,7 +53,12 @@ export async function getAllMaterials() {
     ORDER BY id` 
 }
 
-export async function getAllMaterialsById(id: string) {
+/**
+ * Функция, осуществляющая запрос на выборку строки
+    определенного материала по его id
+    @param id номер материала
+ */
+export async function getMaterialById(id: string) {
     noStore();
 
     return sql`SELECT 
@@ -55,6 +69,12 @@ export async function getAllMaterialsById(id: string) {
     ;` 
 }
 
+/**
+ * Функция, осуществляющая запрос на выборку всех строк
+    материалов, которые имеются у определенного поставщика по 
+    id поставщика
+    @param id номер поставщика
+ */
 export async function getAllMaterialsByProviderId(id: string) {
     noStore();
 
@@ -70,6 +90,12 @@ export async function getAllMaterialsByProviderId(id: string) {
     ;` 
 }
 
+/**
+ * Функция, осуществляющая запрос на выборку всех строк
+    материалов, которые НЕ имеются у определенного поставщика по 
+    id поставщика
+    @param id номер поставщика
+ */
 export async function getNotProviderMaterials(id: string) {
     noStore();
 
