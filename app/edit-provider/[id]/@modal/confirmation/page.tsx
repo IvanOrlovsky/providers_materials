@@ -55,76 +55,100 @@ export default function ProviderConfirmarion({ params } : { params: { id: string
         )
     } 
 
-    console.log("prevState: ",JSON.stringify(prevProviderMaterialsQuantities),"\ncurState: ", JSON.stringify(providerMaterialsQuantities))
-
     return (
         <Modal
         title='Подтвердите изменения'
-        
         >
             <section className="modal-card-body">
                 <div className="tile is-ancestor">
-                    <div className="tile is-child box">
-                    <table className="table is-bordered my-1 is-narrow">
-                        <tbody>
-                            <tr>
-                                <th>
-                                    Тип поставщика
-                                </th>
-                                <td className={prevProviderInfo["Тип поставщика"] != providerType?
-                                "is-warning" : ""}>
-                                    {providerType}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Название компании
-                                </th>
-                                <td className={prevProviderInfo['Название компании'] != providerName?
-                                "is-warning" : ""}>
-                                    {providerName}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Номер телефона
-                                </th>
-                                <td className={prevProviderInfo['Номер телефона'] != providerNumber?
-                                "is-warning" : ""}>
-                                    {providerNumber}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th>
-                                    Адрес
-                                </th>
-                                <td className={prevProviderInfo['Адрес'] != providerAddress?
-                                "is-warning" : ""}>
-                                    {providerAddress}
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    </div>
-                    <div className="tile is-child box">
-                        <table className="table is-bordered my-5"> 
-                            <tbody>
-                                {prevProviderMaterialsInfo.map((material: {[key: string] : string}) => (
-                                    <tr
-                                    key={material["Номер материала"]}
-                                    style={providerMaterialsDisabledRows.includes(+material["Номер материала"]) ? { backgroundColor: 'rgba(255, 0, 0, 0.5)' } : ((material["Количество"] != providerMaterialsQuantities[parseInt(material["Номер материала"], 10)]) ? {backgroundColor: 'rgba(255, 221, 87, 0.7)'} : {})}
+                    <div className="tile is-parent is-vertical">
+                        <div className="tile is-child">
+                            <table className="table is-bordered">
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        - Ничего не изменилось
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="has-background-warning"></td>
+                                    <td>
+                                        - Значение изменено
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="has-background-danger"></td>
+                                    <td>
+                                        - Значение будет удалено
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div className="tile is-parent">
+                            <div className="tile is-child box">
+                                <table className="table is-bordered my-1 is-narrow">
+                                    <tbody>
+                                        <tr>
+                                            <th>
+                                                Тип поставщика
+                                            </th>
+                                            <td className={prevProviderInfo["Тип поставщика"] != providerType?
+                                            "is-warning" : ""}>
+                                                {providerType}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                Название компании
+                                            </th>
+                                            <td className={prevProviderInfo['Название компании'] != providerName?
+                                            "is-warning" : ""}>
+                                                {providerName}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                Номер телефона
+                                            </th>
+                                            <td className={prevProviderInfo['Номер телефона'] != providerNumber?
+                                            "is-warning" : ""}>
+                                                {providerNumber}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                Адрес
+                                            </th>
+                                            <td className={prevProviderInfo['Адрес'] != providerAddress?
+                                            "is-warning" : ""}>
+                                                {providerAddress}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        
+                            <div className="tile is-child box">
+                                <table className="table is-bordered my-5"> 
+                                    <tbody>
+                                        {prevProviderMaterialsInfo.map((material: {[key: string] : string}) => (
+                                            <tr
+                                            key={material["Номер материала"]}
+                                            style={providerMaterialsDisabledRows.includes(+material["Номер материала"]) ? { backgroundColor: 'rgba(255, 0, 0, 0.5)' } : ((material["Количество"] != providerMaterialsQuantities[parseInt(material["Номер материала"], 10)]) ? {backgroundColor: 'rgba(255, 221, 87, 0.7)'} : {})}
 
-                                    >
-                                        <th>
-                                            {material["Название материала"]}
-                                        </th>
-                                        <td>
-                                            {providerMaterialsQuantities[parseInt(material["Номер материала"], 10)] || material["Количество"]}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                            >
+                                                <th>
+                                                    {material["Название материала"]}
+                                                </th>
+                                                <td>
+                                                    {providerMaterialsQuantities[parseInt(material["Номер материала"], 10)] || material["Количество"]}
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
