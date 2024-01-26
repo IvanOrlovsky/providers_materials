@@ -5,6 +5,9 @@ import Link from "next/link"
 import { useEffect, useState, ChangeEvent, Dispatch, SetStateAction } from "react"
 import { QueryResultRow } from "@vercel/postgres"
 
+export function toggleDataState() {
+
+}
 
 export default function Provider_Materials_Edit_Table({ id, setProviderMaterialsEditData, setProviderMaterialDataLoadedState }: {
     id: string,
@@ -15,7 +18,6 @@ export default function Provider_Materials_Edit_Table({ id, setProviderMaterials
     const [materialRows, setMaterialRows] = useState<QueryResultRow[]>([]);
     const [disabledRows, setDisabledRows] = useState<string[]>([]);
     const [materialQuantities, setMaterialQuantities] = useState<{ [key: string]: string }>({});
-
 
     const fetchData = async () => {
         const materialData = await getAllMaterialsById(id);
@@ -123,8 +125,8 @@ export default function Provider_Materials_Edit_Table({ id, setProviderMaterials
                     <tr>
                         <td>
                         <Link href={`/edit-provider/${id}/add-material`} className="button is-info is-fullwidth">
-                        Добавить материал
-                    </Link>
+                            Добавить материал
+                        </Link>
                         </td>
                     </tr>
                 </tfoot>

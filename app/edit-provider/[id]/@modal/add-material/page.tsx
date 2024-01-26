@@ -107,7 +107,7 @@ export default function AddMaterial({ params } : { params: { id: string } }){
             </section>
             <footer className="modal-card-foot">
                 <button className="button is-info" onClick={() => {
-                    
+                    alert("Необходимо будет обновить страницу редактирования, чтобы изменения вступили в силу.")
                     router.back();
                 }}>
                     Вернуться к редактированию поставщика
