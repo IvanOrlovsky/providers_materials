@@ -100,17 +100,26 @@ export default function EditMaterial() {
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colSpan={3}>
+                                    <td colSpan={3}>                                       
+                                        {(Object.keys(materialsNames).length > 0 && Object.keys(materialsUnitsOfMeasure).length > 0) ? 
                                         <Link href={``} className="button is-info is-fullwidth">
                                             Добавить материал
-                                        </Link>
+                                        </Link> 
+                                        : 
+                                        <button className="button is-info is-fullwidth is-loading"></button>}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colSpan={3}>
-                                        <Link href={``} className="button is-warning is-fullwidth">
+                                    <td colSpan={3}>                                       
+                                        {(Object.keys(materialsNames).length > 0 && Object.keys(materialsUnitsOfMeasure).length > 0) ? 
+                                       <Link href={``} className="button is-warning is-fullwidth">
                                             Сохранить изменения
                                         </Link>
+                                        : 
+                                        <button className="button is-warning is-fullwidth is-loading"></button>}
+                                    </td>
+                                    <td colSpan={3}>
+                                        
                                     </td>
                                 </tr>   
                             </tfoot>
