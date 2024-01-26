@@ -60,12 +60,20 @@ export default function EditProvider({ params } : { params: { id: string } }) {
                         />
                     </div>
                 </div>
-                {providerMaterialDataLoadedState && providerDataLoadedState && (
+                {providerMaterialDataLoadedState && providerDataLoadedState ? (
                     <button 
                         className="button is-warning is-fullwidth has-text-weight-bold my-3"
                         type="submit"
                     >
                         Подтвердить изменения
+                    </button>
+                ) :
+                (
+                    <button 
+                        className="button is-warning is-fullwidth is-loading"
+                        
+                    >
+                        
                     </button>
                 )}
                 <button 
