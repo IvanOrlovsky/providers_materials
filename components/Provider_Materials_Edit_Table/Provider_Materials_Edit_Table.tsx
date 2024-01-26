@@ -106,6 +106,7 @@ export default function Provider_Materials_Edit_Table({ id, setProviderMaterials
                                     const quantity = e.target.value;
                                     handleQuantityChange(material["Номер материала"], quantity);
                                 }}
+                                required
                                 >
                                 </input>
                             </td>

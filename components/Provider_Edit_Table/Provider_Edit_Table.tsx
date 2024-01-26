@@ -90,6 +90,7 @@ export default function Provider_Edit_Table({ id, setProviderEditData, setProvid
                                     name="providerType"
                                     defaultValue={providerType}
                                     onChange={handleChange}
+                                    required
                                 >
                                     <option
                                         value="ИП"
@@ -128,6 +129,7 @@ export default function Provider_Edit_Table({ id, setProviderEditData, setProvid
                                 className="input"
                                 value={providerName}
                                 onChange={handleChange}
+                                required
                             />
                         </td>
                     </tr>
@@ -143,6 +145,7 @@ export default function Provider_Edit_Table({ id, setProviderEditData, setProvid
                                 className="input"
                                 value={providerNumber}
                                 onChange={handleChange}
+                                required
                             />
                         </td>
                     </tr>
@@ -158,6 +161,7 @@ export default function Provider_Edit_Table({ id, setProviderEditData, setProvid
                                 className="input"
                                 value={providerAddress}
                                 onChange={handleChange}
+                                required
                             />
                         </td>
                     </tr>
