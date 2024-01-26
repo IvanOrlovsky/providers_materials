@@ -57,6 +57,9 @@ export default function EditProvider({ params } : { params: { id: string } }) {
                                 Материалы поставщика
                             </strong>                        
                         </p>
+                        <p className="is-size-6 my-2">
+                            Выберите претендующие на удаление материалы или измените количество существующих:
+                        </p>
                         <Provider_Materials_Edit_Table 
                         id={params.id} 
                         setProviderMaterialsEditData={setProviderMaterialsEditData}

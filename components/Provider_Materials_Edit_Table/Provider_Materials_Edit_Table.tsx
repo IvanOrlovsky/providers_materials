@@ -137,7 +137,7 @@ export default function Provider_Materials_Edit_Table({ id, setProviderMaterials
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td>
+                        <td colSpan={3}>
                         <Link href={`/edit-provider/${id}/add-material`} className="button is-info is-fullwidth">
                             Добавить материал
                         </Link>
