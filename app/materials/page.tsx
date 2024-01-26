@@ -12,7 +12,6 @@ export default function Materials() {
     useEffect(() => {
         const fetchData = async () => {
             const data = await getAllMaterials();
-            console.log(data)
             setMaterialsData(data.rows);
         }
         fetchData();

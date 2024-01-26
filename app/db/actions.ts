@@ -34,6 +34,14 @@ export async function updateProviderMaterial(material_id: string, provider_id: s
                 `
 }
 
+export async function insertMaterial(name: string, unit_of_measure: string) {
+    noStore();
+
+    await sql`INSERT INTO Material (name, unit_of_measure)
+                VALUES (${name}, ${unit_of_measure});
+                `
+}
+
 export async function deleteMaterial(material_id: string, provider_id: string) {
     noStore();
 

@@ -20,7 +20,6 @@ export default function Modal({ title, children, onDismissFunc}: ModalProps) {
     const onDismiss = useCallback(() => {
         if (onDismissFunc) {
             onDismissFunc();
-            console.log(onDismissFunc)
         } else {
             onDismissFunc = () => router.back(); 
         }
