@@ -1,7 +1,7 @@
 "use server";
 
 import { getAllMaterials } from "../db/queries"
-
+import Link from "next/link";
 
 export default async function Materials() {
 
@@ -21,6 +21,9 @@ export default async function Materials() {
                     </li>
                 ))}
             </ul>
+            <Link href={`/edit-material`} className="button is-info">
+                Редактировать
+            </Link>
         </div>
     )
 }

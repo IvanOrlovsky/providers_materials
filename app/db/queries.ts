@@ -40,7 +40,8 @@ export async function getAllMaterials() {
     id AS "Номер материала", 
     name AS "Название материала",
     Unit_of_measure AS "Единица измерения"
-    FROM material` 
+    FROM material
+    ORDER BY id` 
 }
 
 export async function getAllMaterialsById(id: string) {
