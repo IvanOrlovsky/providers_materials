@@ -12,6 +12,11 @@ export const metadata: Metadata = {
 
 export const revalidate = 10;
 
+/**
+ * Корневой слой для всех созданных страниц
+ * @param children Дочерний элемент
+ * @returns Страницу, видимую для пользователя
+ */
 export default function RootLayout({
   children,
 }: {

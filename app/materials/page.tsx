@@ -5,6 +5,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { QueryResultRow } from "@vercel/postgres";
 
+/**
+ * Клиентская страница списка материалов
+ * 
+ */
 export default function Materials() {
 
     const [materialsData, setMaterialsData] = useState<QueryResultRow[]>([]);

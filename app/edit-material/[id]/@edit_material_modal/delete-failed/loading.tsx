@@ -1,5 +1,9 @@
 import Modal from "@/components/Modal/Modal"
 
+/**
+ * Модальное окно для загрузки окна уведомления о неудаче удаления материала 
+ * в связи с наличием материала у одного из поставщиков
+ */
 export default function DeleteFailedLoading() {
     
     return (

@@ -4,6 +4,13 @@ import Modal from "@/components/Modal/Modal";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 
+/**
+ * Модальное окно подтверждения изменения данных материала
+ * Собирает все данные из параметров URL
+ * @param params Номер материала
+ * @returns Если данные не были изменены, то возвращает модальное окно
+ * с предупреждением, иначе - окно, где показано где какие изменения совершил пользователь
+ */
 export default function MaterialConfirmarion({ params }: { params: { id: string } }) {
 
     const router = useRouter();

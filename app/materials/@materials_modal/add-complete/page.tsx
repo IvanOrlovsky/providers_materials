@@ -6,9 +6,12 @@ import { useEffect } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 
+/**
+ * Модальное подтверждения добавления материала
+ * 
+ */
 export default function AddSuccess() {
     
-
     const router = useRouter();
     const searchParams = useSearchParams();
 

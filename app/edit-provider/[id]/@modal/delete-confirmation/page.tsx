@@ -4,6 +4,11 @@ import Modal from "@/components/Modal/Modal";
 import { deleteProvider } from "@/app/db/actions"
 import { useRouter } from "next/navigation";
 
+/**
+ * Модальное окно подтверждения удаления поставщика
+ * @param params Номер поставщика
+ * 
+ */
 export default function DeleteProviderConfirmation({ params } : { params: { id: string } }) {
 
     const router = useRouter();

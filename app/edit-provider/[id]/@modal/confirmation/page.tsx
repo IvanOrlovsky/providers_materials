@@ -6,6 +6,13 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import areObjectsEqual from "@/app/utils/areObjectsEqual";
 
+/**
+ * Модальное окно подтверждения изменения данных поставщика
+ * Собирает все данные из параметров URL
+ * @param params Номер поставщика
+ * @returns Если данные не были изменены, то возвращает модальное окно
+ * с предупреждением, иначе - окно, где показано где какие изменения совершил пользователь
+ */
 export default function ProviderConfirmarion({ params } : { params: { id: string } }) {
 
     const router = useRouter();

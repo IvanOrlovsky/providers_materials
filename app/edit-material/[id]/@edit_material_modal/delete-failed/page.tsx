@@ -4,6 +4,10 @@ import Link from "next/link";
 import Modal from "@/components/Modal/Modal";
 import { useRouter } from "next/navigation";
 
+/**
+ * Модальное окно для уведомления о неудаче удаления материала 
+ * в связи с наличием материала у одного из поставщиков
+ */
 export default function DeleteMaterialFailed() {
 
     const router = useRouter();

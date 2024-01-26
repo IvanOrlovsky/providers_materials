@@ -6,6 +6,11 @@ import { updateMaterial } from "@/app/db/actions";
 import { useEffect } from "react";
 import Modal from "@/components/Modal/Modal";
 
+/**
+ * Модальное окно, уведомляющее об успешном изменения данных материала
+ * @param id Номер материала
+ * 
+ */
 export default function UpdateMaterialSuccess({ params }: { params: { id: string } }) {
 
     const router = useRouter();

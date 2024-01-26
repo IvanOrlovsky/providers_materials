@@ -5,7 +5,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-
+/**
+ * Модальное окно с формой добавления нового материала
+ * 
+ */
 export default function AddMaterial(){
 
     const router = useRouter();
@@ -13,16 +16,21 @@ export default function AddMaterial(){
     const [materialName, setMaterialName] = useState("")
     const [materialUnitOfMeasure, setMaterialUnitOfMeasure] = useState("")
 
-
+    /**
+     * Функция, отслеживающее состояние введенного в input названия материала
+     * @param name текущее введенное название материала
+     */
     const handleMaterialNameChange = (name: string) => {
         setMaterialName(name)
     }
 
+    /**
+     * Функция, отслеживающее состояние введенного в input единицы измерения материала
+     * @param unitOfMeasure текущее введенное единицы измерения материала
+     */
     const handleMaterialUnitOfMeasureChange = (unitOfMeasure: string) => {
         setMaterialUnitOfMeasure(unitOfMeasure)
     }
-
-
 
     return (
         <Modal

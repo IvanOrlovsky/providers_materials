@@ -1,5 +1,8 @@
 import Modal from "@/components/Modal/Modal"
 
+/**
+ * Модальное окно загрузки окна об успешном изменения данных поставщика
+ */
 export default function Loading() {
     
     return (

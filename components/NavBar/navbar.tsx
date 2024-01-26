@@ -3,6 +3,10 @@
 import { useState } from "react"
 import Link from "next/link";
 
+/**
+ * Клиентский компонент навигационной панели
+ * Находится на корневом слое сайта, всегда сверху
+ */
 export default function NavBar() {
 
 	const [isActive, setIsAcive] = useState(false);

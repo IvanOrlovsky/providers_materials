@@ -1,3 +1,11 @@
+
+/**
+ * Функция, создающая строку параметров для URL из
+ * данных измененной информации о поставщиках
+ * @param providerEditData объект, содержащий изменные данные поставщика
+ * @param providerMaterialsEditData объект, содержащий изменные данные материалов поставщика
+ * @returns строку для вставки в качастве параметров для URL адреса
+ */
 export default function makeSearchParams(
     providerEditData: { [key: string]: string | object },
     providerMaterialsEditData: { [key: string]: string | object }

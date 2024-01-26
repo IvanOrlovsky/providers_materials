@@ -4,6 +4,11 @@ import { useEffect, useState } from "react";
 import { getMaterialById } from "../../db/queries";
 import Link from "next/link";
 
+/**
+ * Клиентская страница редактирования конкретного материала
+ * @param id Номер материала
+ * @returns Таблицу с вводами названия материала и единиц измерения
+ */
 export default function EditMaterial({ params }: { params: { id: string } }) {
   const [materialInfo, setMaterialsInfo] = useState<Record<string, string>>({});
   const [materialName, setMaterialName] = useState<string>("");
@@ -21,11 +26,20 @@ export default function EditMaterial({ params }: { params: { id: string } }) {
     fetchData();
   }, [params.id]);
 
-    
+  /**
+   * Функция, обрабатывающая изменение value у input
+   * , которая меняет текущее название материала
+   * @param name текущее введенное название материала
+   */
   const handleMaterialNameChange = (name: string) => {
     setMaterialName(name);
   };
 
+  /**
+   * Функция, обрабатывающая изменение value у input
+   * , которая меняет текущую единицу измерения материала
+   * @param unit_of_measure текущая введенная единица измерения материала
+   */
   const handleMaterialUnitsOfMeasureChange = (unit_of_measure: string) => {
     setMaterialUnitOfMeasure(unit_of_measure);
   };

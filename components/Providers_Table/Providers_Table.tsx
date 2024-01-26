@@ -9,7 +9,7 @@ interface TableProps {
 
 /**
  * Серверный компонент таблицы с информацией о поставщиках на странице /providers;
- * @param entries Деструктирозованный результат запроса на выборку всех строк из таблицы поставщиков
+ * @param entries Деструкторизованный результат запроса на выборку всех строк из таблицы поставщиков
  * 
  */
 export default function Providers_Table({ entries }: TableProps) {

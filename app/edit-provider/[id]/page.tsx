@@ -7,9 +7,11 @@ import { FormEvent, useState } from "react"
 import makeSearchParams from "@/app/utils/makeSearchParams"
 import Link from "next/link"
 
-
-
-
+/**
+ * Клиентская страница редактирования информации о конкретном поставщике
+ * @param params Номер поставщика 
+ * 
+ */
 export default function EditProvider({ params } : { params: { id: string } }) {
 
     const [providerEditData, setProviderEditData] = useState<{ [key: string]: string }>({});
@@ -21,7 +23,12 @@ export default function EditProvider({ params } : { params: { id: string } }) {
     const router = useRouter();
 
 
-
+    /**
+     * Функция, обрабатывающая подтверждение формы
+     * Создает из текущих данных формы параметры для URL адреса
+     * и показывет модальное окно подтверждения сохранения изменений
+     * @param e Событие подтверждения формы
+     */
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
         const urlParams = makeSearchParams(providerEditData, providerMaterialsEditData);

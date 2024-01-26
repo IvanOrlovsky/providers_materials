@@ -4,6 +4,10 @@ import Modal from "@/components/Modal/Modal";
 import { deleteMaterial } from "@/app/db/actions"
 import { useRouter } from "next/navigation";
 
+/**
+ * Модальное окно для подтверждения удаления материала
+ * @param id Номер материала
+ */
 export default function DeleteMaterialConfirmation({ params } : { params: { id: string } }) {
 
     const router = useRouter();

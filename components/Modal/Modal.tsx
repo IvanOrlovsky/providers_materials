@@ -9,6 +9,13 @@ type ModalProps = {
     onDismissFunc?: () => void,
 };
 
+/**
+ * Клиентский компонент переиспользуемого модального окна
+ * @param title Заголовок в header окна
+ * @param children Дочерний контент окна
+ * @param onDismissFunc Опциональная функция, которая вызывается при нажатии на фон, 
+ * кнопку выхода, кнопку Escape. По умолчанию - router.back()
+ */
 export default function Modal({ title, children, onDismissFunc}: ModalProps) {
 
 

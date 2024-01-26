@@ -1,5 +1,8 @@
-
-export default function Loading() {
+/**
+ * Страница загрузки для страницы поставщиков
+ * @returns Спинер посередине экрана, сигнализирующий о текущей загрузке
+ */
+export default function ProviderLoading() {
     
     return (
         <section className="section">

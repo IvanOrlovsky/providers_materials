@@ -7,6 +7,12 @@ import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import areObjectsEqual from "@/app/utils/areObjectsEqual";
 
+
+/**
+ * Модальное окно, уведомляющее об успешном изменения данных поставщика
+ * @param id Номер поставщика
+ * 
+ */
 export default function ConfirmSuccess({ params } : { params: { id: string } }) {
 
     const router = useRouter();

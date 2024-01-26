@@ -30,7 +30,8 @@ export default function Provider_Materials_Edit_Table({ id, setProviderMaterials
      * а также уставнавливающая состояния
      * setMaterialRows - вся строка материалов
      * setMaterialQuantities - количество материалов в виде объекта вида {[key: Номер материала] : Количество}
-     * setProviderMaterialsEditData - 
+     * setProviderMaterialsEditData - объект, содержащий изначальные данные о материалах поставщика, 
+     *      материалов поставщика, которые идут на удаление, а также измененные количества материалов поставщика
      */
     const fetchData = async () => {
         const materialData = await getAllMaterialsByProviderId(id);
@@ -52,6 +53,11 @@ export default function Provider_Materials_Edit_Table({ id, setProviderMaterials
         
       };
 
+    /**
+     * Функция, которая обрабатывает изменение вводных данных количества материалов
+     * @param material_id Номер материала
+     * @param quantity Количество материала
+     */
     const handleQuantityChange = (material_id: string, quantity: string) => {
         setMaterialQuantities(prevQuantities => ({
             ...prevQuantities,
@@ -63,6 +69,10 @@ export default function Provider_Materials_Edit_Table({ id, setProviderMaterials
         }));
     }
     
+    /**
+     * Функция, которая обрабатывает добавление материалов в очередь на удаление
+     * @param material_id Номер материала
+     */
     const handleMaterialDelete = (material_id: string) => {
         if (disabledRows.includes(material_id)) {
             const newDisabledRows = disabledRows.filter(obj => obj !== material_id)

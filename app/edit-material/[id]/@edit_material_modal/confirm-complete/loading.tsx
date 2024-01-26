@@ -1,5 +1,8 @@
 import Modal from "@/components/Modal/Modal"
 
+/**
+ * Модальное окно загрузки окна об успешном изменения данных материала
+ */
 export default function Loading() {
     
     return (

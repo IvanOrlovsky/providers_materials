@@ -1,6 +1,18 @@
+"use client"
+
 import { getProviderById } from "@/app/db/queries";
 import { useEffect, useState, Dispatch, SetStateAction, ChangeEvent } from "react";
 
+
+/**
+ * Клиентский компонент таблицы редактирования данных поставщика
+ * @param id номер поставщика
+ * @param setProviderEditData обновляет состояние объекта с информацией о об измененных
+ * полях поставщика
+ * @param setProviderDataLoadedState обновляет состояние, которое сигнализирует о том, что данные для 
+компонента загрузились, по сути она нужно только для того, чтобы в родительской странице была 
+недоступна кнопка сохранения изменений и показывался UI загрузки
+ */
 export default function Provider_Edit_Table({ id, setProviderEditData, setProviderDataLoadedState }: {
     id: string,
     setProviderEditData: Dispatch<SetStateAction<any>>,
@@ -34,7 +46,10 @@ export default function Provider_Edit_Table({ id, setProviderEditData, setProvid
     }, [id]);
 
 
-
+    /**
+     * Функция, которая обрабатывает все введенные значения на форме
+     * @param e событие изменения ввода
+     */
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
         switch (name) {

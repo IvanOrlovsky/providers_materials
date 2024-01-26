@@ -8,6 +8,11 @@ import { insertMaterialToProvider } from "@/app/db/actions";
 import { useRouter } from "next/navigation";
 
 
+/**
+ * Модальное окно добавления материала для поставщика
+ * @param id Номер поставщика 
+ * 
+ */
 export default function AddProviderMaterial({ params } : { params: { id: string } }){
 
     const router = useRouter();
@@ -17,6 +22,10 @@ export default function AddProviderMaterial({ params } : { params: { id: string 
     const [materialsDataChanged, setMaterialsDataChanged] = useState(false)
 
     useEffect(() => {
+        /**
+         * Функция, забирающая выборку всех строк материалов, которые НЕ имеются у определенного поставщика по id поставщика
+         * и изменяющая состояние данных материалов, вместе с введенными количествами материалов
+         */
         const fetchData = async () => {
             const data = await getNotProviderMaterials(params.id);
             setMaterialsData(data.rows);
@@ -25,7 +34,10 @@ export default function AddProviderMaterial({ params } : { params: { id: string 
         fetchData();
     }, [params.id, materialsDataChanged])
 
-
+    /**
+     * Функция, обрабатывающая изменение ввода количеств материалов
+     * и изменяющая состояние данных введенных количеств материалов
+     */
     const handleQuantityChange = (materialNumber: string, quantity: string) => {
         setMaterialQuantities((prevQuantities) => ({
             ...prevQuantities,
@@ -33,6 +45,11 @@ export default function AddProviderMaterial({ params } : { params: { id: string 
         }));
     };
 
+    /**
+     * Функция, обрабатывающая добавление материала в таблицу
+     * и изменяющая состояние переменной изменнных данных
+     * Это нужно для вызова useEffect для ререндера списка материалов
+     */
     const handleAddMaterial = (material_id: string) => {
         insertMaterialToProvider(params.id, material_id, materialQuantities[material_id]);
         
