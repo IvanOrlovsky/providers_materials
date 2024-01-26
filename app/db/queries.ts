@@ -56,3 +56,15 @@ export async function getAllMaterialsById(id: string) {
     WHERE pm.provider_id = ${id}
     ;` 
 }
+
+export async function getNotProviderMaterials(id: string) {
+    noStore();
+
+    return sql`SELECT *
+    FROM Material
+    WHERE id NOT IN (
+        SELECT material_id
+        FROM Provider_Material
+        WHERE provider_id = ${id}
+    `
+}
