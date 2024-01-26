@@ -4,6 +4,7 @@ import Modal from "@/components/Modal/Modal";
 import { updateProvider } from "@/app/db/actions";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 export default function ConfirmSuccess({ params } : { params: { id: string } }) {
 
@@ -21,11 +22,14 @@ export default function ConfirmSuccess({ params } : { params: { id: string } }) 
     
     return (
         <Modal
-        title=""
+        title="Успех"
         >
-            <>
-
-            </>
+            <section className="modal-card-body">
+                Данные о поставщике успешно обновлены
+            </section>
+            <footer className="modal-card-foot">
+            <Link href={`/providers`} className="button is-success">К таблице поставщиков</Link>
+            </footer>
         </Modal>
     )
 

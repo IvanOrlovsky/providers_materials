@@ -12,7 +12,8 @@ export async function getAllProviders() {
                 name AS "Название компании",
                 phone AS "Номер телефона",
                 address AS "Адрес"
-                FROM provider;`;
+                FROM provider
+                ORDER BY id;`;
     
 }
 
