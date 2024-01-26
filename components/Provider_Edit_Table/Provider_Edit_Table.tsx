@@ -92,7 +92,7 @@ export default function Provider_Edit_Table({ id, setProviderEditData, setProvid
                                     onChange={handleChange}
                                     required
                                 >
-                                    <option value="" disabled hidden>{providerType}</option>
+                                    <option value={providerType} disabled hidden>{providerType}</option>
                                     <option
                                         value="ИП"
                                     >
