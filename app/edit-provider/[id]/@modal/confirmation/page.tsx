@@ -125,7 +125,7 @@ export default function Confirmation({ params } : { params: { id: string } }) {
                 </div>
             </section>
             <footer className="modal-card-foot">
-                <Link className="button is-success" href={`/edit-provider/${params.id}/confirm-complete`}>
+                <Link className="button is-success" href={`/edit-provider/${params.id}/confirm-complete?${searchParams.toString()}`}>
                     Сохранить изменения
                 </Link>
                 <button className="button" onClick={() => {router.back()}}>Отмена</button>
