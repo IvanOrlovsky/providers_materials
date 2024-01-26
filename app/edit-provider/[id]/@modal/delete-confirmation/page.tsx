@@ -4,7 +4,7 @@ import Modal from "@/components/Modal/Modal";
 import { deleteProvider } from "@/app/db/actions"
 import { useRouter } from "next/navigation";
 
-export default function deleteProviderConfirmation({ params } : { params: { id: string } }) {
+export default function DeleteProviderConfirmation({ params } : { params: { id: string } }) {
 
     const router = useRouter();
 

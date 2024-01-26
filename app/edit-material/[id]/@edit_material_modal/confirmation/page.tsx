@@ -1,16 +1,10 @@
 "use client"
 
 import Modal from "@/components/Modal/Modal";
-import { insertMaterial} from "@/app/db/actions";
-import { useEffect } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 
-export default function materialConfirmarion({ params }: { params: { id: string } }) {
-    // const pathname = usePathname();
-    // if (!pathname.includes('add-complete')) {
-    //     return null;
-    // }
+export default function MaterialConfirmarion({ params }: { params: { id: string } }) {
 
     const router = useRouter();
     const searchParams = useSearchParams();

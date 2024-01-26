@@ -1,6 +1,6 @@
 import Modal from "@/components/Modal/Modal"
 
-export default function deleteFailedLoading() {
+export default function DeleteFailedLoading() {
     
     return (
         <Modal

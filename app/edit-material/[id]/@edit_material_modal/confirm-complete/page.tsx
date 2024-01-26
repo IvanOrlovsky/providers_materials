@@ -6,7 +6,7 @@ import { updateMaterial } from "@/app/db/actions";
 import { useEffect } from "react";
 import Modal from "@/components/Modal/Modal";
 
-export default function updateMaterialSuccess({ params }: { params: { id: string } }) {
+export default function UpdateMaterialSuccess({ params }: { params: { id: string } }) {
 
     const router = useRouter();
     const searchParams = useSearchParams();

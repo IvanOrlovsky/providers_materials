@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import areObjectsEqual from "@/app/utils/areObjectsEqual";
 
-export default function providerConfirmarion({ params } : { params: { id: string } }) {
+export default function ProviderConfirmarion({ params } : { params: { id: string } }) {
 
     const router = useRouter();
     const searchParams = useSearchParams();

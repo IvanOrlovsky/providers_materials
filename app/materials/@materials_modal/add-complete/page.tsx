@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 
-export default function addSuccess() {
+export default function AddSuccess() {
     const pathname = usePathname();
     if (!pathname.includes('add-complete')) {
         return null;
