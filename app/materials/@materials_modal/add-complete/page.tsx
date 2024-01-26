@@ -18,7 +18,7 @@ export default function AddSuccess() {
         insertMaterial(name, unit_of_measure)
 
     }, [])
-        
+
     const pathname = usePathname();
     if (!pathname.includes('add-complete')) {
         return null;
@@ -35,7 +35,7 @@ export default function AddSuccess() {
                 Данные о видах материалов успешно обновлены
             </section>
             <footer className="modal-card-foot">
-            <Link href={`/materials`} className="button is-success" onClick={() => (alert("Необходимо будет обновить страницу видов материалов, чтобы изменения вступили в силу."))}>К списку материалов</Link>
+            <Link href={`/materials`} className="button is-success">К списку материалов</Link>
             </footer>
         </Modal>
     )
