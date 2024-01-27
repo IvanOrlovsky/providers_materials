@@ -4,6 +4,7 @@ import { getAllMaterials } from "../db/queries"
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { QueryResultRow } from "@vercel/postgres";
+import { useRouter } from "next/navigation";
 
 /**
  * Клиентская страница списка материалов
@@ -12,6 +13,7 @@ import { QueryResultRow } from "@vercel/postgres";
 export default function Materials() {
 
     const [materialsData, setMaterialsData] = useState<QueryResultRow[]>([]);
+    const router = useRouter();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,6 +22,8 @@ export default function Materials() {
         }
         fetchData();
     }, [])
+    
+    
     
 
     return (
@@ -36,9 +40,9 @@ export default function Materials() {
                     </li>
                 ))}
             </ul>
-            <Link href={`/materials/add-material?data=${JSON.stringify(materialsData)}`} as="/materials/add-material" className="button is-warning">
+            <button className="button is-warning" onClick={() => {router.push(`/materials/add-material`)}}>
                 Добавить материал
-            </Link> 
+            </button> 
         </div>
     )
 }
