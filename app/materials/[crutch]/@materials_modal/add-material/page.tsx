@@ -37,7 +37,7 @@ export default function AddMaterial(){
         title="Добавить новый материал"
         >
             <section className="modal-card-body">
-                <form onSubmit={(e) => {e.preventDefault(); }}>
+                <form id="AddMaterialForm" onSubmit={(e) => {e.preventDefault(); router.push(`/materials/${1}/add-complete?materialName=${materialName}&materialUnitOfMeasure=${materialUnitOfMeasure}`);}}>
                     <table className="table is-hoverable is-bordered">
                         <tbody>
                             <tr>
@@ -77,7 +77,11 @@ export default function AddMaterial(){
                 </form>
             </section>
             <footer className="modal-card-foot">
-                <button onClick={() => {router.push(`/materials/${1}/add-complete?materialName=${materialName}&materialUnitOfMeasure=${materialUnitOfMeasure}`)}} className="button is-success">
+                <button 
+                className="button is-success"
+                type="submit"
+                form="AddMaterialForm"
+                >
                     Добавить
                 </button>
                 <button className="button" onClick={() => (router.back())}>

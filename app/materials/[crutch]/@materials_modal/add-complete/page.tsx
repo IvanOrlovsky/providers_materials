@@ -33,7 +33,7 @@ export default function AddMaterialSuccess() {
     return (
         <Modal
         title="Успех"
-        onDismissFunc={() => {router.push(`/materials`);}}
+        onDismissFunc={() => {router.push(`/materials/${1}`);}}
         >
             <section className="modal-card-body">
                 Данные о видах материалов успешно обновлены
