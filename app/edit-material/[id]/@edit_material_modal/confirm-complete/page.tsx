@@ -23,13 +23,13 @@ export default function UpdateMaterialSuccess({ params }: { params: { id: string
     return (
         <Modal
         title="Успех"
-        onDismissFunc={() => {router.push(`/materials`)}}
+        onDismissFunc={() => {router.push(`/materials/${1}`)}}
         >
             <section className="modal-card-body">
                 Данные о материале успешно обновлены
             </section>
             <footer className="modal-card-foot">
-                <Link href={`/materials`} className="button is-success">К видам материалов</Link>
+                <Link href={`/materials/${1}`} className="button is-success">К видам материалов</Link>
             </footer>
         </Modal>
     )

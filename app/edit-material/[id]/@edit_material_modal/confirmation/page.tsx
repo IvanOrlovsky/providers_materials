@@ -31,7 +31,7 @@ export default function MaterialConfirmarion({ params }: { params: { id: string 
                     </div>
                 </section>
                 <footer  className="modal-card-foot">
-                    <Link href={`/materials`}  className="button is-warning">
+                    <Link href={`/materials/${1}`}  className="button is-warning">
                         Я знаю и хочу продолжить
                     </Link>
                     <button className="button" onClick={() => {router.back()}}>Отмена</button>

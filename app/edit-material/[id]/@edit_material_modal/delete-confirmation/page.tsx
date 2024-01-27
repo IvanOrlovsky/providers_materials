@@ -15,7 +15,7 @@ export default function DeleteMaterialConfirmation({ params } : { params: { id: 
     const handleDelete = (material_id: string) => {
         deleteMaterial(material_id)
             .then(() => {
-                router.push(`/materials`);
+                router.push(`/materials/${1}`);
             })
             .catch(() => {
                 router.push(`/edit-material/${params.id}/delete-failed`);

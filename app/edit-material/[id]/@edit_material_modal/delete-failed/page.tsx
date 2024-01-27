@@ -15,7 +15,7 @@ export default function DeleteMaterialFailed() {
     return (
         <Modal
         title="Ошибка"
-        onDismissFunc={() => {router.push(`/materials`)}}
+        onDismissFunc={() => {router.push(`/materials/${1}`)}}
         >
             <section className="modal-card-body has-background-danger has-text-white-bis">
                 <p>
@@ -23,7 +23,7 @@ export default function DeleteMaterialFailed() {
                 </p>
             </section>
             <footer className="modal-card-foot">
-                <Link href={`/materials`} className="button is-success">К видам материалов</Link>
+                <Link href={`/materials/${1}`} className="button is-success">К видам материалов</Link>
             </footer>
         </Modal>
     )
