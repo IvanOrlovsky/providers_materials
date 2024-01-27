@@ -22,10 +22,10 @@ export default function AddMaterialSuccess() {
 
     }, [])
 
-    const pathname = usePathname();
-    if (!pathname.includes('add-complete')) {
-        return null;
-    }
+    // const pathname = usePathname();
+    // if (!pathname.includes('add-complete')) {
+    //     return null;
+    // }
 
     
     
@@ -38,7 +38,9 @@ export default function AddMaterialSuccess() {
                 Данные о видах материалов успешно обновлены
             </section>
             <footer className="modal-card-foot">
-            <Link href={`/materials`} className="button is-success">К списку материалов</Link>
+            <Link href={`/materials`} className="button is-success" prefetch={false}>
+                К списку материалов
+            </Link>
             </footer>
         </Modal>
     )

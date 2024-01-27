@@ -36,7 +36,7 @@ export default function Materials() {
                     </li>
                 ))}
             </ul>
-            <Link href={`/materials/add-material`} className="button is-warning">
+            <Link href={`/materials/add-material?data=${JSON.stringify(materialsData)}`} as="/materials/add-material" className="button is-warning">
                 Добавить материал
             </Link> 
         </div>
