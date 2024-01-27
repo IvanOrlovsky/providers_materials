@@ -10,7 +10,7 @@ import Link from "next/link";
  * Модальное подтверждения добавления материала
  * 
  */
-export default function AddSuccess() {
+export default function AddMaterialSuccess() {
     
     const router = useRouter();
     const searchParams = useSearchParams();
