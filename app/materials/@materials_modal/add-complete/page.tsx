@@ -14,6 +14,7 @@ export default function AddMaterialSuccess() {
     
     const router = useRouter();
     const searchParams = useSearchParams();
+    const pathname = usePathname();
 
     useEffect(() => {
         const name = searchParams.get("materialName") as string
@@ -22,10 +23,10 @@ export default function AddMaterialSuccess() {
 
     }, [])
 
-    // const pathname = usePathname();
-    // if (!pathname.includes('add-complete')) {
-    //     return null;
-    // }
+    
+    if (!pathname.includes('add-complete')) {
+        return null;
+    }
 
     
     
@@ -38,9 +39,9 @@ export default function AddMaterialSuccess() {
                 Данные о видах материалов успешно обновлены
             </section>
             <footer className="modal-card-foot">
-            <Link href={`/materials`} className="button is-success" prefetch={false}>
+            <button  className="button is-success" onClick={() => {router.push(`/materials`);}}>
                 К списку материалов
-            </Link>
+            </button>
             </footer>
         </Modal>
     )
