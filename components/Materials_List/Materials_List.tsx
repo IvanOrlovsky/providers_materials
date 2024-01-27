@@ -1,4 +1,4 @@
-import { getAllMaterialsByProviderId } from "@/app/db/queries";
+import { getAllMaterialsByProviderId } from "@/db/queries";
 import { QueryResultRow } from "@vercel/postgres";
 
 /**

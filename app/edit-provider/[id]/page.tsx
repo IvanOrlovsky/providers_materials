@@ -4,7 +4,7 @@ import Provider_Edit_Table from "@/components/Provider_Edit_Table/Provider_Edit_
 import Provider_Materials_Edit_Table from "@/components/Provider_Materials_Edit_Table/Provider_Materials_Edit_Table";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
-import makeSearchParams from "@/app/utils/makeSearchParams";
+import makeSearchParams from "@/utils/makeSearchParams";
 import Link from "next/link";
 
 /**

@@ -1,7 +1,7 @@
 "use client";
 
 import Modal from "@/components/Modal/Modal";
-import { insertMaterial } from "@/app/db/actions";
+import { insertMaterial } from "@/db/actions";
 import { useEffect } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import Link from "next/link";

@@ -5,11 +5,11 @@ import {
 	updateProvider,
 	deleteProviderMaterial,
 	updateProviderMaterial,
-} from "@/app/db/actions";
+} from "@/db/actions";
 import { useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import areObjectsEqual from "@/app/utils/areObjectsEqual";
+import areObjectsEqual from "@/utils/areObjectsEqual";
 
 /**
  * Модальное окно, уведомляющее об успешном изменения данных поставщика

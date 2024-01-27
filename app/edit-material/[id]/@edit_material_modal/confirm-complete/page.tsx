@@ -2,7 +2,7 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { updateMaterial } from "@/app/db/actions";
+import { updateMaterial } from "@/db/actions";
 import { useEffect } from "react";
 import Modal from "@/components/Modal/Modal";
 

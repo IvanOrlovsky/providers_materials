@@ -1,6 +1,6 @@
 "use client";
 
-import { getAllMaterialsByProviderId } from "@/app/db/queries";
+import { getAllMaterialsByProviderId } from "@/db/queries";
 import Link from "next/link";
 import {
 	useEffect,

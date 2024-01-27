@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getMaterialById } from "../../db/queries";
+import { getMaterialById } from "../../../db/queries";
 import Link from "next/link";
 
 /**

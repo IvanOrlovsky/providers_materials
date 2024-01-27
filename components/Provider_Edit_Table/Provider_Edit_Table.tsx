@@ -1,6 +1,6 @@
 "use client";
 
-import { getProviderById } from "@/app/db/queries";
+import { getProviderById } from "@/db/queries";
 import {
 	useEffect,
 	useState,

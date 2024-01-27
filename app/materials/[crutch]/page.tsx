@@ -1,6 +1,6 @@
 "use client";
 
-import { getAllMaterials } from "../../db/queries";
+import { getAllMaterials } from "../../../db/queries";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { QueryResultRow } from "@vercel/postgres";

@@ -4,7 +4,7 @@ import Modal from "@/components/Modal/Modal";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
-import areObjectsEqual from "@/app/utils/areObjectsEqual";
+import areObjectsEqual from "@/utils/areObjectsEqual";
 
 /**
  * Модальное окно подтверждения изменения данных поставщика

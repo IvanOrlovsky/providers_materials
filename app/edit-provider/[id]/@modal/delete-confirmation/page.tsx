@@ -1,7 +1,7 @@
 "use client";
 
 import Modal from "@/components/Modal/Modal";
-import { deleteProvider } from "@/app/db/actions";
+import { deleteProvider } from "@/db/actions";
 import { useRouter } from "next/navigation";
 
 /**

@@ -1,6 +1,6 @@
 "use server";
 
-import { getAllProviders } from "../db/queries";
+import { getAllProviders } from "../../db/queries";
 import Providers_Table from "@/components/Providers_Table/Providers_Table";
 
 /**

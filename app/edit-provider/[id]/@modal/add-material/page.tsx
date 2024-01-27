@@ -2,9 +2,9 @@
 
 import Modal from "@/components/Modal/Modal";
 import { useEffect, useState } from "react";
-import { getNotProviderMaterials } from "@/app/db/queries";
+import { getNotProviderMaterials } from "@/db/queries";
 import { QueryResultRow } from "@vercel/postgres";
-import { insertMaterialToProvider } from "@/app/db/actions";
+import { insertMaterialToProvider } from "@/db/actions";
 import { useRouter } from "next/navigation";
 
 /**
