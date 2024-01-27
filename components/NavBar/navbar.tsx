@@ -46,7 +46,7 @@ export default function NavBar() {
 						Поставщики
 					</Link>
 
-					<Link className="navbar-item has-text-black-bis" href="/materials">
+					<Link className="navbar-item has-text-black-bis" href={`/materials/${1}`}>
 						Виды материалов
 					</Link>
 				</div>

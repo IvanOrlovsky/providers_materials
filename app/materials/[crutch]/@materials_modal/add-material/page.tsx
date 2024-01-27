@@ -77,7 +77,7 @@ export default function AddMaterial(){
                 </form>
             </section>
             <footer className="modal-card-foot">
-                <button onClick={() => {router.push(`/materials/add-complete?materialName=${materialName}&materialUnitOfMeasure=${materialUnitOfMeasure}`)}} className="button is-success">
+                <button onClick={() => {router.push(`/materials/${1}/add-complete?materialName=${materialName}&materialUnitOfMeasure=${materialUnitOfMeasure}`)}} className="button is-success">
                     Добавить
                 </button>
                 <button className="button" onClick={() => (router.back())}>

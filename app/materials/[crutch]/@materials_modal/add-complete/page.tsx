@@ -39,7 +39,7 @@ export default function AddMaterialSuccess() {
                 Данные о видах материалов успешно обновлены
             </section>
             <footer className="modal-card-foot">
-            <button  className="button is-success" onClick={() => {router.push(`/materials`);}}>
+            <button  className="button is-success" onClick={() => {router.push(`/materials/${1}`);}}>
                 К списку материалов
             </button>
             </footer>

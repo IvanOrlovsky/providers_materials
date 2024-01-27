@@ -1,6 +1,6 @@
 "use client";
 
-import { getAllMaterials } from "../db/queries"
+import { getAllMaterials } from "../../db/queries"
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { QueryResultRow } from "@vercel/postgres";
@@ -24,8 +24,6 @@ export default function Materials() {
     }, [])
     
     
-    
-
     return (
         <div className="container content px-5">
             <ul>
@@ -40,7 +38,7 @@ export default function Materials() {
                     </li>
                 ))}
             </ul>
-            <button className="button is-warning" onClick={() => {router.push(`/materials/add-material`)}}>
+            <button className="button is-warning" onClick={() => {router.push(`/materials/${1}/add-material`)}}>
                 Добавить материал
             </button> 
         </div>
