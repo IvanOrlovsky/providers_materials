@@ -4,7 +4,6 @@ import Modal from "@/components/Modal/Modal";
 import { insertMaterial } from "@/db/actions";
 import { useEffect } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import Link from "next/link";
 
 /**
  * Модальное подтверждения добавления материала

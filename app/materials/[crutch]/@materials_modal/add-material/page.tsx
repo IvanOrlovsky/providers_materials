@@ -3,7 +3,6 @@
 import Modal from "@/components/Modal/Modal";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 /**
  * Модальное окно с формой добавления нового материала

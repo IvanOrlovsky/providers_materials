@@ -35,7 +35,7 @@ export default function Materials() {
 						</span>
 						<Link
 							href={`/edit-material/${material["Номер материала"]}`}
-							className="button is-info is-small mx-4    "
+							className="button is-info is-small mx-4"
 						>
 							Редактировать
 						</Link>
