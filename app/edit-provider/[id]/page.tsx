@@ -9,7 +9,7 @@ import Link from "next/link";
 
 /**
  * Клиентская страница редактирования информации о конкретном поставщике
- * @param params Номер поставщика
+ * @param params.id Номер поставщика
  *
  */
 export default function EditProvider({ params }: { params: { id: string } }) {
