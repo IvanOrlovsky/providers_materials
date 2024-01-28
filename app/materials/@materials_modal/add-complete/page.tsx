@@ -2,8 +2,9 @@
 
 import Modal from "@/components/Modal/Modal";
 import { insertMaterial } from "@/db/actions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 /**
  * Модальное подтверждения добавления материала
@@ -30,7 +31,7 @@ export default function AddMaterialSuccess() {
 		<Modal
 			title="Успех"
 			onDismissFunc={() => {
-				router.push(`/materials/${1}`);
+				router.push(`/materials`);
 			}}
 		>
 			<section className="modal-card-body">
@@ -40,7 +41,7 @@ export default function AddMaterialSuccess() {
 				<button
 					className="button is-success"
 					onClick={() => {
-						router.push(`/materials/${1}`);
+						router.push(`/materials`);
 					}}
 				>
 					К списку материалов

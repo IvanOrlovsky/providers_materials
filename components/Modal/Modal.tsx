@@ -1,6 +1,12 @@
 "use client";
 
-import { useCallback, useRef, useEffect, MouseEventHandler } from "react";
+import {
+	useCallback,
+	useRef,
+	useEffect,
+	MouseEventHandler,
+	useState,
+} from "react";
 import { useRouter } from "next/navigation";
 
 type ModalProps = {
@@ -21,18 +27,22 @@ export default function Modal({ title, children, onDismissFunc }: ModalProps) {
 	const wrapper = useRef(null);
 	const router = useRouter();
 
+	const [isOpen, setIsOpen] = useState(true);
+
 	const onDismiss = useCallback(() => {
 		if (onDismissFunc) {
 			onDismissFunc();
 		} else {
 			onDismissFunc = () => router.back();
+			onDismissFunc();
 		}
+		setIsOpen(false);
 	}, [router]);
 
 	const onClick: MouseEventHandler = useCallback(
 		(e) => {
 			if (e.target === overlay.current || e.target === wrapper.current) {
-				if (onDismiss) onDismiss();
+				onDismiss();
 			}
 		},
 		[onDismiss, overlay, wrapper]
@@ -47,11 +57,13 @@ export default function Modal({ title, children, onDismissFunc }: ModalProps) {
 
 	useEffect(() => {
 		document.addEventListener("keydown", onKeyDown);
+		console.log("Modal");
 		return () => document.removeEventListener("keydown", onKeyDown);
 	}, [onKeyDown]);
 
 	return (
 		<>
+			{/* <div className={isOpen ? "modal is-active" : "modal"}> */}
 			<div className="modal is-active">
 				<div
 					className="modal-background"
@@ -67,7 +79,6 @@ export default function Modal({ title, children, onDismissFunc }: ModalProps) {
 							onClick={onDismiss}
 						></button>
 					</header>
-
 					{children}
 				</div>
 			</div>

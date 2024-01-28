@@ -38,7 +38,7 @@ export default function AddMaterial() {
 					onSubmit={(e) => {
 						e.preventDefault();
 						router.push(
-							`/materials/${1}/add-complete?materialName=${materialName}&materialUnitOfMeasure=${materialUnitOfMeasure}`
+							`/materials/add-complete?materialName=${materialName}&materialUnitOfMeasure=${materialUnitOfMeasure}`
 						);
 					}}
 				>
