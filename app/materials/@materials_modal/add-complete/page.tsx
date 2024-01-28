@@ -13,8 +13,8 @@ import { useMaterialsContext } from "@/contexts/MaterialsContext";
 export default function AddMaterialSuccess() {
 	const router = useRouter();
 
-	const { setIsModalOpen, materialName, materialUnitOfMeasure } =
-		useMaterialsContext();
+	const context = useMaterialsContext();
+	const { setIsModalOpen, materialName, materialUnitOfMeasure } = context;
 
 	useEffect(() => {
 		insertMaterial(materialName, materialUnitOfMeasure);
@@ -39,6 +39,7 @@ export default function AddMaterialSuccess() {
 				router.push(`/materials`);
 			}}
 			buttons={ModalButtons}
+			context={context}
 		>
 			Данные о видах материалов успешно обновлены
 		</Modal>

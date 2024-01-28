@@ -9,6 +9,10 @@ type ModalProps = {
 	children: React.ReactNode;
 	onDismissFunc?: () => void;
 	buttons?: React.ReactNode;
+	context: {
+		isModalOpen: boolean;
+		setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	};
 };
 
 /**
@@ -24,12 +28,13 @@ export default function Modal({
 	children,
 	onDismissFunc,
 	buttons,
+	context,
 }: ModalProps) {
 	const overlay = useRef(null);
 	const wrapper = useRef(null);
 	const router = useRouter();
 
-	const { isModalOpen, setIsModalOpen } = useMaterialsContext();
+	const { isModalOpen, setIsModalOpen } = context;
 
 	const onDismiss = useCallback(() => {
 		onDismissFunc = onDismissFunc ? onDismissFunc : () => router.back();

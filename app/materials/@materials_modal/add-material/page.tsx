@@ -11,13 +11,14 @@ import { useMaterialsContext } from "@/contexts/MaterialsContext";
 export default function AddMaterial() {
 	const router = useRouter();
 
+	const MaterialsContext = useMaterialsContext();
 	const {
 		materialName,
 		materialUnitOfMeasure,
 		setIsModalOpen,
 		setMaterialName,
 		setMaterialUnitOfMeasure,
-	} = useMaterialsContext();
+	} = MaterialsContext;
 
 	const ModalButtons = (
 		<button
@@ -30,7 +31,11 @@ export default function AddMaterial() {
 	);
 
 	return (
-		<Modal title="Добавить новый материал" buttons={ModalButtons}>
+		<Modal
+			title="Добавить новый материал"
+			buttons={ModalButtons}
+			context={MaterialsContext}
+		>
 			<form
 				id="AddMaterialForm"
 				onSubmit={(e) => {

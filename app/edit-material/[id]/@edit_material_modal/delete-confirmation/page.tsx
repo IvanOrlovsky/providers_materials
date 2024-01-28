@@ -16,7 +16,8 @@ export default function DeleteMaterialConfirmation({
 }) {
 	const router = useRouter();
 
-	const { setIsModalOpen } = useEditMaterialContext();
+	const context = useEditMaterialContext();
+	const { setIsModalOpen } = context;
 
 	const handleDelete = (material_id: string) => {
 		deleteMaterial(material_id)
@@ -43,7 +44,11 @@ export default function DeleteMaterialConfirmation({
 	);
 
 	return (
-		<Modal title={`Удаление материала ${params.id}`} buttons={ModalButtons}>
+		<Modal
+			title={`Удаление материала ${params.id}`}
+			buttons={ModalButtons}
+			context={context}
+		>
 			<p>
 				Вы уверены, что хотите удалить материал? Это действие
 				необратимо.

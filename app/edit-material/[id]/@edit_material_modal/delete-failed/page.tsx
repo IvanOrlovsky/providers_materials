@@ -11,7 +11,8 @@ import { useEditMaterialContext } from "@/contexts/EditMaterialContext";
 export default function DeleteMaterialFailed() {
 	const router = useRouter();
 
-	const { setIsModalOpen } = useEditMaterialContext();
+	const context = useEditMaterialContext();
+	const { setIsModalOpen } = context;
 
 	const ModalButtons = (
 		<button
@@ -32,6 +33,7 @@ export default function DeleteMaterialFailed() {
 				router.push(`/materials`);
 			}}
 			buttons={ModalButtons}
+			context={context}
 		>
 			<p>
 				Не удалось удалить материал, так как он имеется в наличии у
