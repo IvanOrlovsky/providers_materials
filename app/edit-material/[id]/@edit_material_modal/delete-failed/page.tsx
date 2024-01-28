@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import Modal from "@/components/Modal/Modal";
 import { useRouter } from "next/navigation";
+import { useEditMaterialContext } from "@/contexts/EditMaterialContext";
 
 /**
  * Модальное окно для уведомления о неудаче удаления материала
@@ -11,24 +11,32 @@ import { useRouter } from "next/navigation";
 export default function DeleteMaterialFailed() {
 	const router = useRouter();
 
+	const { setIsModalOpen } = useEditMaterialContext();
+
+	const ModalButtons = (
+		<button
+			onClick={() => {
+				setIsModalOpen(false);
+				router.push(`/materials`);
+			}}
+			className="button is-success"
+		>
+			К видам материалов
+		</button>
+	);
+
 	return (
 		<Modal
 			title="Ошибка"
 			onDismissFunc={() => {
-				router.push(`/materials/${1}`);
+				router.push(`/materials`);
 			}}
+			buttons={ModalButtons}
 		>
-			<section className="modal-card-body has-background-danger has-text-white-bis">
-				<p>
-					Не удалось удалить материал, так как он имеется в наличии у
-					поставщиков. Удаление невозможно.
-				</p>
-			</section>
-			<footer className="modal-card-foot">
-				<Link href={`/materials/${1}`} className="button is-success">
-					К видам материалов
-				</Link>
-			</footer>
+			<p>
+				Не удалось удалить материал, так как он имеется в наличии у
+				поставщиков. Удаление невозможно.
+			</p>
 		</Modal>
 	);
 }

@@ -1,3 +1,5 @@
+import EditMaterialContextProvider from "@/contexts/EditMaterialContext";
+
 /**
  * Слой для станицы редактирования материала
  * @param children дочерний компонент
@@ -12,9 +14,9 @@ export default function EditProviderLayout({
 	edit_material_modal: React.ReactNode;
 }) {
 	return (
-		<>
+		<EditMaterialContextProvider>
 			<div>{children}</div>
 			<div>{edit_material_modal}</div>
-		</>
+		</EditMaterialContextProvider>
 	);
 }

@@ -19,22 +19,6 @@ export default function AddMaterial() {
 		setMaterialUnitOfMeasure,
 	} = useMaterialsContext();
 
-	/**
-	 * Функция, отслеживающее состояние введенного в input названия материала
-	 * @param name текущее введенное название материала
-	 */
-	const handleMaterialNameChange = (name: string) => {
-		setMaterialName(name);
-	};
-
-	/**
-	 * Функция, отслеживающее состояние введенного в input единицы измерения материала
-	 * @param unitOfMeasure текущее введенное единицы измерения материала
-	 */
-	const handleMaterialUnitOfMeasureChange = (unitOfMeasure: string) => {
-		setMaterialUnitOfMeasure(unitOfMeasure);
-	};
-
 	const ModalButtons = (
 		<button
 			className="button is-success"
@@ -68,9 +52,7 @@ export default function AddMaterial() {
 									className="input"
 									value={materialName}
 									onChange={(e) => {
-										handleMaterialNameChange(
-											e.target.value
-										);
+										setMaterialName(e.target.value);
 									}}
 									required
 								></input>
@@ -81,7 +63,7 @@ export default function AddMaterial() {
 									className="input"
 									value={materialUnitOfMeasure}
 									onChange={(e) => {
-										handleMaterialUnitOfMeasureChange(
+										setMaterialUnitOfMeasure(
 											e.target.value
 										);
 									}}

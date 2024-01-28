@@ -79,7 +79,6 @@ export default function Modal({
 
 					<section className="modal-card-body">{children}</section>
 					<footer className="modal-card-foot">
-						{/* <div onClick={onDismiss}>{buttons}</div> */}
 						{buttons}
 						<button className="button" onClick={onDismiss}>
 							Отмена

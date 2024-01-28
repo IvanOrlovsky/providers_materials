@@ -51,13 +51,15 @@ export default function NavBar() {
 						<Link
 							className="navbar-item has-text-black-bis"
 							href="/providers"
+							onClick={toggleBurger}
 						>
 							Поставщики
 						</Link>
 
 						<Link
 							className="navbar-item has-text-black-bis"
-							href={`/materials/${1}`}
+							href={`/materials`}
+							onClick={toggleBurger}
 						>
 							Виды материалов
 						</Link>

@@ -3,6 +3,7 @@
 import Modal from "@/components/Modal/Modal";
 import { deleteMaterial } from "@/db/actions";
 import { useRouter } from "next/navigation";
+import { useEditMaterialContext } from "@/contexts/EditMaterialContext";
 
 /**
  * Модальное окно для подтверждения удаления материала
@@ -15,42 +16,38 @@ export default function DeleteMaterialConfirmation({
 }) {
 	const router = useRouter();
 
+	const { setIsModalOpen } = useEditMaterialContext();
+
 	const handleDelete = (material_id: string) => {
 		deleteMaterial(material_id)
 			.then(() => {
-				router.push(`/materials/${1}`);
+				setIsModalOpen(false);
+				router.push(`/materials`);
 			})
 			.catch(() => {
+				setIsModalOpen(false);
 				router.push(`/edit-material/${params.id}/delete-failed`);
 			});
 	};
 
+	const ModalButtons = (
+		<button
+			type="button"
+			className="button is-danger"
+			onClick={() => {
+				handleDelete(params.id);
+			}}
+		>
+			Удалить материал
+		</button>
+	);
+
 	return (
-		<Modal title={`Удаление материала ${params.id}`}>
-			<section className="modal-card-body has-background-danger has-text-weight-bold has-text-white-bis">
+		<Modal title={`Удаление материала ${params.id}`} buttons={ModalButtons}>
+			<p>
 				Вы уверены, что хотите удалить материал? Это действие
 				необратимо.
-			</section>
-			<footer className="modal-card-foot">
-				<button
-					type="button"
-					className="button is-danger"
-					onClick={() => {
-						handleDelete(params.id);
-					}}
-				>
-					Удалить материал
-				</button>
-				<button
-					type="button"
-					className="button"
-					onClick={() => {
-						router.back();
-					}}
-				>
-					Отмена
-				</button>
-			</footer>
+			</p>
 		</Modal>
 	);
 }
