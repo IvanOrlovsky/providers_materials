@@ -3,7 +3,7 @@
 import Modal from "@/components/Modal/Modal";
 import { insertMaterial } from "@/db/actions";
 import { useEffect } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useMaterialsContext } from "@/contexts/MaterialsContext";
 
 /**
@@ -12,16 +12,12 @@ import { useMaterialsContext } from "@/contexts/MaterialsContext";
  */
 export default function AddMaterialSuccess() {
 	const router = useRouter();
-	const searchParams = useSearchParams();
 
-	const { setIsModalOpen } = useMaterialsContext();
+	const { setIsModalOpen, materialName, materialUnitOfMeasure } =
+		useMaterialsContext();
 
 	useEffect(() => {
-		const name = searchParams.get("materialName") as string;
-		const unit_of_measure = searchParams.get(
-			"materialUnitOfMeasure"
-		) as string;
-		insertMaterial(name, unit_of_measure);
+		insertMaterial(materialName, materialUnitOfMeasure);
 	}, []);
 
 	const ModalButtons = (

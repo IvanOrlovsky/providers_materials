@@ -1,7 +1,6 @@
 "use client";
 
 import Modal from "@/components/Modal/Modal";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useMaterialsContext } from "@/contexts/MaterialsContext";
 
@@ -12,10 +11,13 @@ import { useMaterialsContext } from "@/contexts/MaterialsContext";
 export default function AddMaterial() {
 	const router = useRouter();
 
-	const [materialName, setMaterialName] = useState("");
-	const [materialUnitOfMeasure, setMaterialUnitOfMeasure] = useState("");
-
-	const { setIsModalOpen } = useMaterialsContext();
+	const {
+		materialName,
+		materialUnitOfMeasure,
+		setIsModalOpen,
+		setMaterialName,
+		setMaterialUnitOfMeasure,
+	} = useMaterialsContext();
 
 	/**
 	 * Функция, отслеживающее состояние введенного в input названия материала
@@ -50,9 +52,7 @@ export default function AddMaterial() {
 				onSubmit={(e) => {
 					e.preventDefault();
 					setIsModalOpen(false);
-					router.push(
-						`/materials/add-complete?materialName=${materialName}&materialUnitOfMeasure=${materialUnitOfMeasure}`
-					);
+					router.push(`/materials/add-complete`);
 				}}
 			>
 				<table className="table is-hoverable is-bordered">
