@@ -1,8 +1,8 @@
 "use client";
 
 import Modal from "@/components/Modal/Modal";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEditMaterialContext } from "@/contexts/EditMaterialContext";
 
 /**
  * Модальное окно подтверждения изменения данных материала
@@ -17,93 +17,97 @@ export default function MaterialConfirmarion({
 	params: { id: string };
 }) {
 	const router = useRouter();
-	const searchParams = useSearchParams();
 
-	const prevName = searchParams.get("prevName") as string;
-	const prevUnitOfMeasure = searchParams.get("prevUnitOfMeasure") as string;
-	const name = searchParams.get("name") as string;
-	const unitOfMeasure = searchParams.get("unitOfMeasure") as string;
+	const context = useEditMaterialContext();
 
-	if (prevName == name && prevUnitOfMeasure == unitOfMeasure) {
+	const {
+		setIsModalOpen,
+		prevMaterialInfo,
+		materialName,
+		materialUnitOfMeasure,
+	} = context;
+
+	if (
+		prevMaterialInfo["Название материала"] == materialName &&
+		prevMaterialInfo["Единица измерения"] == materialUnitOfMeasure
+	) {
+		const ModalButtons = (
+			<button
+				onClick={() => {
+					setIsModalOpen(false);
+					router.push("/materials");
+				}}
+				className="button is-warning"
+			>
+				Я знаю и хочу продолжить
+			</button>
+		);
 		return (
-			<Modal title="Вы ничего не изменили">
-				<section className="modal-card-body  has-background-warning">
-					<div className="container">
-						{`Вы не изменили информацию о материале ${params.id}`}
-					</div>
-				</section>
-				<footer className="modal-card-foot">
-					<Link
-						href={`/materials/${1}`}
-						className="button is-warning"
-					>
-						Я знаю и хочу продолжить
-					</Link>
-					<button
-						className="button"
-						onClick={() => {
-							router.back();
-						}}
-					>
-						Отмена
-					</button>
-				</footer>
+			<Modal
+				title="Вы ничего не изменили"
+				context={context}
+				buttons={ModalButtons}
+			>
+				<div className="container">
+					{`Вы не изменили информацию о материале ${params.id}`}
+				</div>
 			</Modal>
 		);
 	}
 
+	const ModalButtons = (
+		//href={`/edit-material/${params.id}/confirm-complete?name=${name}&unitOfMeasure=${unitOfMeasure}`}
+		<button
+			onClick={() => {
+				setIsModalOpen(false);
+				router.push(`/edit-material/${params.id}/confirm-complete`);
+			}}
+			className="button is-success"
+		>
+			Сохранить изменения
+		</button>
+	);
+
 	return (
-		<Modal title="Подтвердите изменения">
-			<section className="modal-card-body">
-				<table className="table is-bordered">
-					<thead>
-						<tr>
-							<th>Номер материала</th>
-							<th>Название материала</th>
-							<th>Единица измерения</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>{params.id}</td>
-							<td
-								className={
-									name == prevName
-										? ""
-										: "has-background-warning"
-								}
-							>
-								{name}
-							</td>
-							<td
-								className={
-									prevUnitOfMeasure == unitOfMeasure
-										? ""
-										: "has-background-warning"
-								}
-							>
-								{unitOfMeasure}
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</section>
-			<footer className="modal-card-foot">
-				<Link
-					href={`/edit-material/${params.id}/confirm-complete?name=${name}&unitOfMeasure=${unitOfMeasure}`}
-					className="button is-success"
-				>
-					Сохранить изменения
-				</Link>
-				<button
-					className="button"
-					onClick={() => {
-						router.back();
-					}}
-				>
-					Отмена
-				</button>
-			</footer>
+		<Modal
+			title="Подтвердите изменения"
+			context={context}
+			buttons={ModalButtons}
+		>
+			<table className="table is-bordered">
+				<thead>
+					<tr>
+						<th>Номер материала</th>
+						<th>Название материала</th>
+						<th>Единица измерения</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{params.id}</td>
+						<td
+							className={
+								materialName ==
+								prevMaterialInfo["Название материала"]
+									? ""
+									: "has-background-warning"
+							}
+						>
+							{materialName}
+						</td>
+						<td
+							className={
+								prevMaterialInfo["Единица измерения"] ==
+								materialUnitOfMeasure
+									? ""
+									: "has-background-warning"
+							}
+						>
+							{materialUnitOfMeasure}
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</Modal>
 	);
 }

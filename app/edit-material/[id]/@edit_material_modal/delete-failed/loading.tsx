@@ -1,3 +1,5 @@
+"use client";
+
 import Modal from "@/components/Modal/Modal";
 import { useEditMaterialContext } from "@/contexts/EditMaterialContext";
 
@@ -9,10 +11,7 @@ export default function DeleteFailedLoading() {
 	const context = useEditMaterialContext();
 	return (
 		<Modal title="Загрузка" context={context}>
-			<section className="modal-card-body">
-				<span className="loader"></span>
-			</section>
-			<footer className="modal-card-foot"></footer>
+			<span className="loader"></span>
 		</Modal>
 	);
 }

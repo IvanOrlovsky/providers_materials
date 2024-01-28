@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getMaterialById } from "../../../db/queries";
 import Link from "next/link";
+import { useEditMaterialContext } from "@/contexts/EditMaterialContext";
 
 /**
  * Клиентская страница редактирования конкретного материала
@@ -10,42 +11,30 @@ import Link from "next/link";
  * @returns Таблицу с вводами названия материала и единиц измерения
  */
 export default function EditMaterial({ params }: { params: { id: string } }) {
-	const [materialInfo, setMaterialsInfo] = useState<Record<string, string>>(
-		{}
-	);
-	const [materialName, setMaterialName] = useState<string>("");
-	const [materialUnitOfMeasure, setMaterialUnitOfMeasure] =
-		useState<string>("");
+	const context = useEditMaterialContext();
+
+	const {
+		isModalOpen,
+		setIsModalOpen,
+		prevMaterialInfo,
+		setPrevMaterialsInfo,
+		materialName,
+		setMaterialName,
+		materialUnitOfMeasure,
+		setMaterialUnitOfMeasure,
+	} = context;
 
 	useEffect(() => {
 		const fetchData = async () => {
 			const { rows } = await getMaterialById(params.id);
 
-			setMaterialsInfo(rows[0]);
+			setPrevMaterialsInfo(rows[0]);
 			setMaterialName(rows[0]["Название материала"]);
 			setMaterialUnitOfMeasure(rows[0]["Единица измерения"]);
 		};
 
 		fetchData();
 	}, [params.id]);
-
-	/**
-	 * Функция, обрабатывающая изменение value у input
-	 * , которая меняет текущее название материала
-	 * @param name текущее введенное название материала
-	 */
-	const handleMaterialNameChange = (name: string) => {
-		setMaterialName(name);
-	};
-
-	/**
-	 * Функция, обрабатывающая изменение value у input
-	 * , которая меняет текущую единицу измерения материала
-	 * @param unit_of_measure текущая введенная единица измерения материала
-	 */
-	const handleMaterialUnitsOfMeasureChange = (unit_of_measure: string) => {
-		setMaterialUnitOfMeasure(unit_of_measure);
-	};
 
 	return (
 		<div className="container my-5">
@@ -69,15 +58,13 @@ export default function EditMaterial({ params }: { params: { id: string } }) {
 											type="text"
 											className="input"
 											placeholder={
-												materialInfo[
+												prevMaterialInfo[
 													"Название материала"
 												]
 											}
 											value={materialName}
 											onChange={(e) => {
-												handleMaterialNameChange(
-													e.target.value
-												);
+												setMaterialName(e.target.value);
 											}}
 											required
 										/>
@@ -87,13 +74,13 @@ export default function EditMaterial({ params }: { params: { id: string } }) {
 											type="text"
 											className="input"
 											placeholder={
-												materialInfo[
+												prevMaterialInfo[
 													"Единица измерения"
 												]
 											}
 											value={materialUnitOfMeasure}
 											onChange={(e) => {
-												handleMaterialUnitsOfMeasureChange(
+												setMaterialUnitOfMeasure(
 													e.target.value
 												);
 											}}
@@ -108,7 +95,7 @@ export default function EditMaterial({ params }: { params: { id: string } }) {
 										{materialName !== "" &&
 										materialUnitOfMeasure !== "" ? (
 											<Link
-												href={`/edit-material/${params.id}/confirmation?prevName=${materialInfo["Название материала"]}&prevUnitOfMeasure=${materialInfo["Единица измерения"]}&name=${materialName}&unitOfMeasure=${materialUnitOfMeasure}`}
+												href={`/edit-material/${params.id}/confirmation?prevName=${prevMaterialInfo["Название материала"]}&prevUnitOfMeasure=${prevMaterialInfo["Единица измерения"]}&name=${materialName}&unitOfMeasure=${materialUnitOfMeasure}`}
 												className="button is-warning is-fullwidth"
 											>
 												Сохранить изменения

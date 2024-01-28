@@ -1,10 +1,10 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { updateMaterial } from "@/db/actions";
 import { useEffect } from "react";
 import Modal from "@/components/Modal/Modal";
+import { useEditMaterialContext } from "@/contexts/EditMaterialContext";
 
 /**
  * Модальное окно, уведомляющее об успешном изменения данных материала
@@ -17,31 +17,36 @@ export default function UpdateMaterialSuccess({
 	params: { id: string };
 }) {
 	const router = useRouter();
-	const searchParams = useSearchParams();
+
+	const context = useEditMaterialContext();
+	const { setIsModalOpen, materialName, materialUnitOfMeasure } = context;
 
 	useEffect(() => {
-		updateMaterial(
-			params.id,
-			searchParams.get("name") as string,
-			searchParams.get("unitOfMeasure") as string
-		);
+		updateMaterial(params.id, materialName, materialUnitOfMeasure);
 	}, []);
+
+	const ModalButtons = (
+		<button
+			onClick={() => {
+				setIsModalOpen(false);
+				router.push("/materials");
+			}}
+			className="button is-success"
+		>
+			К видам материалов
+		</button>
+	);
 
 	return (
 		<Modal
 			title="Успех"
 			onDismissFunc={() => {
-				router.push(`/materials/${1}`);
+				router.push(`/materials`);
 			}}
+			context={context}
+			buttons={ModalButtons}
 		>
-			<section className="modal-card-body">
-				Данные о материале успешно обновлены
-			</section>
-			<footer className="modal-card-foot">
-				<Link href={`/materials/${1}`} className="button is-success">
-					К видам материалов
-				</Link>
-			</footer>
+			Данные о материале успешно обновлены
 		</Modal>
 	);
 }

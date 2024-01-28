@@ -11,6 +11,12 @@ import {
 type EditMaterialContext = {
 	isModalOpen: boolean;
 	setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+	materialUnitOfMeasure: string;
+	setMaterialUnitOfMeasure: Dispatch<SetStateAction<string>>;
+	materialName: string;
+	setMaterialName: Dispatch<SetStateAction<string>>;
+	prevMaterialInfo: Record<string, string>;
+	setPrevMaterialsInfo: Dispatch<SetStateAction<Record<string, string>>>;
 };
 
 export const EditMaterialContext = createContext<EditMaterialContext | null>(
@@ -23,12 +29,24 @@ export default function EditMaterialContextProvider({
 	children: React.ReactNode;
 }) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [prevMaterialInfo, setPrevMaterialsInfo] = useState<
+		Record<string, string>
+	>({});
+	const [materialName, setMaterialName] = useState<string>("");
+	const [materialUnitOfMeasure, setMaterialUnitOfMeasure] =
+		useState<string>("");
 
 	return (
 		<EditMaterialContext.Provider
 			value={{
 				isModalOpen,
 				setIsModalOpen,
+				prevMaterialInfo,
+				setPrevMaterialsInfo,
+				materialName,
+				setMaterialName,
+				materialUnitOfMeasure,
+				setMaterialUnitOfMeasure,
 			}}
 		>
 			{children}
