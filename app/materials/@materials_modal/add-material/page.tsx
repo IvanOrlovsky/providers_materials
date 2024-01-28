@@ -3,6 +3,7 @@
 import Modal from "@/components/Modal/Modal";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useMaterialsContext } from "@/contexts/MaterialsContext";
 
 /**
  * Модальное окно с формой добавления нового материала
@@ -13,6 +14,8 @@ export default function AddMaterial() {
 
 	const [materialName, setMaterialName] = useState("");
 	const [materialUnitOfMeasure, setMaterialUnitOfMeasure] = useState("");
+
+	const { setIsModalOpen } = useMaterialsContext();
 
 	/**
 	 * Функция, отслеживающее состояние введенного в input названия материала
@@ -30,68 +33,65 @@ export default function AddMaterial() {
 		setMaterialUnitOfMeasure(unitOfMeasure);
 	};
 
+	const ModalButtons = (
+		<button
+			className="button is-success"
+			type="submit"
+			form="AddMaterialForm"
+		>
+			Добавить
+		</button>
+	);
+
 	return (
-		<Modal title="Добавить новый материал">
-			<section className="modal-card-body">
-				<form
-					id="AddMaterialForm"
-					onSubmit={(e) => {
-						e.preventDefault();
-						router.push(
-							`/materials/add-complete?materialName=${materialName}&materialUnitOfMeasure=${materialUnitOfMeasure}`
-						);
-					}}
-				>
-					<table className="table is-hoverable is-bordered">
-						<tbody>
-							<tr>
-								<th>Название материала</th>
-								<th>Единица измерения</th>
-							</tr>
-							<tr>
-								<td>
-									<input
-										name="materialName"
-										className="input"
-										value={materialName}
-										onChange={(e) => {
-											handleMaterialNameChange(
-												e.target.value
-											);
-										}}
-										required
-									></input>
-								</td>
-								<td>
-									<input
-										name="materialUnitOfMeasure"
-										className="input"
-										value={materialUnitOfMeasure}
-										onChange={(e) => {
-											handleMaterialUnitOfMeasureChange(
-												e.target.value
-											);
-										}}
-										required
-									></input>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</form>
-			</section>
-			<footer className="modal-card-foot">
-				<button
-					className="button is-success"
-					type="submit"
-					form="AddMaterialForm"
-				>
-					Добавить
-				</button>
-				<button className="button" onClick={() => router.back()}>
-					Отмена
-				</button>
-			</footer>
+		<Modal title="Добавить новый материал" buttons={ModalButtons}>
+			<form
+				id="AddMaterialForm"
+				onSubmit={(e) => {
+					e.preventDefault();
+					setIsModalOpen(false);
+					router.push(
+						`/materials/add-complete?materialName=${materialName}&materialUnitOfMeasure=${materialUnitOfMeasure}`
+					);
+				}}
+			>
+				<table className="table is-hoverable is-bordered">
+					<tbody>
+						<tr>
+							<th>Название материала</th>
+							<th>Единица измерения</th>
+						</tr>
+						<tr>
+							<td>
+								<input
+									name="materialName"
+									className="input"
+									value={materialName}
+									onChange={(e) => {
+										handleMaterialNameChange(
+											e.target.value
+										);
+									}}
+									required
+								></input>
+							</td>
+							<td>
+								<input
+									name="materialUnitOfMeasure"
+									className="input"
+									value={materialUnitOfMeasure}
+									onChange={(e) => {
+										handleMaterialUnitOfMeasureChange(
+											e.target.value
+										);
+									}}
+									required
+								></input>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
 		</Modal>
 	);
 }

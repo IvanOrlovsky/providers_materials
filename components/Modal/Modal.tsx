@@ -1,18 +1,14 @@
 "use client";
 
-import {
-	useCallback,
-	useRef,
-	useEffect,
-	MouseEventHandler,
-	useState,
-} from "react";
+import { useCallback, useRef, useEffect, MouseEventHandler } from "react";
 import { useRouter } from "next/navigation";
+import { useMaterialsContext } from "@/contexts/MaterialsContext";
 
 type ModalProps = {
 	title: string;
 	children: React.ReactNode;
 	onDismissFunc?: () => void;
+	buttons?: React.ReactNode;
 };
 
 /**
@@ -21,22 +17,24 @@ type ModalProps = {
  * @param children Дочерний контент окна
  * @param onDismissFunc Опциональная функция, которая вызывается при нажатии на фон,
  * кнопку выхода, кнопку Escape. По умолчанию - router.back()
+ * @param buttons Дочерние компоненты кнопок для footer`а модального окна
  */
-export default function Modal({ title, children, onDismissFunc }: ModalProps) {
+export default function Modal({
+	title,
+	children,
+	onDismissFunc,
+	buttons,
+}: ModalProps) {
 	const overlay = useRef(null);
 	const wrapper = useRef(null);
 	const router = useRouter();
 
-	const [isOpen, setIsOpen] = useState(true);
+	const { isModalOpen, setIsModalOpen } = useMaterialsContext();
 
 	const onDismiss = useCallback(() => {
-		if (onDismissFunc) {
-			onDismissFunc();
-		} else {
-			onDismissFunc = () => router.back();
-			onDismissFunc();
-		}
-		setIsOpen(false);
+		onDismissFunc = onDismissFunc ? onDismissFunc : () => router.back();
+		onDismissFunc();
+		setIsModalOpen(false);
 	}, [router]);
 
 	const onClick: MouseEventHandler = useCallback(
@@ -57,14 +55,13 @@ export default function Modal({ title, children, onDismissFunc }: ModalProps) {
 
 	useEffect(() => {
 		document.addEventListener("keydown", onKeyDown);
-		console.log("Modal");
+		setIsModalOpen(true);
 		return () => document.removeEventListener("keydown", onKeyDown);
 	}, [onKeyDown]);
 
 	return (
 		<>
-			{/* <div className={isOpen ? "modal is-active" : "modal"}> */}
-			<div className="modal is-active">
+			<div className={isModalOpen ? "modal is-active" : "modal"}>
 				<div
 					className="modal-background"
 					ref={overlay}
@@ -79,7 +76,15 @@ export default function Modal({ title, children, onDismissFunc }: ModalProps) {
 							onClick={onDismiss}
 						></button>
 					</header>
-					{children}
+
+					<section className="modal-card-body">{children}</section>
+					<footer className="modal-card-foot">
+						{/* <div onClick={onDismiss}>{buttons}</div> */}
+						{buttons}
+						<button className="button" onClick={onDismiss}>
+							Отмена
+						</button>
+					</footer>
 				</div>
 			</div>
 		</>

@@ -2,9 +2,9 @@
 
 import Modal from "@/components/Modal/Modal";
 import { insertMaterial } from "@/db/actions";
-import { useEffect, useState } from "react";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import { useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useMaterialsContext } from "@/contexts/MaterialsContext";
 
 /**
  * Модальное подтверждения добавления материала
@@ -13,7 +13,8 @@ import { revalidatePath } from "next/cache";
 export default function AddMaterialSuccess() {
 	const router = useRouter();
 	const searchParams = useSearchParams();
-	const pathname = usePathname();
+
+	const { setIsModalOpen } = useMaterialsContext();
 
 	useEffect(() => {
 		const name = searchParams.get("materialName") as string;
@@ -23,9 +24,17 @@ export default function AddMaterialSuccess() {
 		insertMaterial(name, unit_of_measure);
 	}, []);
 
-	if (!pathname.includes("add-complete")) {
-		return null;
-	}
+	const ModalButtons = (
+		<button
+			className="button is-success"
+			onClick={() => {
+				setIsModalOpen(false);
+				router.push(`/materials`);
+			}}
+		>
+			К списку материалов
+		</button>
+	);
 
 	return (
 		<Modal
@@ -33,20 +42,9 @@ export default function AddMaterialSuccess() {
 			onDismissFunc={() => {
 				router.push(`/materials`);
 			}}
+			buttons={ModalButtons}
 		>
-			<section className="modal-card-body">
-				Данные о видах материалов успешно обновлены
-			</section>
-			<footer className="modal-card-foot">
-				<button
-					className="button is-success"
-					onClick={() => {
-						router.push(`/materials`);
-					}}
-				>
-					К списку материалов
-				</button>
-			</footer>
+			Данные о видах материалов успешно обновлены
 		</Modal>
 	);
 }

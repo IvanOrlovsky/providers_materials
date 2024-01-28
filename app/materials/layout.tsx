@@ -1,3 +1,5 @@
+import MaterialsContextProvider from "@/contexts/MaterialsContext";
+
 /**
  * Слой для станицы материалов
  * @param children дочерний компонент
@@ -13,8 +15,10 @@ export default function MaterialsLayout({
 }) {
 	return (
 		<>
-			<div>{children}</div>
-			<div>{materials_modal}</div>
+			<MaterialsContextProvider>
+				<div>{children}</div>
+				<div>{materials_modal}</div>
+			</MaterialsContextProvider>
 		</>
 	);
 }
