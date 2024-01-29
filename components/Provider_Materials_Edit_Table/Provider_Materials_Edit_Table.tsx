@@ -10,32 +10,26 @@ import {
 	SetStateAction,
 } from "react";
 import { QueryResultRow } from "@vercel/postgres";
+import { useEditProviderContext } from "@/contexts/EditProviderContext";
 
 /** Клеинтский компонент таблицы с вводом пользовательских новых значений для полей поставщика
     на странице /edit-provider/[id]
  * @param id id поставщика из URL адреса
- * @param setProviderMaterialsEditData обновляет состояние объекта с информацией о выбранных на удаление
-        строк материалов поставщика, введенных значений количества, а также изначальной информацией о
-        связи поставщика с материалами
- * @param setProviderMaterialDataLoadedState обновляет состояние, которое сигнализирует о том, что данные для 
-        компонента загрузились, по сути она нужно только для того, чтобы в родительской странице была 
-        недоступна кнопка сохранения изменений и показывался UI загрузки
- */
-export default function Provider_Materials_Edit_Table({
-	id,
-	setProviderMaterialsEditData,
-	setProviderMaterialDataLoadedState,
-}: {
-	id: string;
-	setProviderMaterialsEditData: Dispatch<SetStateAction<any>>;
-	setProviderMaterialDataLoadedState: Dispatch<SetStateAction<any>>;
-}) {
-	const [materialRows, setMaterialRows] = useState<QueryResultRow[]>([]);
-	const [disabledRows, setDisabledRows] = useState<string[]>([]);
-	const [materialQuantities, setMaterialQuantities] = useState<{
-		[key: string]: string;
-	}>({});
 
+ */
+export default function Provider_Materials_Edit_Table({ id }: { id: string }) {
+	const context = useEditProviderContext();
+	const {
+		materialRows,
+		setMaterialRows,
+		disabledRows,
+		setDisabledRows,
+		materialQuantities,
+		setMaterialQuantities,
+		setProviderMaterialDataLoadedState,
+		providerMaterialsEditData,
+		setProviderMaterialsEditData,
+	} = context;
 	/**
 	 * Функция, получающая из базы данных выборку материалов по номеру поставщика,
 	 * а также уставнавливающая состояния
@@ -116,16 +110,6 @@ export default function Provider_Materials_Edit_Table({
 
 	return (
 		<>
-			<input
-				type="hidden"
-				name="prevMaterialsInfo"
-				value={JSON.stringify({ materialRows })}
-			/>
-			<input
-				type="hidden"
-				name="disabledRowsData"
-				value={JSON.stringify(disabledRows)}
-			/>
 			<table className="table is-bordered my-5">
 				<tbody>
 					{materialRows.map((material) => (

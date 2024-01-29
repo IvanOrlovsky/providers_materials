@@ -1,3 +1,5 @@
+import EditProviderContextProvider from "@/contexts/EditProviderContext";
+
 /**
  * Слой для станицы редатирования поставщика
  * @param children дочерний компонент
@@ -12,9 +14,9 @@ export default function EditProviderLayout({
 	modal: React.ReactNode;
 }) {
 	return (
-		<>
+		<EditProviderContextProvider>
 			<div>{children}</div>
 			<div>{modal}</div>
-		</>
+		</EditProviderContextProvider>
 	);
 }

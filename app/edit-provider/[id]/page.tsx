@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import makeSearchParams from "@/utils/makeSearchParams";
 import Link from "next/link";
+import { useEditProviderContext } from "@/contexts/EditProviderContext";
 
 /**
  * Клиентская страница редактирования информации о конкретном поставщике
@@ -13,22 +14,11 @@ import Link from "next/link";
  *
  */
 export default function EditProvider({ params }: { params: { id: string } }) {
-	const [providerEditData, setProviderEditData] = useState<{
-		[key: string]: string;
-	}>({});
-	const [providerMaterialsEditData, setProviderMaterialsEditData] = useState<{
-		[key: string]: string;
-	}>({});
-
-	const [providerDataLoadedState, setProviderDataLoadedState] =
-		useState(false);
-	const [
-		providerMaterialDataLoadedState,
-		setProviderMaterialDataLoadedState,
-	] = useState(false);
-
 	const router = useRouter();
 
+	const context = useEditProviderContext();
+	const { providerMaterialDataLoadedState, providerDataLoadedState } =
+		context;
 	/**
 	 * Функция, обрабатывающая подтверждение формы
 	 * Создает из текущих данных формы параметры для URL адреса
@@ -37,12 +27,7 @@ export default function EditProvider({ params }: { params: { id: string } }) {
 	 */
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
-		const urlParams = makeSearchParams(
-			providerEditData,
-			providerMaterialsEditData
-		);
-
-		router.push(`/edit-provider/${params.id}/confirmation/${urlParams}`);
+		router.push(`/edit-provider/${params.id}/confirmation`);
 	};
 
 	return (
@@ -57,13 +42,7 @@ export default function EditProvider({ params }: { params: { id: string } }) {
 						<p className="is-size-5">
 							<strong>Информация о поставщике</strong>
 						</p>
-						<Provider_Edit_Table
-							id={params.id}
-							setProviderEditData={setProviderEditData}
-							setProviderDataLoadedState={
-								setProviderDataLoadedState
-							}
-						/>
+						<Provider_Edit_Table id={params.id} />
 					</div>
 					<div className="tile is-child box">
 						<p className="is-size-5">
@@ -73,15 +52,7 @@ export default function EditProvider({ params }: { params: { id: string } }) {
 							Выберите претендующие на удаление материалы или
 							измените количество существующих:
 						</p>
-						<Provider_Materials_Edit_Table
-							id={params.id}
-							setProviderMaterialsEditData={
-								setProviderMaterialsEditData
-							}
-							setProviderMaterialDataLoadedState={
-								setProviderMaterialDataLoadedState
-							}
-						/>
+						<Provider_Materials_Edit_Table id={params.id} />
 					</div>
 				</div>
 				{providerMaterialDataLoadedState && providerDataLoadedState ? (

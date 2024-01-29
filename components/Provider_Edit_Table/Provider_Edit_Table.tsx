@@ -1,54 +1,38 @@
 "use client";
 
+import { useEditProviderContext } from "@/contexts/EditProviderContext";
 import { getProviderById } from "@/db/queries";
-import {
-	useEffect,
-	useState,
-	Dispatch,
-	SetStateAction,
-	ChangeEvent,
-} from "react";
+import { useEffect, ChangeEvent } from "react";
 
 /**
  * Клиентский компонент таблицы редактирования данных поставщика
  * @param id номер поставщика
- * @param setProviderEditData обновляет состояние объекта с информацией о об измененных
- * полях поставщика
- * @param setProviderDataLoadedState обновляет состояние, которое сигнализирует о том, что данные для 
-компонента загрузились, по сути она нужно только для того, чтобы в родительской странице была 
-недоступна кнопка сохранения изменений и показывался UI загрузки
  */
-export default function Provider_Edit_Table({
-	id,
-	setProviderEditData,
-	setProviderDataLoadedState,
-}: {
-	id: string;
-	setProviderEditData: Dispatch<SetStateAction<any>>;
-	setProviderDataLoadedState: Dispatch<SetStateAction<any>>;
-}) {
-	const [providerData, setProviderData] = useState<any>({});
-
-	const [providerType, setProviderType] = useState("");
-	const [providerName, setProviderName] = useState("");
-	const [providerNumber, setProviderNumber] = useState("");
-	const [providerAddress, setProviderAddress] = useState("");
+export default function Provider_Edit_Table({ id }: { id: string }) {
+	const context = useEditProviderContext();
+	const {
+		prevProviderData,
+		setPrevProviderData,
+		providerEditData,
+		setProviderEditData,
+		setProviderDataLoadedState,
+	} = context;
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const result = await getProviderById(id);
-			setProviderData(result.rows[0]);
-			setProviderEditData({
-				prevProviderInfo: result.rows[0],
-				providerType: result.rows[0]["Тип поставщика"],
-				providerName: result.rows[0]["Название компании"],
-				providerNumber: result.rows[0]["Номер телефона"],
-				providerAddress: result.rows[0]["Адрес"],
+			const { rows } = await getProviderById(id);
+			setPrevProviderData({
+				providerType: rows[0]["Тип поставщика"],
+				providerName: rows[0]["Название компании"],
+				providerNumber: rows[0]["Номер телефона"],
+				providerAddress: rows[0]["Адрес"],
 			});
-			setProviderName(result.rows[0]["Название компании"] || "");
-			setProviderNumber(result.rows[0]["Номер телефона"] || "");
-			setProviderAddress(result.rows[0]["Адрес"] || "");
-			setProviderType(result.rows[0]["Тип поставщика"] || "");
+			setProviderEditData({
+				providerType: rows[0]["Тип поставщика"],
+				providerName: rows[0]["Название компании"],
+				providerNumber: rows[0]["Номер телефона"],
+				providerAddress: rows[0]["Адрес"],
+			});
 		};
 		fetchData();
 		setProviderDataLoadedState(true);
@@ -64,28 +48,24 @@ export default function Provider_Edit_Table({
 		const { name, value } = e.target;
 		switch (name) {
 			case "providerType":
-				setProviderType(value);
 				setProviderEditData((prevData: any) => ({
 					...prevData,
 					providerType: value,
 				}));
 				break;
 			case "providerName":
-				setProviderName(value);
 				setProviderEditData((prevData: any) => ({
 					...prevData,
 					providerName: value,
 				}));
 				break;
 			case "providerNumber":
-				setProviderNumber(value);
 				setProviderEditData((prevData: any) => ({
 					...prevData,
 					providerNumber: value,
 				}));
 				break;
 			case "providerAddress":
-				setProviderAddress(value);
 				setProviderEditData((prevData: any) => ({
 					...prevData,
 					providerAddress: value,
@@ -98,11 +78,6 @@ export default function Provider_Edit_Table({
 
 	return (
 		<>
-			<input
-				type="hidden"
-				name="prevProviderInfo"
-				value={JSON.stringify({ providerData })}
-			/>
 			<table className="table is-bordered my-5">
 				<tbody>
 					<tr>
@@ -111,16 +86,16 @@ export default function Provider_Edit_Table({
 							<div className="select">
 								<select
 									name="providerType"
-									defaultValue={providerType}
+									defaultValue={prevProviderData.providerType}
 									onChange={handleChange}
 									required
 								>
 									<option
-										value={providerType}
+										value={prevProviderData.providerType}
 										disabled
 										hidden
 									>
-										{providerType}
+										{prevProviderData.providerType}
 									</option>
 									<option value="ИП">ИП</option>
 									<option value="Самозанятый">
@@ -138,9 +113,9 @@ export default function Provider_Edit_Table({
 							<input
 								name="providerName"
 								type="text"
-								placeholder={providerData["Название компании"]}
+								placeholder={prevProviderData.providerName}
 								className="input"
-								value={providerName}
+								value={providerEditData.providerName}
 								onChange={handleChange}
 								required
 							/>
@@ -152,9 +127,9 @@ export default function Provider_Edit_Table({
 							<input
 								name="providerNumber"
 								type="tel"
-								placeholder={providerData["Номер телефона"]}
+								placeholder={prevProviderData.providerNumber}
 								className="input"
-								value={providerNumber}
+								value={providerEditData.providerNumber}
 								onChange={handleChange}
 								required
 							/>
@@ -166,9 +141,9 @@ export default function Provider_Edit_Table({
 							<input
 								name="providerAddress"
 								type="text"
-								placeholder={providerData["Адрес"]}
+								placeholder={prevProviderData.providerAddress}
 								className="input"
-								value={providerAddress}
+								value={providerEditData.providerAddress}
 								onChange={handleChange}
 								required
 							/>
