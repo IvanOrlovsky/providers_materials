@@ -3,8 +3,7 @@
 import Provider_Edit_Table from "@/components/Provider_Edit_Table/Provider_Edit_Table";
 import Provider_Materials_Edit_Table from "@/components/Provider_Materials_Edit_Table/Provider_Materials_Edit_Table";
 import { useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
-import makeSearchParams from "@/utils/makeSearchParams";
+import { FormEvent } from "react";
 import Link from "next/link";
 import { useEditProviderContext } from "@/contexts/EditProviderContext";
 
