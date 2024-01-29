@@ -1,6 +1,7 @@
 "use client";
 
 import Modal from "@/components/Modal/Modal";
+import { useEditProviderContext } from "@/contexts/EditProviderContext";
 import { deleteProvider } from "@/db/actions";
 import { useRouter } from "next/navigation";
 
@@ -16,37 +17,36 @@ export default function DeleteProviderConfirmation({
 }) {
 	const router = useRouter();
 
+	const context = useEditProviderContext();
+	const { setIsModalOpen } = context;
+
 	const handleProviderDelete = (provider_id: string) => {
 		deleteProvider(provider_id);
 		router.push(`/providers`);
 	};
 
+	const ModalButtons = (
+		<button
+			type="button"
+			className="button is-danger"
+			onClick={() => {
+				setIsModalOpen(false);
+				handleProviderDelete(params.id);
+			}}
+		>
+			Удалить поставщика
+		</button>
+	);
 	return (
-		<Modal title={`Удаление поставщика ${params.id}`}>
-			<section className="modal-card-body has-background-danger has-text-weight-bold has-text-white-bis">
+		<Modal
+			title={`Удаление поставщика ${params.id}`}
+			context={context}
+			buttons={ModalButtons}
+		>
+			<p>
 				Вы уверены, что хотите удалить поставщика? Это действие
 				необратимо.
-			</section>
-			<footer className="modal-card-foot">
-				<button
-					type="button"
-					className="button is-danger"
-					onClick={() => {
-						handleProviderDelete(params.id);
-					}}
-				>
-					Удалить поставщика
-				</button>
-				<button
-					type="button"
-					className="button"
-					onClick={() => {
-						router.back();
-					}}
-				>
-					Отмена
-				</button>
-			</footer>
+			</p>
 		</Modal>
 	);
 }

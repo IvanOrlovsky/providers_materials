@@ -27,7 +27,6 @@ export default function Provider_Materials_Edit_Table({ id }: { id: string }) {
 		materialQuantities,
 		setMaterialQuantities,
 		setProviderMaterialDataLoadedState,
-		providerMaterialsEditData,
 		setProviderMaterialsEditData,
 	} = context;
 	/**
@@ -49,7 +48,7 @@ export default function Provider_Materials_Edit_Table({ id }: { id: string }) {
 		);
 		setProviderMaterialsEditData({
 			prevProviderMaterialsInfo: materialData.rows,
-			providerMaterialsDisabledRows: "",
+			providerMaterialsDisabledRows: [],
 			providerMaterialsQuantities: materialData.rows.reduce(
 				(acc, material) => {
 					acc[material["Номер материала"]] = material["Количество"];

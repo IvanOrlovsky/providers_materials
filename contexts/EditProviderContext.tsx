@@ -42,13 +42,13 @@ type EditProviderContext = {
 	>;
 	providerMaterialsEditData: {
 		prevProviderMaterialsInfo: QueryResultRow;
-		providerMaterialsDisabledRows: string;
+		providerMaterialsDisabledRows: string[];
 		providerMaterialsQuantities: { [key: string]: string };
 	};
 	setProviderMaterialsEditData: Dispatch<
 		SetStateAction<{
 			prevProviderMaterialsInfo: QueryResultRow[];
-			providerMaterialsDisabledRows: string;
+			providerMaterialsDisabledRows: string[];
 			providerMaterialsQuantities: { [key: string]: string };
 		}>
 	>;
@@ -104,11 +104,11 @@ export default function EditProviderContextProvider({
 	});
 	const [providerMaterialsEditData, setProviderMaterialsEditData] = useState<{
 		prevProviderMaterialsInfo: QueryResultRow[];
-		providerMaterialsDisabledRows: string;
+		providerMaterialsDisabledRows: string[];
 		providerMaterialsQuantities: { [key: string]: string };
 	}>({
 		prevProviderMaterialsInfo: [],
-		providerMaterialsDisabledRows: "",
+		providerMaterialsDisabledRows: [],
 		providerMaterialsQuantities: {},
 	});
 	const [providerDataLoadedState, setProviderDataLoadedState] =

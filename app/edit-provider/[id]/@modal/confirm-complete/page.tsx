@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import areObjectsEqual from "@/utils/areObjectsEqual";
+import { useEditProviderContext } from "@/contexts/EditProviderContext";
 
 /**
  * Модальное окно, уведомляющее об успешном изменения данных поставщика
@@ -17,37 +18,36 @@ import areObjectsEqual from "@/utils/areObjectsEqual";
  *
  */
 export default function ConfirmSuccess({ params }: { params: { id: string } }) {
+	const context = useEditProviderContext();
 	const router = useRouter();
-	const searchParams = useSearchParams();
 
-	const providerMaterialsDisabledRows = searchParams.get(
-		"providerMaterialsDisabledRows"
-	)
-		? JSON.parse(
-				searchParams.get("providerMaterialsDisabledRows") as string
-		  )
-		: [];
+	const { providerEditData, providerMaterialsEditData, setIsModalOpen } =
+		context;
 
-	const providerMaterialsQuantities = searchParams.get(
-		"providerMaterialsQuantities"
-	)
-		? JSON.parse(searchParams.get("providerMaterialsQuantities") as string)
-		: {};
+	const { providerName, providerNumber, providerType, providerAddress } =
+		providerEditData;
 
-	const prevProviderMaterialsQuantities = JSON.parse(
-		searchParams.get("prevProviderMaterialsInfo") as string
-	).reduce((acc: any, material: any) => {
-		acc[material["Номер материала"]] = material["Количество"];
-		return acc;
-	}, {});
+	const {
+		prevProviderMaterialsInfo,
+		providerMaterialsDisabledRows,
+		providerMaterialsQuantities,
+	} = providerMaterialsEditData;
+
+	const prevProviderMaterialsQuantities = prevProviderMaterialsInfo.reduce(
+		(acc: any, material: any) => {
+			acc[material["Номер материала"]] = material["Количество"];
+			return acc;
+		},
+		{}
+	);
 
 	useEffect(() => {
 		updateProvider({
 			id: params.id,
-			type: searchParams.get("providerType") as string,
-			name: searchParams.get("providerName") as string,
-			number: searchParams.get("providerNumber") as string,
-			address: searchParams.get("providerAddress") as string,
+			type: providerType,
+			name: providerName,
+			number: providerNumber,
+			address: providerAddress,
 		});
 
 		if (
@@ -77,21 +77,28 @@ export default function ConfirmSuccess({ params }: { params: { id: string } }) {
 		}
 	}, []);
 
+	const ModalButtons = (
+		<button
+			onClick={() => {
+				setIsModalOpen(false);
+				router.push("/providers");
+			}}
+			className="button is-success"
+		>
+			К таблице поставщиков
+		</button>
+	);
+
 	return (
 		<Modal
 			title="Успех"
 			onDismissFunc={() => {
 				router.push(`/providers`);
 			}}
+			context={context}
+			buttons={ModalButtons}
 		>
-			<section className="modal-card-body">
-				Данные о поставщике успешно обновлены
-			</section>
-			<footer className="modal-card-foot">
-				<Link href={`/providers`} className="button is-success">
-					К таблице поставщиков
-				</Link>
-			</footer>
+			<p>Данные о поставщике успешно обновлены</p>
 		</Modal>
 	);
 }
