@@ -42,12 +42,14 @@ export default function Materials() {
 					</li>
 				))}
 			</ul>
-			<Link
+			<button
 				className="button is-warning"
-				href={`/materials/add-material`}
+				onClick={() => {
+					router.push("/materials/add-material");
+				}}
 			>
 				Добавить материал
-			</Link>
+			</button>
 		</div>
 	);
 }
