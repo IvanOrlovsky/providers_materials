@@ -56,7 +56,6 @@ export default function MaterialConfirmarion({
 	}
 
 	const ModalButtons = (
-		//href={`/edit-material/${params.id}/confirm-complete?name=${name}&unitOfMeasure=${unitOfMeasure}`}
 		<button
 			onClick={() => {
 				setIsModalOpen(false);

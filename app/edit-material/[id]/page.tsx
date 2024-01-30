@@ -14,8 +14,6 @@ export default function EditMaterial({ params }: { params: { id: string } }) {
 	const context = useEditMaterialContext();
 
 	const {
-		isModalOpen,
-		setIsModalOpen,
 		prevMaterialInfo,
 		setPrevMaterialsInfo,
 		materialName,

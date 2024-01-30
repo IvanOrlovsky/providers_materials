@@ -39,7 +39,14 @@ export default function AddMaterialForm() {
 				required
 			></input>
 
-			<button type="submit" className="button is-success">
+			<button
+				type="submit"
+				className={
+					pending
+						? "button  is-success is-loading"
+						: "button  is-success"
+				}
+			>
 				Добавить
 			</button>
 			<button
@@ -48,7 +55,6 @@ export default function AddMaterialForm() {
 				onClick={() => {
 					setIsFormActive(!isFormActive);
 				}}
-				aria-disabled={pending}
 			>
 				Отмена
 			</button>

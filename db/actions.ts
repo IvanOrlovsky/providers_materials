@@ -2,6 +2,7 @@
 
 import { sql, QueryResultRow } from "@vercel/postgres";
 import { unstable_noStore as noStore } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 /**
  * Функция, осуществляющая запрос на обновление данных поставщика по его id
@@ -140,6 +141,8 @@ export async function deleteMaterial(id: string): Promise<void> {
             FROM Provider_Material
             WHERE material_id = ${id}
         ) AS has_associations;`;
+
+		revalidatePath("/materials");
 
 		if (hasAssociations.rows[0].has_associations) {
 			return Promise.reject("Material has associations");
