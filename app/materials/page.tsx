@@ -1,31 +1,20 @@
-"use client";
+"use server";
 
 import { getAllMaterials } from "../../db/queries";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { QueryResultRow } from "@vercel/postgres";
-import { useRouter } from "next/navigation";
+import AddMaterialForm from "@/components/Add_Material_Form/AddMaterialForm";
 
 /**
- * Клиентская страница списка материалов
+ * Серверная страница списка материалов
  *
  */
-export default function Materials() {
-	const [materialsData, setMaterialsData] = useState<QueryResultRow[]>([]);
-	const router = useRouter();
-
-	useEffect(() => {
-		const fetchData = async () => {
-			const data = await getAllMaterials();
-			setMaterialsData(data.rows);
-		};
-		fetchData();
-	}, []);
+export default async function Materials() {
+	const { rows } = await getAllMaterials();
 
 	return (
 		<div className="container content px-5">
 			<ul>
-				{materialsData.map((material, index) => (
+				{rows.map((material, index) => (
 					<li key={index}>
 						<span key={index}>
 							<strong>{material["Название материала"]}</strong>
@@ -42,14 +31,7 @@ export default function Materials() {
 					</li>
 				))}
 			</ul>
-			<button
-				className="button is-warning"
-				onClick={() => {
-					router.push("/materials/add-material");
-				}}
-			>
-				Добавить материал
-			</button>
+			<AddMaterialForm />
 		</div>
 	);
 }
