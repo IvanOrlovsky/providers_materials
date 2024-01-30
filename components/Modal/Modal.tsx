@@ -2,7 +2,6 @@
 
 import { useCallback, useRef, useEffect, MouseEventHandler } from "react";
 import { useRouter } from "next/navigation";
-import { useMaterialsContext } from "@/contexts/MaterialsContext";
 
 type ModalProps = {
 	title: string;
